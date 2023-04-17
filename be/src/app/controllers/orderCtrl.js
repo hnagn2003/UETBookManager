@@ -1,7 +1,7 @@
 const Orders = require("../models/orderModel");
 const Labs = require("../models/labModel");
 const Books = require("../models/bookModel");
-const Customers = require("../models/customerModel");
+const Students = require("../models/studentModel");
 
 const orderCtrl = {
   getOderFromIdLab: async (req, res) => {
@@ -28,29 +28,29 @@ const orderCtrl = {
       const {
         idLab,
         nameLab,
-        nameCustomer,
+        nameStudent,
         sdt,
         address,
         price,
         idBook,
       } = req.body;
-      const newCustomer = new Customers({
-        name: nameCustomer,
+      const newStudent = new Students({
+        name: nameStudent,
         sdt: sdt,
         address: address,
       })
 
-      await newCustomer.save();
+      await newStudent.save();
 
       const book = await Books.findOne({_id: idBook})
       const newOrder = new Orders({
         idLab: idLab,
         nameLab: nameLab,
-        idCustomer: newCustomer._id,
+        idStudent: newStudent._id,
         idBook: idBook,
         nameBook: book.name,
         price: price,
-        status: 'not guarantee',
+        status: 'not penalty',
       })
       newOrder.save();
       res.json({create: true, msg: 'Create order'});

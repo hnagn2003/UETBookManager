@@ -137,9 +137,9 @@ const userCtrl = {
       return res.status(500).json({ msg: error.message });
     }
   },
-  getUserGuarantee: async (req, res) => {
+  getUserPenalty: async (req, res) => {
     try {
-      const user = await Users.find({ role: "guarantee" });
+      const user = await Users.find({ role: "penalty" });
       if (user) {
         res.json(user);
       } else {
@@ -149,9 +149,9 @@ const userCtrl = {
       return res.status(500).json({ msg: error.message });
     }
   },
-  getUserFactory: async (req, res) => {
+  getUserLib: async (req, res) => {
     try {
-      const user = await Users.find({ role: "factory" });
+      const user = await Users.find({ role: "lib" });
       if (user) {
         res.json(user);
       } else {

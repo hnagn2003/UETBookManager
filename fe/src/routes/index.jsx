@@ -1,32 +1,32 @@
 import AdminPage from "~/pages/AdminPage";
 import AdminLab from "~/pages/AdminPage/AdminLab";
 import LabDetails from "~/pages/AdminPage/AdminLab/AdminLabDetails";
-import AdminFactory from "~/pages/AdminPage/AdminFactory";
-import FactoryDetails from "~/pages/AdminPage/AdminFactory/AdminFactoryDetails";
-import AdminGuarantee from "~/pages/AdminPage/AdminGuarantee";
-import GuaranteeDetails from "~/pages/AdminPage/AdminGuarantee/AdminGuaranteeDetails";
+import AdminLib from "~/pages/AdminPage/AdminLib";
+import LibDetails from "~/pages/AdminPage/AdminLib/AdminLibDetails";
+import AdminPenalty from "~/pages/AdminPage/AdminPenalty";
+import PenaltyDetails from "~/pages/AdminPage/AdminPenalty/AdminPenaltyDetails";
 import Books from "~/pages/AdminPage/AdminBook";
 import AdminUser from "~/pages/AdminPage/AdminUser";
 import UserAdminDetails from "~/pages/AdminPage/AdminUser/UserAdminPage";
 import UserLabDetails from "~/pages/AdminPage/AdminUser/UserLabPage";
-import UserFactoryDetails from "~/pages/AdminPage/AdminUser/UserFactoryPage";
-import UserGuaranteeDetails from "~/pages/AdminPage/AdminUser/UserGuaranteePage";
+import UserLibDetails from "~/pages/AdminPage/AdminUser/UserLibPage";
+import UserPenaltyDetails from "~/pages/AdminPage/AdminUser/UserPenaltyPage";
 import LabPage from "~/pages/LabPage";
 import LabDelivery from "~/pages/LabPage/LabDelivery";
-import LabGuarantee from "~/pages/LabPage/LabGuarantee";
+import LabPenalty from "~/pages/LabPage/LabPenalty";
 import LabImport from "~/pages/LabPage/LabImport";
 import LabBook from "~/pages/LabPage/LabBook";
 import LabSold from "~/pages/LabPage/LabSold";
 import LabStorage from "~/pages/LabPage/LabStorage";
-import FactoryPage from "~/pages/FactoryPage";
-import FactoryDelivery from "~/pages/FactoryPage/FactoryDelivery";
-import FactoryExport from "~/pages/FactoryPage/FactoryExport";
-import FactoryGuarantee from "~/pages/FactoryPage/FactoryGuarantee";
-import FactoryImport from "~/pages/FactoryPage/FactoryImport";
-import FactoryStorage from "~/pages/FactoryPage/FactoryStorage";
-import GuaranteePage from "~/pages/GuaranteePage";
-import GuaranteeDelivery from "~/pages/GuaranteePage/GuaranteeDelivery";
-import GuaranteeBook from "~/pages/GuaranteePage/GuaranteeBook";
+import LibPage from "~/pages/LibPage";
+import LibDelivery from "~/pages/LibPage/LibDelivery";
+import LibExport from "~/pages/LibPage/LibExport";
+import LibPenalty from "~/pages/LibPage/LibPenalty";
+import LibImport from "~/pages/LibPage/LibImport";
+import LibStorage from "~/pages/LibPage/LibStorage";
+import PenaltyPage from "~/pages/PenaltyPage";
+import PenaltyDelivery from "~/pages/PenaltyPage/PenaltyDelivery";
+import PenaltyBook from "~/pages/PenaltyPage/PenaltyBook";
 import LoginPage from "~/pages/LoginPage";
 
 const publicRoutes = [
@@ -55,20 +55,20 @@ const privateAdminRoutes = [
         component: UserLabDetails,
     },
     {
-        path: '/Admin/guaranteeUsers',
-        component: UserGuaranteeDetails,
+        path: '/Admin/penaltyUsers',
+        component: UserPenaltyDetails,
     },
     {
-        path: '/Admin/factoryUsers',
-        component: UserFactoryDetails,
+        path: '/Admin/libUsers',
+        component: UserLibDetails,
     },
     {
-        path: '/Admin/factory',
-        component: AdminFactory,
+        path: '/Admin/lib',
+        component: AdminLib,
     },
     {
-        path: '/Admin/factory/:id',
-        component: FactoryDetails,
+        path: '/Admin/lib/:id',
+        component: LibDetails,
     },
     {
         path: '/Admin/lab',
@@ -79,12 +79,12 @@ const privateAdminRoutes = [
         component: LabDetails,
     },
     {
-        path: '/Admin/guarantee',
-        component: AdminGuarantee,
+        path: '/Admin/penalty',
+        component: AdminPenalty,
     },
     {
-        path: '/Admin/guarantee/:id',
-        component: GuaranteeDetails,
+        path: '/Admin/penalty/:id',
+        component: PenaltyDetails,
     },
     {
         path: '/Admin/books',
@@ -92,30 +92,30 @@ const privateAdminRoutes = [
     },
 ];
 
-const privateFactoryRoutes = [
+const privateLibRoutes = [
     {
-        path: '/Factory',
-        component: FactoryPage,
+        path: '/Lib',
+        component: LibPage,
     },
     {
-        path: '/Factory/storage',
-        component: FactoryStorage,
+        path: '/Lib/storage',
+        component: LibStorage,
     },
     {
-        path: '/Factory/import',
-        component: FactoryImport,
+        path: '/Lib/import',
+        component: LibImport,
     },
     {
-        path: '/Factory/export',
-        component: FactoryExport,
+        path: '/Lib/export',
+        component: LibExport,
     },
     {
-        path: '/Factory/delivery',
-        component: FactoryDelivery,
+        path: '/Lib/delivery',
+        component: LibDelivery,
     },
     {
-        path: '/Factory/guarantee',
-        component: FactoryGuarantee,
+        path: '/Lib/penalty',
+        component: LibPenalty,
     },
 ];
 
@@ -145,30 +145,30 @@ const privateLabRoutes = [
         component: LabDelivery,
     },
     {
-        path: '/Lab/guarantee',
-        component: LabGuarantee,
+        path: '/Lab/penalty',
+        component: LabPenalty,
     },
 ];
 
-const privateGuaranteeRoutes = [
+const privatePenaltyRoutes = [
     {
         path: '/',
-        component: GuaranteePage,
+        component: PenaltyPage,
     },
     {
-        path: '/Guarantee',
-        component: GuaranteePage,
+        path: '/Penalty',
+        component: PenaltyPage,
     },
     {
-        path: '/Guarantee/delivery',
-        component: GuaranteeDelivery,
+        path: '/Penalty/delivery',
+        component: PenaltyDelivery,
     },
     {
-        path: '/Guarantee/book',
-        component: GuaranteeBook,
+        path: '/Penalty/book',
+        component: PenaltyBook,
     },
 ];
 
 
 
-export { publicRoutes, privateAdminRoutes, privateFactoryRoutes, privateLabRoutes,  privateGuaranteeRoutes};
+export { publicRoutes, privateAdminRoutes, privateLibRoutes, privateLabRoutes,  privatePenaltyRoutes};

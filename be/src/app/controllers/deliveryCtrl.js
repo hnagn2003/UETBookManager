@@ -1,9 +1,9 @@
 const Deliveries = require("../models/deliveryModel");
 const Books = require("../models/bookModel.js");
-const GuaranteeOrders = require("../models/orderGuaranteeModel");
+const PenaltyOrders = require("../models/orderPenaltyModel");
 
 const deliveryCtrl = {
-  createDeliveryByFactory: async (req, res) => {
+  createDeliveryByLib: async (req, res) => {
     try {
       const {
         from,
@@ -41,19 +41,19 @@ const deliveryCtrl = {
 
   createDeliveryByLab: async (req, res) => {
     try {
-      const { from, nameFrom, to, nameTo, idGuaranteeOrder, status } = req.body;
+      const { from, nameFrom, to, nameTo, idPenaltyOrder, status } = req.body;
       // console.log(
-      //   from + " " + nameFrom + " " + to + " " + idGuaranteeOrder + " " + status
+      //   from + " " + nameFrom + " " + to + " " + idPenaltyOrder + " " + status
       // );
-      const guaranteeOrder = await GuaranteeOrders.findOne({
-        _id: idGuaranteeOrder,
+      const penaltyOrder = await PenaltyOrders.findOne({
+        _id: idPenaltyOrder,
       });
-      if (guaranteeOrder) {
-        console.log(guaranteeOrder);
-        await GuaranteeOrders.findByIdAndUpdate(
-          idGuaranteeOrder,
+      if (penaltyOrder) {
+        console.log(penaltyOrder);
+        await PenaltyOrders.findByIdAndUpdate(
+          idPenaltyOrder,
           { 
-            idGuarantee: to, 
+            idPenalty: to, 
             status: "",
           },
           { new: true }
@@ -64,7 +64,7 @@ const deliveryCtrl = {
         nameFrom: nameFrom,
         to: to,
         nameTo: nameTo,
-        idGuaranteeOrder: idGuaranteeOrder,
+        idPenaltyOrder: idPenaltyOrder,
         status: status,
       });
       // Save mongodb

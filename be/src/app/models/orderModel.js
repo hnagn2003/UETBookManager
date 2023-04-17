@@ -8,7 +8,7 @@ const orderModel = new mongoose.Schema (
     nameLab: {
       type: String,
     },
-    idCustomer: {
+    idStudent: {
       type: String,
     },
     idBook: {

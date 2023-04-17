@@ -27,13 +27,13 @@ const bookSchema = new mongoose.Schema (
       required: true,
       trim: true,
     },
-    factory: {
+    lib: {
       type: Array,
     },
     lab: {
       type: Array,
     },
-    guarantee: {
+    penalty: {
       type: Array,
     },
   },

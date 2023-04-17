@@ -48,7 +48,7 @@ function SideBarAdmin() {
                         <Inventory2OutlinedIcon className="SideBarAdmin__link-icon" />
                         Quản lý sách
                     </NavLink>
-                    <NavLink to="/admin/factory" className="SideBarAdmin__link">
+                    <NavLink to="/admin/lib" className="SideBarAdmin__link">
                         <AccountBalanceOutlinedIcon className="SideBarAdmin__link-icon" />
                         Quản lý nhà phân phối
                     </NavLink>
@@ -56,7 +56,7 @@ function SideBarAdmin() {
                         <StoreOutlinedIcon className="SideBarAdmin__link-icon" />
                         Quản lý phòng thí nghiệm
                     </NavLink>
-                    <NavLink to="/admin/guarantee" className="SideBarAdmin__link">
+                    <NavLink to="/admin/penalty" className="SideBarAdmin__link">
                         <WorkspacePremiumOutlinedIcon className="SideBarAdmin__link-icon" />
                         Trung tâm bảo hành
                     </NavLink>

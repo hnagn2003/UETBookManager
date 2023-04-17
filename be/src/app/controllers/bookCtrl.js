@@ -17,8 +17,8 @@ const bookCtrl = {
         image,
         price,
         lab: [],
-        guarantee: [],
-        factory: [],
+        penalty: [],
+        lib: [],
 
       });
 
@@ -69,10 +69,10 @@ const bookCtrl = {
       return res.status(500).json({ msg: error.message });
     }
   },
-  getAllBooksFactory: async (req, res) => {
+  getAllBooksLib: async (req, res) => {
     try {
       const id = req.params.id;
-      const books = await Books.find({factory: id});
+      const books = await Books.find({lib: id});
       if (books) {
         res.json(books);
       } else {

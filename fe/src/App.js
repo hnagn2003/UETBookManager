@@ -3,18 +3,18 @@ import {
     publicRoutes,
     privateAdminRoutes,
     privateLabRoutes,
-    privateGuaranteeRoutes,
-    privateFactoryRoutes,
+    privatePenaltyRoutes,
+    privateLibRoutes,
 } from './routes';
 import './App.css';
 import SideBarAdmin from './components/Admin/components/SideBar';
 import TopBarAdmin from './components/Admin/components/TopBar';
-import SideBarFactory from './components/Factory/components/SideBar';
-import TopBarFactory from './components/Factory/components/TopBar';
+import SideBarLib from './components/Lib/components/SideBar';
+import TopBarLib from './components/Lib/components/TopBar';
 import SideBarLab from './components/Lab/components/SideBar';
 import TopBarLab from './components/Lab/components/TopBar';
-import SideBarGuarantee from './components/Guarantee/components/SideBar';
-import TopBarGuarantee from '~/components/Guarantee/components/TopBar';
+import SideBarPenalty from './components/Penalty/components/SideBar';
+import TopBarPenalty from '~/components/Penalty/components/TopBar';
 
 
 function App() {
@@ -41,22 +41,22 @@ function App() {
                             })}
                         </Routes>
                     </>
-                ) : localStorage.getItem('role') === 'guarantee' ? (
+                ) : localStorage.getItem('role') === 'penalty' ? (
                     <>
-                        <SideBarGuarantee />
-                        <TopBarGuarantee />
+                        <SideBarPenalty />
+                        <TopBarPenalty />
                         <Routes>
-                            {privateGuaranteeRoutes.map((route, i) => {
+                            {privatePenaltyRoutes.map((route, i) => {
                                 return <Route key={i} path={route.path} element={<route.component />} />;
                             })}
                         </Routes>
                     </>
-                ) : localStorage.getItem('role') === 'factory' ? (
+                ) : localStorage.getItem('role') === 'lib' ? (
                     <>
-                        <SideBarFactory />
-                        <TopBarFactory />
+                        <SideBarLib />
+                        <TopBarLib />
                         <Routes>
-                            {privateFactoryRoutes.map((route, i) => {
+                            {privateLibRoutes.map((route, i) => {
                                 return <Route key={i} path={route.path} element={<route.component />} />;
                             })}
                         </Routes>

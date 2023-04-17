@@ -8,8 +8,8 @@ router.post('/delete', userCtrl.delete);
 router.post('/update', userCtrl.update);
 router.get('/userAdmin', userCtrl.getUserAdmin);
 router.get('/userLab', userCtrl.getUserLab);
-router.get('/userGuarantee', userCtrl.getUserGuarantee);
-router.get('/userFactory', userCtrl.getUserFactory);
+router.get('/userPenalty', userCtrl.getUserPenalty);
+router.get('/userLib', userCtrl.getUserLib);
 
 
 module.exports = router;

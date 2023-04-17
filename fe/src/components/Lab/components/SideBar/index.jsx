@@ -61,7 +61,7 @@ function SideBarLab() {
                         <FileUploadOutlinedIcon className="SideBarLab__link-icon" />
                         SP đã bán
                     </NavLink>
-                    <NavLink to="/lab/guarantee" className="SideBarLab__link">
+                    <NavLink to="/lab/penalty" className="SideBarLab__link">
                         <WorkspacePremiumOutlinedIcon className="SideBarLab__link-icon" />
                         Sản Phẩm bảo hành
                     </NavLink>

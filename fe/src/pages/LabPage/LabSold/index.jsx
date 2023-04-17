@@ -36,13 +36,13 @@ function LabSold() {
 
     const [openModalCreate, setOpenModalCreate] = useState(false);
     const [nameLab, setNameLab] = useState('');
-    const [nameCustomer, setNameCustomer] = useState('');
+    const [nameStudent, setNameStudent] = useState('');
     const [sdt, setSdt] = useState('');
     const [address, setAddress] = useState('');
     const [codeBook, setCodeBook] = useState('');
     const [price, setPrice] = useState(0);
 
-    const [openModalGuarantee, setOpenModalGuarantee] = useState(false);
+    const [openModalPenalty, setOpenModalPenalty] = useState(false);
     const [idOrder, setIdOrder] = useState('');
     const [error, setError] = useState('');
 
@@ -118,7 +118,7 @@ function LabSold() {
             const res = await axios.post('http://localhost:5001/lab/createOder', {
                 idLab: localStorage.getItem('idPage'),
                 nameLab: nameLab,
-                nameCustomer: nameCustomer,
+                nameStudent: nameStudent,
                 sdt: sdt,
                 address: address,
                 price: Number(price),
@@ -133,9 +133,9 @@ function LabSold() {
             console.log(e);
         }
     };
-    const handleGuaranteeOrder = async () => {
+    const handlePenaltyOrder = async () => {
         try {
-            const res = await axios.post('http://localhost:5001/lab/createGuaranteeOrder', {
+            const res = await axios.post('http://localhost:5001/lab/createPenaltyOrder', {
                 idOrder: idOrder,
                 error: error,
                 idLab: localStorage.getItem('idPage'),
@@ -200,7 +200,7 @@ function LabSold() {
                                         <TableCell component="th" scope="row" sortDirection="desc">
                                             {row.nameBook}
                                         </TableCell>
-                                        <TableCell>{row.idCustomer}</TableCell>
+                                        <TableCell>{row.idStudent}</TableCell>
                                         <TableCell>{PriceVND(row.price)}</TableCell>
                                         <TableCell>{getDate(row.createdAt)}</TableCell>
                                         <TableCell>
@@ -215,11 +215,11 @@ function LabSold() {
                                                 </Button>
                                             ) : (
                                                 <>
-                                                    {row.status === 'not guarantee' ? (
+                                                    {row.status === 'not penalty' ? (
                                                         <Button
                                                             onClick={() => {
                                                                 setIdOrder(row._id);
-                                                                setOpenModalGuarantee(true);
+                                                                setOpenModalPenalty(true);
                                                             }}
                                                             variant="outlined"
                                                             color="primary"
@@ -289,8 +289,8 @@ function LabSold() {
                             variant="standard"
                             fullWidth
                             type="text"
-                            value={nameCustomer}
-                            onChange={(e) => setNameCustomer(e.target.value)}
+                            value={nameStudent}
+                            onChange={(e) => setNameStudent(e.target.value)}
                         />
                         <TextField
                             sx={{ margin: '10px 0' }}
@@ -354,19 +354,19 @@ function LabSold() {
                     </Box>
                 </Fade>
             </Modal>
-            {/* Modal guarantee order */}
+            {/* Modal penalty order */}
             <Modal
                 aria-labelledby="transition-modal-title"
                 aria-describedby="transition-modal-description"
-                open={openModalGuarantee}
-                onClose={() => setOpenModalGuarantee(false)}
+                open={openModalPenalty}
+                onClose={() => setOpenModalPenalty(false)}
                 closeAfterTransition
                 BackdropComponent={Backdrop}
                 BackdropProps={{
                     timeout: 500,
                 }}
             >
-                <Fade in={openModalGuarantee}>
+                <Fade in={openModalPenalty}>
                     <Box sx={styleModal}>
                         <Typography
                             id="transition-modal-title"
@@ -392,7 +392,7 @@ function LabSold() {
                                 color="secondary"
                                 variant="contained"
                                 type="submit"
-                                onClick={() => setOpenModalGuarantee(false)}
+                                onClick={() => setOpenModalPenalty(false)}
                             >
                                 Hủy bỏ
                             </Button>
@@ -400,7 +400,7 @@ function LabSold() {
                                 sx={{ marginTop: '10px', marginLeft: '10px' }}
                                 variant="contained"
                                 type="submit"
-                                onClick={handleGuaranteeOrder}
+                                onClick={handlePenaltyOrder}
                             >
                                 Xác nhận
                             </Button>

@@ -85,7 +85,7 @@ function LabDelivery() {
                                         Mã bảo hành
                                     </Typography>
                                     <Typography sx={{ color: '#666', fontSize: '1rem' }} variant="span">
-                                        {delivery.idGuaranteeOrder}
+                                        {delivery.idPenaltyOrder}
                                     </Typography>
                                 </Box>
                                 <Box sx={{ width: '100%', display: 'flex', justifyContent: 'space-between' }}>
