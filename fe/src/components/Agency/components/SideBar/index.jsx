@@ -59,11 +59,11 @@ function SideBarAgency() {
                     </NavLink>
                     <NavLink to="/agency/sold" className="SideBarAgency__link">
                         <FileUploadOutlinedIcon className="SideBarAgency__link-icon" />
-                        SP đã bán
+                        Sản phẩm đã bán
                     </NavLink>
                     <NavLink to="/agency/guarantee" className="SideBarAgency__link">
                         <WorkspacePremiumOutlinedIcon className="SideBarAgency__link-icon" />
-                        Sản Phẩm bảo hành
+                        Sản phẩm bảo hành
                     </NavLink>
                     <NavLink to="/agency/delivery" className="SideBarAgency__link">
                         <LocalShippingOutlinedIcon className="SideBarAgency__link-icon" />
