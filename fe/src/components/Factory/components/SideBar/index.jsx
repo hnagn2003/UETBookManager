@@ -45,7 +45,7 @@ function SideBarFactory() {
                 >
                     <NavLink to="/factory/storage" className="SideBarFactory__link">
                         <AccountBalanceOutlinedIcon className="SideBarFactory__link-icon" />
-                        Quản lý Kho
+                        Quản lý nhà phân phối
                     </NavLink>
                     <NavLink to="/factory/import" className="SideBarFactory__link">
                         <FileDownloadOutlinedIcon className="SideBarFactory__link-icon" />

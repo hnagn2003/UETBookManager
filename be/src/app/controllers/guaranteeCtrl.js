@@ -1,6 +1,8 @@
+//module guaranteeModel để thao tác với cơ sở dữ liệu
 const Guarantees = require("../models/guaranteeModel");
-
+//đối tượng bảo hành trong web
 const guaranteeCtrl = {
+  // Lấy tất cả các bảo hành từ cơ sở dữ liệu và trả về dưới dạng JSON. Nếu không có bảo hành nào thì trả về thông báo "Not agencies".
   getAllGuarantees: async (req, res) => {
     try {
       const guarantees = await Guarantees.find();

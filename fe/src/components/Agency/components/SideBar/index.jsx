@@ -51,7 +51,7 @@ function SideBarAgency() {
                     </NavLink>
                     <NavLink to="/agency/storage" className="SideBarAgency__link">
                         <AccountBalanceOutlinedIcon className="SideBarAgency__link-icon" />
-                        Quản lý Kho
+                        Quản lý nhà phân phối
                     </NavLink>
                     <NavLink to="/agency/import" className="SideBarAgency__link">
                         <FileDownloadOutlinedIcon className="SideBarAgency__link-icon" />

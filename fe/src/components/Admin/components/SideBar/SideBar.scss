@@ -8,7 +8,7 @@
     justify-content: flex-start;
     padding-left: 20px;
     
-
+    //hiệu ứng màu khi di chuyển mouse
     &:hover {
         background-color: #46546c;
     }
@@ -18,7 +18,7 @@
         margin-right: 4px;
     }
 }
-
+  //hiệu ứng màu khi phần tử được mouse cl
 .active {
     background-color: #46546c;
 }

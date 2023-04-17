@@ -63,7 +63,7 @@ function AdminUser() {
                             />
                             <CardContent>
                                 <Typography sx={{ textAlign: 'center', fontSize: '1rem' }} gutterBottom variant="h7" component="div">
-                                    Tài Khoản Kho sản xuất
+                                    Tài Khoản nhà phân phối
                                 </Typography>
                             </CardContent>
                         </CardActionArea>
@@ -84,7 +84,7 @@ function AdminUser() {
                             />
                             <CardContent>
                                 <Typography sx={{ textAlign: 'center', fontSize: '1rem' }} gutterBottom variant="h7" component="div">
-                                    Tài Khoản Đại lý
+                                    Tài Khoản phòng thí nghiệm
                                 </Typography>
                             </CardContent>
                         </CardActionArea>

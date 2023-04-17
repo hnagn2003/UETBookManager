@@ -60,10 +60,7 @@ export default function Login() {
                     sm={4}
                     md={7}
                     sx={{
-                        backgroundImage: 'url(https://source.unsplash.com/random)',
-                        // backgroundImage:
-                        // 'url(https://images.wallpaperscraft.com/image/single/anonymous_hacker_mask_200159_3840x2160.jpg)',
-
+                        backgroundImage: 'url(https://aztruyen.com/cover/dn-genshin-impact-x-kazuha-cung-nhau-di-den-noi-cuoi-chan-troi-337699641.jpg)',
                         backgroundRepeat: 'no-repeat',
                         backgroundColor: (t) => (t.palette.mode === 'light' ? t.palette.grey[50] : t.palette.grey[900]),
                         backgroundSize: 'cover',
@@ -83,7 +80,7 @@ export default function Login() {
                         }}
                     >
                         <Typography sx={{ fontWeight: '400' }} component="h1" variant="h2" mb={2}>
-                            BigCorp
+                            UETBookManager
                         </Typography>
                         <Avatar sx={{ m: 1, bgcolor: 'secondary.main' }}>
                             <LockOutlinedIcon />

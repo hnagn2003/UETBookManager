@@ -174,7 +174,7 @@ function GuaranteeProduct() {
                                                 variant="outlined"
                                                 color="secondary"
                                             >
-                                                Chuyển đại lý
+                                                Chuyển phòng thí nghiệm
                                             </Button>
                                         </TableCell>
                                         <TableCell>
@@ -186,7 +186,7 @@ function GuaranteeProduct() {
                                                 variant="outlined"
                                                 color="primary"
                                             >
-                                                Chuyển kho sản xuất
+                                                Chuyển nhà phân phối
                                             </Button>
                                         </TableCell>
                                     </TableRow>

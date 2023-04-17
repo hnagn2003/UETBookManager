@@ -7,6 +7,7 @@ import WorkspacePremiumOutlinedIcon from '@mui/icons-material/WorkspacePremiumOu
 import Inventory2OutlinedIcon from '@mui/icons-material/Inventory2Outlined';
 import AccountBalanceOutlinedIcon from '@mui/icons-material/AccountBalanceOutlined';
 
+// khung lựa chọn
 function SideBarAdmin() {
     return (
         <>
@@ -45,15 +46,15 @@ function SideBarAdmin() {
                 >
                     <NavLink to="/admin/products" className="SideBarAdmin__link">
                         <Inventory2OutlinedIcon className="SideBarAdmin__link-icon" />
-                        Quản lý sản phẩm
+                        Quản lý sách
                     </NavLink>
                     <NavLink to="/admin/factory" className="SideBarAdmin__link">
                         <AccountBalanceOutlinedIcon className="SideBarAdmin__link-icon" />
-                        Quản lý Kho
+                        Quản lý nhà phân phối
                     </NavLink>
                     <NavLink to="/admin/agency" className="SideBarAdmin__link">
                         <StoreOutlinedIcon className="SideBarAdmin__link-icon" />
-                        Quản lý Đại lý
+                        Quản lý phòng thí nghiệm
                     </NavLink>
                     <NavLink to="/admin/guarantee" className="SideBarAdmin__link">
                         <WorkspacePremiumOutlinedIcon className="SideBarAdmin__link-icon" />

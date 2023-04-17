@@ -27,7 +27,7 @@ function Admin() {
                                         variant="h7"
                                         component="div"
                                     >
-                                        BigCorp
+                                        UETBookManager
                                     </Typography>
                                     <Typography
                                         sx={{ marginTop: '10px', textAlign: 'center', fontSize: '1.4rem', fontWeight: '400' }}
@@ -35,7 +35,7 @@ function Admin() {
                                         variant="h7"
                                         component="div"
                                     >
-                                        Hệ thống quản lý vòng đời sản phẩm
+                                        Hệ thống quản lý cho thuê sách
                                     </Typography>
                                     
                                 </CardContent>
