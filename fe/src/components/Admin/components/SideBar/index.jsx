@@ -44,7 +44,7 @@ function SideBarAdmin() {
                         height: 'var(--default-layout-height-header)',
                     }}
                 >
-                    <NavLink to="/admin/products" className="SideBarAdmin__link">
+                    <NavLink to="/admin/books" className="SideBarAdmin__link">
                         <Inventory2OutlinedIcon className="SideBarAdmin__link-icon" />
                         Quản lý sách
                     </NavLink>
@@ -52,7 +52,7 @@ function SideBarAdmin() {
                         <AccountBalanceOutlinedIcon className="SideBarAdmin__link-icon" />
                         Quản lý nhà phân phối
                     </NavLink>
-                    <NavLink to="/admin/agency" className="SideBarAdmin__link">
+                    <NavLink to="/admin/lab" className="SideBarAdmin__link">
                         <StoreOutlinedIcon className="SideBarAdmin__link-icon" />
                         Quản lý phòng thí nghiệm
                     </NavLink>

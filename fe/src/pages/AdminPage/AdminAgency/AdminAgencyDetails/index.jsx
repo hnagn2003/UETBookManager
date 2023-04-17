@@ -13,7 +13,7 @@ import { useEffect, useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import { Stack } from '@mui/system';
 
-function AgencyDetails() {
+function LabDetails() {
     const { id } = useParams();
     const [rows, setRows] = useState([]);
     const [storage, setStorage] = useState([]);
@@ -29,9 +29,9 @@ function AgencyDetails() {
     useEffect(() => {
         const getData = async () => {
             try {
-                const res = await axios.get(`http://localhost:5001/agency/${id}`);
-                setRows(res.data.products);
-                setStorage(res.data.agency.storage);
+                const res = await axios.get(`http://localhost:5001/lab/${id}`);
+                setRows(res.data.books);
+                setStorage(res.data.lab.storage);
             } catch (err) {
                 console.error(err);
             }
@@ -51,7 +51,7 @@ function AgencyDetails() {
                     overflowY: 'scroll',
                 }}
             >
-                <Button onClick={() => navigate('/admin/agency')} variant="outlined" sx={{ margin: '10px' }}>
+                <Button onClick={() => navigate('/admin/lab')} variant="outlined" sx={{ margin: '10px' }}>
                     <KeyboardArrowLeftOutlinedIcon />
                     Quay lại
                 </Button>
@@ -104,4 +104,4 @@ function AgencyDetails() {
     );
 }
 
-export default AgencyDetails;
+export default LabDetails;

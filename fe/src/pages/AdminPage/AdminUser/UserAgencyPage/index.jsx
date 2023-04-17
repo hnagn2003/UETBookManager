@@ -1,4 +1,4 @@
-import './UserAgencyDetails.scss';
+import './UserLabDetails.scss';
 import Table from '@mui/material/Table';
 import TableBody from '@mui/material/TableBody';
 import TableCell from '@mui/material/TableCell';
@@ -36,7 +36,7 @@ const styleModal = {
     p: 3,
 };
 
-function UserAgencyDetails() {
+function UserLabDetails() {
     const navigate = useNavigate();
     const [rows, setRows] = useState([]);
     const [openModalCreate, setOpenModalCreate] = useState(false);
@@ -66,7 +66,7 @@ function UserAgencyDetails() {
     useEffect(() => {
         const getData = async () => {
             try {
-                const res = await axios.get('http://localhost:5001/user/userAgency');
+                const res = await axios.get('http://localhost:5001/user/userLab');
                 setRows(res.data);
             } catch (err) {
                 console.log('fe : ' + err.message);
@@ -84,7 +84,7 @@ function UserAgencyDetails() {
                 password,
                 sdt,
                 address,
-                role: 'agency',
+                role: 'lab',
             });
             if (res.data.register) {
                 window.location.reload();
@@ -144,7 +144,7 @@ function UserAgencyDetails() {
                     Quay lại
                 </Button>
                 <Typography variant="h4" sx={{ margin: '10px', color: '#666' }}>
-                    User Agency
+                    User Lab
                 </Typography>
 
                 {/* btn new user */}
@@ -460,4 +460,4 @@ function UserAgencyDetails() {
     );
 }
 
-export default UserAgencyDetails;
+export default UserLabDetails;

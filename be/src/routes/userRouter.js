@@ -7,7 +7,7 @@ router.post('/register', userCtrl.register);
 router.post('/delete', userCtrl.delete);
 router.post('/update', userCtrl.update);
 router.get('/userAdmin', userCtrl.getUserAdmin);
-router.get('/userAgency', userCtrl.getUserAgency);
+router.get('/userLab', userCtrl.getUserLab);
 router.get('/userGuarantee', userCtrl.getUserGuarantee);
 router.get('/userFactory', userCtrl.getUserFactory);
 

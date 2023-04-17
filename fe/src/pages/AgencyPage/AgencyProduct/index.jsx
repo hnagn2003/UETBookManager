@@ -25,10 +25,10 @@ const styleModal = {
     p: 3,
 };
 
-function AgencyProduct() {
+function LabBook() {
     const navigate = useNavigate();
-    const [products, setProducts] = useState([]);
-    const [openModalProduct, setOpenModalProduct] = useState(false);
+    const [books, setBooks] = useState([]);
+    const [openModalBook, setOpenModalBook] = useState(false);
     const [code, setCode] = useState('');
     const [name, setName] = useState('');
     const [image, setImage] = useState('');
@@ -38,9 +38,9 @@ function AgencyProduct() {
     useEffect(() => {
         const getData = async () => {
             try {
-                const res = await axios.get('http://localhost:5001/product/allProducts');
+                const res = await axios.get('http://localhost:5001/book/allBooks');
                 // console.log(res.data);
-                setProducts(res.data);
+                setBooks(res.data);
             } catch (e) {
                 console.log(e);
             }
@@ -65,7 +65,7 @@ function AgencyProduct() {
                     overflowY: 'scroll',
                 }}
             >
-                <Button onClick={() => navigate('/agency')} variant="outlined" sx={{ margin: '10px' }}>
+                <Button onClick={() => navigate('/lab')} variant="outlined" sx={{ margin: '10px' }}>
                     <KeyboardArrowLeftOutlinedIcon />
                     Quay lại
                 </Button>
@@ -79,27 +79,27 @@ function AgencyProduct() {
                         padding: '10px',
                     }}
                 >
-                    {products.map((product) => {
+                    {books.map((book) => {
                         return (
                             <Box
-                                key={product._id}
+                                key={book._id}
                                 sx={{ width: '33.3333%', paddingLeft: '10px', paddingRight: '10px', margin: '20px 0' }}
                             >
                                 <Card
                                     onClick={() => {
-                                        setCode(product.code);
-                                        setName(product.name);
-                                        setImage(product.image);
-                                        setPrice(product.price);
-                                        setDescription(product.description);
-                                        setOpenModalProduct(true);
+                                        setCode(book.code);
+                                        setName(book.name);
+                                        setImage(book.image);
+                                        setPrice(book.price);
+                                        setDescription(book.description);
+                                        setOpenModalBook(true);
                                     }}
                                 >
                                     <CardActionArea>
                                         <CardMedia
                                             component="img"
                                             height="250"
-                                            image={product.image}
+                                            image={book.image}
                                             alt="green iguana"
                                         />
                                         <CardContent>
@@ -108,7 +108,7 @@ function AgencyProduct() {
                                                 variant="h5"
                                                 component="div"
                                             >
-                                                {product.name}
+                                                {book.name}
                                             </Typography>
                                             <Rating value={6} readOnly />
                                             <Typography
@@ -116,14 +116,14 @@ function AgencyProduct() {
                                                 variant="h5"
                                                 component="div"
                                             >
-                                                Price : {PriceVND(product.price)} VND
+                                                Price : {PriceVND(book.price)} VND
                                             </Typography>
                                             {/* <Typography
                                                 sx={{ color: '#666', fontSize: '1rem' }}
                                                 variant="body2"
                                                 color="text.secondary"
                                             >
-                                                {product.description}
+                                                {book.description}
                                             </Typography> */}
                                         </CardContent>
                                     </CardActionArea>
@@ -133,19 +133,19 @@ function AgencyProduct() {
                     })}
                 </Box>
             </Box>
-            {/* Modal product */}
+            {/* Modal book */}
             <Modal
                 aria-labelledby="transition-modal-title"
                 aria-describedby="transition-modal-description"
-                open={openModalProduct}
-                onClose={() => setOpenModalProduct(false)}
+                open={openModalBook}
+                onClose={() => setOpenModalBook(false)}
                 closeAfterTransition
                 BackdropComponent={Backdrop}
                 BackdropProps={{
                     timeout: 500,
                 }}
             >
-                <Fade in={openModalProduct}>
+                <Fade in={openModalBook}>
                     <Box sx={styleModal}>
                         <CardActionArea sx={{ display: 'flex' }}>
                             <CardMedia component="img" height="250" image={image} alt="green iguana" />
@@ -208,4 +208,4 @@ function AgencyProduct() {
     );
 }
 
-export default AgencyProduct;
+export default LabBook;

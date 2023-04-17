@@ -30,7 +30,7 @@ function FactoryDetails() {
         const getData = async () => {
             try {
                 const res = await axios.get(`http://localhost:5001/factory/${id}`);
-                setRows(res.data.products);
+                setRows(res.data.books);
                 setStorage(res.data.factory.storage);
             } catch (err) {
                 console.error(err);

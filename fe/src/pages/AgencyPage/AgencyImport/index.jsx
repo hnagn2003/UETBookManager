@@ -6,7 +6,7 @@ import KeyboardArrowLeftOutlinedIcon from '@mui/icons-material/KeyboardArrowLeft
 import List from '@mui/material/List';
 import ListItem from '@mui/material/ListItem';
 
-function AgencyImport() {
+function LabImport() {
     const navigate = useNavigate();
     const [deliveries, setDeliveries] = useState([]);
     const [storage, setStorage] = useState([]);
@@ -15,12 +15,12 @@ function AgencyImport() {
         const getData = async () => {
             try {
                 const res = await axios.get(`http://localhost:5001/delivery/to/${localStorage.getItem('idPage')}`);
-                const resStorage = await axios.get(`http://localhost:5001/agency/${localStorage.getItem('idPage')}`);
+                const resStorage = await axios.get(`http://localhost:5001/lab/${localStorage.getItem('idPage')}`);
                 const newDeliveries = res.data.filter((delivery) => {
                     return delivery.status !== 'Giao hàng thành công';
                 });
                 setDeliveries(newDeliveries.reverse());
-                setStorage(resStorage.data.agency.storage);
+                setStorage(resStorage.data.lab.storage);
             } catch (e) {
                 console.log(e);
             }
@@ -44,20 +44,20 @@ function AgencyImport() {
         return dt + '/' + month + '/' + year;
     };
 
-    const handleClickAccept = async (idProduct, amountImport, idDelivery) => {
+    const handleClickAccept = async (idBook, amountImport, idDelivery) => {
         // console.log(idDelivery);
         const rest = storage.filter((item) => {
-            return item.id !== idProduct;
+            return item.id !== idBook;
         });
-        const productImport = storage.find((item) => {
-            return item.id === idProduct;
+        const bookImport = storage.find((item) => {
+            return item.id === idBook;
         });
-        var amount = Number(amountImport) + productImport.amount;
+        var amount = Number(amountImport) + bookImport.amount;
 
         try {
-            await axios.post('http://localhost:5001/agency/updateAmount', {
+            await axios.post('http://localhost:5001/lab/updateAmount', {
                 id: localStorage.getItem('idPage'),
-                storage: [{ id: idProduct, amount: amount }, ...rest],
+                storage: [{ id: idBook, amount: amount }, ...rest],
             });
             const res = await axios.put(`http://localhost:5001/delivery/updateStatus/${idDelivery}`, {
                 status: 'Giao hàng thành công',
@@ -83,7 +83,7 @@ function AgencyImport() {
                     overflowY: 'scroll',
                 }}
             >
-                <Button onClick={() => navigate('/agency')} variant="outlined" sx={{ margin: '10px' }}>
+                <Button onClick={() => navigate('/lab')} variant="outlined" sx={{ margin: '10px' }}>
                     <KeyboardArrowLeftOutlinedIcon />
                     Quay lại
                 </Button>
@@ -115,7 +115,7 @@ function AgencyImport() {
                                 >
                                     <Box sx={{ width: '100%', display: 'flex', justifyContent: 'space-between' }}>
                                         <Typography sx={{ color: '#666', fontSize: '1rem' }} variant="span">
-                                            {delivery.nameProduct}
+                                            {delivery.nameBook}
                                         </Typography>
                                         <Typography sx={{ color: '#666', fontSize: '1rem' }} variant="span">
                                             Số lượng: {delivery.amount}
@@ -147,7 +147,7 @@ function AgencyImport() {
                                     >
                                         <Button
                                             onClick={() =>
-                                                handleClickAccept(delivery.idProduct, delivery.amount, delivery._id)
+                                                handleClickAccept(delivery.idBook, delivery.amount, delivery._id)
                                             }
                                             variant="contained"
                                             color="primary"
@@ -171,4 +171,4 @@ function AgencyImport() {
     );
 }
 
-export default AgencyImport;
+export default LabImport;

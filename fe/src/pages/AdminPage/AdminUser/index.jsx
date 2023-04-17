@@ -6,7 +6,7 @@ import CardMedia from '@mui/material/CardMedia';
 import Typography from '@mui/material/Typography';
 import { CardActionArea } from '@mui/material';
 import adminImage from '~/assets/image/admin.jpg';
-import agencyImage from '~/assets/image/agency.jpg';
+import labImage from '~/assets/image/lab.jpg';
 import factoryImage from '~/assets/image/factory.png';
 import guaranteeImage from '~/assets/image/guarantee.png';
 
@@ -71,14 +71,14 @@ function AdminUser() {
                     <Card
                         sx={{ maxWidth: 345, margin: '0 20px' }}
                         onClick={() => {
-                            navigate('/admin/agencyUsers');
+                            navigate('/admin/labUsers');
                         }}
                     >
                         <CardActionArea>
                             <CardMedia
                                 component="img"
                                 height="200"
-                                image={agencyImage}
+                                image={labImage}
                                 alt="Image"
                                 backgroundColor="black"
                             />

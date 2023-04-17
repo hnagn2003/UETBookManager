@@ -33,21 +33,21 @@ function FactoryExport() {
     // data call api
     const [rows, setRows] = useState([]);
     const [storage, setStorage] = useState([]);
-    const [agencies, setAgencies] = useState([]);
+    const [labs, setLabs] = useState([]);
     const [factory, setFactory] = useState();
 
     // input delivery
     const [openModal, setOpenModal] = useState(false);
-    const [idAgencyExport, setIdAgencyExport] = useState('');
-    const [idProduct, setIdProduct] = useState('');
+    const [idLabExport, setIdLabExport] = useState('');
+    const [idBook, setIdBook] = useState('');
     const [amountExport, setAmountExport] = useState(0);
     const [description, setDescription] = useState('');
 
     const navigate = useNavigate();
 
     const getAmount = (id) => {
-        var result = storage.find((product) => {
-            return product.id === id;
+        var result = storage.find((book) => {
+            return book.id === id;
         });
         return result.amount;
     };
@@ -57,8 +57,8 @@ function FactoryExport() {
             try {
                 const res = await axios.get(`http://localhost:5001/factory/${localStorage.getItem('idPage')}`);
                 console.log(res.data);
-                setAgencies(res.data.agencies);
-                setRows(res.data.products);
+                setLabs(res.data.labs);
+                setRows(res.data.books);
                 setStorage(res.data.factory.storage);
                 setFactory(res.data.factory);
             } catch (err) {
@@ -70,12 +70,12 @@ function FactoryExport() {
 
     const handleClickExport = async () => {
         const rest = storage.filter((item) => {
-            return item.id !== idProduct;
+            return item.id !== idBook;
         });
-        var amount = getAmount(idProduct) - Number(amountExport);
+        var amount = getAmount(idBook) - Number(amountExport);
 
-        const agencyName = agencies.find((item) => {
-            return item._id === idAgencyExport;
+        const labName = labs.find((item) => {
+            return item._id === idLabExport;
         });
 
         if (amount <= 0 || Number(amountExport) <= 0) {
@@ -85,14 +85,14 @@ function FactoryExport() {
         try {
             await axios.post('http://localhost:5001/factory/updateAmount', {
                 id: localStorage.getItem('idPage'),
-                storage: [{ id: idProduct, amount: amount }, ...rest],
+                storage: [{ id: idBook, amount: amount }, ...rest],
             });
             const res2 = await axios.post('http://localhost:5001/delivery/createDeliveryByFactory', {
                 from: localStorage.getItem('idPage'),
                 nameFrom: factory.name,
-                to: idAgencyExport,
-                nameTo: agencyName.name,
-                idProduct: idProduct,
+                to: idLabExport,
+                nameTo: labName.name,
+                idBook: idBook,
                 amount: amountExport,
                 description: description,
                 status: 'Đang giao hàng',
@@ -155,7 +155,7 @@ function FactoryExport() {
                                                 color="secondary"
                                                 onClick={() => {
                                                     setOpenModal(true);
-                                                    setIdProduct(row._id);
+                                                    setIdBook(row._id);
                                                 }}
                                             >
                                                 Chuyển hàng
@@ -179,7 +179,7 @@ function FactoryExport() {
                     )}
                 </TableContainer>
             </Box>
-            {/* Modal export amount product */}
+            {/* Modal export amount book */}
             <Modal
                 aria-labelledby="transition-modal-title"
                 aria-describedby="transition-modal-description"
@@ -201,17 +201,17 @@ function FactoryExport() {
                             <Select
                                 labelId="demo-simple-select-label"
                                 id="demo-simple-select"
-                                value={idAgencyExport}
+                                value={idLabExport}
                                 label="Đại lý"
                                 onChange={(e) => {
                                     console.log(e.target.value);
-                                    setIdAgencyExport(e.target.value);
+                                    setIdLabExport(e.target.value);
                                 }}
                             >
-                                {agencies.map((agency) => {
+                                {labs.map((lab) => {
                                     return (
-                                        <MenuItem key={agency._id} value={agency._id}>
-                                            {agency.name}
+                                        <MenuItem key={lab._id} value={lab._id}>
+                                            {lab.name}
                                         </MenuItem>
                                     );
                                 })}
@@ -222,11 +222,11 @@ function FactoryExport() {
                             <Select
                                 labelId="demo-simple-select-label"
                                 id="demo-simple-select"
-                                value={idProduct}
+                                value={idBook}
                                 label="Mã sản phẩm"
                                 onChange={(e) => {
                                     console.log(e.target.value);
-                                    setIdProduct(e.target.value);
+                                    setIdBook(e.target.value);
                                 }}
                             >
                                 {rows.map((row) => {

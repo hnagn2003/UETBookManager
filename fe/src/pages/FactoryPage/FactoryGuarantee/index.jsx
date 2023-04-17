@@ -16,7 +16,7 @@ import { Stack } from '@mui/system';
 function FactoryGuarantee() {
     const [rows, setRows] = useState([]);
     const navigate = useNavigate();
-    const [listProducts, setListProducts] = useState([]);
+    const [listBooks, setListBooks] = useState([]);
 
     useEffect(() => {
         const getData = async () => {
@@ -27,7 +27,7 @@ function FactoryGuarantee() {
 
                 if (res) {
                     setRows(res.data.guaranteeOrders);
-                    setListProducts(res.data.productGuarantees);
+                    setListBooks(res.data.bookGuarantees);
                 }
             } catch (err) {
                 console.error(err);
@@ -36,11 +36,11 @@ function FactoryGuarantee() {
         getData();
     }, []);
 
-    const getNameProduct = (id) => {
-        let product = listProducts.find((product) => {
-            return product._id === id;
+    const getNameBook = (id) => {
+        let book = listBooks.find((book) => {
+            return book._id === id;
         });
-        return product.nameProduct;
+        return book.nameBook;
     };
 
     // const getDate = (data) => {
@@ -99,7 +99,7 @@ function FactoryGuarantee() {
                                         <TableCell component="th" scope="row" sx={{ maxWidth: '200px' }}>
                                             {row.idOrder}
                                         </TableCell>
-                                        <TableCell sx={{ maxWidth: '200px' }}>{getNameProduct(row.idOrder)}</TableCell>
+                                        <TableCell sx={{ maxWidth: '200px' }}>{getNameBook(row.idOrder)}</TableCell>
                                         <TableCell>{row.error}</TableCell>
                                     </TableRow>
                                 ))}

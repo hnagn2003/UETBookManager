@@ -8,7 +8,7 @@ const orderGuaranteeModel = new mongoose.Schema (
     error: {
       type: String,
     },
-    idAgency: {
+    idLab: {
       type: String,
       default: '',
     },

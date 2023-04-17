@@ -9,7 +9,7 @@ import LocalShippingOutlinedIcon from '@mui/icons-material/LocalShippingOutlined
 import Inventory2OutlinedIcon from '@mui/icons-material/Inventory2Outlined';
 
 
-function SideBarAgency() {
+function SideBarLab() {
     return (
         <>
             <Box
@@ -32,7 +32,7 @@ function SideBarAgency() {
                     }}
                 >
                     <Typography variant="h4" sx={{}}>
-                        Agency
+                        Lab
                     </Typography>
                 </Box>
                 <Box
@@ -45,28 +45,28 @@ function SideBarAgency() {
                         height: 'var(--default-layout-height-header)',
                     }}
                 >
-                    <NavLink to="/agency/product" className="SideBarAgency__link">
-                        <Inventory2OutlinedIcon className="SideBarAgency__link-icon" />
+                    <NavLink to="/lab/book" className="SideBarLab__link">
+                        <Inventory2OutlinedIcon className="SideBarLab__link-icon" />
                         Sản phẩm
                     </NavLink>
-                    <NavLink to="/agency/storage" className="SideBarAgency__link">
-                        <AccountBalanceOutlinedIcon className="SideBarAgency__link-icon" />
+                    <NavLink to="/lab/storage" className="SideBarLab__link">
+                        <AccountBalanceOutlinedIcon className="SideBarLab__link-icon" />
                         Quản lý nhà phân phối
                     </NavLink>
-                    <NavLink to="/agency/import" className="SideBarAgency__link">
-                        <FileDownloadOutlinedIcon className="SideBarAgency__link-icon" />
+                    <NavLink to="/lab/import" className="SideBarLab__link">
+                        <FileDownloadOutlinedIcon className="SideBarLab__link-icon" />
                         Nhập hàng
                     </NavLink>
-                    <NavLink to="/agency/sold" className="SideBarAgency__link">
-                        <FileUploadOutlinedIcon className="SideBarAgency__link-icon" />
+                    <NavLink to="/lab/sold" className="SideBarLab__link">
+                        <FileUploadOutlinedIcon className="SideBarLab__link-icon" />
                         SP đã bán
                     </NavLink>
-                    <NavLink to="/agency/guarantee" className="SideBarAgency__link">
-                        <WorkspacePremiumOutlinedIcon className="SideBarAgency__link-icon" />
+                    <NavLink to="/lab/guarantee" className="SideBarLab__link">
+                        <WorkspacePremiumOutlinedIcon className="SideBarLab__link-icon" />
                         Sản Phẩm bảo hành
                     </NavLink>
-                    <NavLink to="/agency/delivery" className="SideBarAgency__link">
-                        <LocalShippingOutlinedIcon className="SideBarAgency__link-icon" />
+                    <NavLink to="/lab/delivery" className="SideBarLab__link">
+                        <LocalShippingOutlinedIcon className="SideBarLab__link-icon" />
                         Vận chuyển
                     </NavLink>
                     
@@ -76,4 +76,4 @@ function SideBarAgency() {
     );
 }
 
-export default SideBarAgency;
+export default SideBarLab;

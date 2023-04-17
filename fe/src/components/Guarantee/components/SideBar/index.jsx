@@ -44,7 +44,7 @@ function SideBarGuarantee() {
                         <Inventory2OutlinedIcon className="SideBarGuarantee__link-icon" />
                         Sản phẩm được gửi
                     </NavLink>
-                    <NavLink to="/guarantee/product" className="SideBarGuarantee__link">
+                    <NavLink to="/guarantee/book" className="SideBarGuarantee__link">
                         <WorkspacePremiumOutlinedIcon className="SideBarGuarantee__link-icon" />
                         Đang bảo hành
                     </NavLink>

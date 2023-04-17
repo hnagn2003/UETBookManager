@@ -28,10 +28,10 @@ const styleModal = {
     p: 3,
 };
 
-function AgencyGuarantee() {
+function LabGuarantee() {
     const [rows, setRows] = useState([]);
     const navigate = useNavigate();
-    const [listProducts, setListProducts] = useState([]);
+    const [listBooks, setListBooks] = useState([]);
     const [listGuarantees, setListGuarantees] = useState([]);
 
     const [openModalCustomer, setOpenModalCustomer] = useState(false);
@@ -44,7 +44,7 @@ function AgencyGuarantee() {
         const getData = async () => {
             try {
                 const res = await axios.get(
-                    `http://localhost:5001/agency/guaranteeOrder/${localStorage.getItem('idPage')}`,
+                    `http://localhost:5001/lab/guaranteeOrder/${localStorage.getItem('idPage')}`,
                 );
                 const resGuarantees = await axios.get('http://localhost:5001/guarantee');
                 if (resGuarantees) {
@@ -54,7 +54,7 @@ function AgencyGuarantee() {
                 if (res) {
                     // console.log(res.data);
                     setRows(res.data.guaranteeOrders);
-                    setListProducts(res.data.productGuarantees);
+                    setListBooks(res.data.bookGuarantees);
                 }
             } catch (err) {
                 console.error(err);
@@ -63,11 +63,11 @@ function AgencyGuarantee() {
         getData();
     }, []);
 
-    const getNameProduct = (id) => {
-        let product = listProducts.find((product) => {
-            return product._id === id;
+    const getNameBook = (id) => {
+        let book = listBooks.find((book) => {
+            return book._id === id;
         });
-        return product.nameProduct;
+        return book.nameBook;
     };
 
     const getDate = (data) => {
@@ -95,7 +95,7 @@ function AgencyGuarantee() {
         });
 
         try {
-            const res = await axios.post('http://localhost:5001/delivery/createDeliveryByAgency', {
+            const res = await axios.post('http://localhost:5001/delivery/createDeliveryByLab', {
                 from: localStorage.getItem('idPage'),
                 nameFrom: localStorage.getItem('name'),
                 to: idGuaranteeExport,
@@ -115,7 +115,7 @@ function AgencyGuarantee() {
     const handleDeliveryCustomer = async () => {
         // console.log(idOrder);
         try {
-            const res = await axios.put(`http://localhost:5001/agency/updateNotGuaranteeOrder/${idGuaranteeOrder}`);
+            const res = await axios.put(`http://localhost:5001/lab/updateNotGuaranteeOrder/${idGuaranteeOrder}`);
             if (res.data.update) {
                 alert(res.data.msg);
                 window.location.reload();
@@ -137,7 +137,7 @@ function AgencyGuarantee() {
                     overflowY: 'scroll',
                 }}
             >
-                <Button onClick={() => navigate('/agency')} variant="outlined" sx={{ margin: '10px' }}>
+                <Button onClick={() => navigate('/lab')} variant="outlined" sx={{ margin: '10px' }}>
                     <KeyboardArrowLeftOutlinedIcon />
                     Quay lại
                 </Button>
@@ -168,7 +168,7 @@ function AgencyGuarantee() {
                                         <TableCell component="th" scope="row" sx={{ maxWidth: '200px' }}>
                                             {row.idOrder}
                                         </TableCell>
-                                        <TableCell sx={{ maxWidth: '200px' }}>{getNameProduct(row.idOrder)}</TableCell>
+                                        <TableCell sx={{ maxWidth: '200px' }}>{getNameBook(row.idOrder)}</TableCell>
                                         <TableCell>{row.error}</TableCell>
                                         <TableCell>{getDate(row.createdAt)}</TableCell>
                                         <TableCell>
@@ -328,4 +328,4 @@ function AgencyGuarantee() {
     );
 }
 
-export default AgencyGuarantee;
+export default LabGuarantee;

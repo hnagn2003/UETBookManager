@@ -1,6 +1,6 @@
 const Factories = require("../models/factoryModel");
-const Products = require("../models/productModel");
-const Agencies = require("../models/agencyModel");
+const Books = require("../models/bookModel");
+const Labs = require("../models/labModel");
 const bcrypt = require("bcrypt");
 
 const factoryCtrl = {
@@ -19,14 +19,14 @@ const factoryCtrl = {
   getFactoryById: async (req, res) => {
     try {
       const id = req.params.id;
-      const products = await Products.find({ factory: id });
+      const books = await Books.find({ factory: id });
       const factory = await Factories.findOne({ _id: id });
-      const agencies = await Agencies.find();
+      const labs = await Labs.find();
 
-      if (products && factory && agencies) {
-        res.json({ products, factory, agencies});
+      if (books && factory && labs) {
+        res.json({ books, factory, labs});
       } else {
-        res.json({ msg: "Not products" });
+        res.json({ msg: "Not books" });
       }
     } catch (error) {
       return res.status(500).json({ msg: error.message });

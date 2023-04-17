@@ -12,7 +12,7 @@ import axios from 'axios';
 import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
-function AgencyStorage() {
+function LabStorage() {
     const [rows, setRows] = useState([]);
     const [storage, setStorage] = useState([]);
     const navigate = useNavigate();
@@ -27,9 +27,9 @@ function AgencyStorage() {
     useEffect(() => {
         const getData = async () => {
             try {
-                const res = await axios.get(`http://localhost:5001/agency/${localStorage.getItem('idPage')}`);
-                setRows(res.data.products);
-                setStorage(res.data.agency.storage);
+                const res = await axios.get(`http://localhost:5001/lab/${localStorage.getItem('idPage')}`);
+                setRows(res.data.books);
+                setStorage(res.data.lab.storage);
             } catch (err) {
                 console.error(err);
             }
@@ -54,7 +54,7 @@ function AgencyStorage() {
                     overflowY: 'scroll',
                 }}
             >
-                <Button onClick={() => navigate('/agency')} variant="outlined" sx={{ margin: '10px' }}>
+                <Button onClick={() => navigate('/lab')} variant="outlined" sx={{ margin: '10px' }}>
                     <KeyboardArrowLeftOutlinedIcon />
                     Quay lại
                 </Button>
@@ -108,4 +108,4 @@ function AgencyStorage() {
     );
 }
 
-export default AgencyStorage;
+export default LabStorage;

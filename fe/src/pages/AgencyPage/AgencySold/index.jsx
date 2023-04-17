@@ -28,18 +28,18 @@ const styleModal = {
     p: 3,
 };
 
-function AgencySold() {
+function LabSold() {
     const [rows, setRows] = useState([]);
     const navigate = useNavigate();
-    const [listProducts, setListProducts] = useState([]);
+    const [listBooks, setListBooks] = useState([]);
     const [storage, setStorage] = useState([]);
 
     const [openModalCreate, setOpenModalCreate] = useState(false);
-    const [nameAgency, setNameAgency] = useState('');
+    const [nameLab, setNameLab] = useState('');
     const [nameCustomer, setNameCustomer] = useState('');
     const [sdt, setSdt] = useState('');
     const [address, setAddress] = useState('');
-    const [codeProduct, setCodeProduct] = useState('');
+    const [codeBook, setCodeBook] = useState('');
     const [price, setPrice] = useState(0);
 
     const [openModalGuarantee, setOpenModalGuarantee] = useState(false);
@@ -49,13 +49,13 @@ function AgencySold() {
     useEffect(() => {
         const getData = async () => {
             try {
-                const res = await axios.get(`http://localhost:5001/agency/order/${localStorage.getItem('idPage')}`);
-                const resStorage = await axios.get(`http://localhost:5001/agency/${localStorage.getItem('idPage')}`);
+                const res = await axios.get(`http://localhost:5001/lab/order/${localStorage.getItem('idPage')}`);
+                const resStorage = await axios.get(`http://localhost:5001/lab/${localStorage.getItem('idPage')}`);
                 console.log(res.data);
                 setRows(res.data.orders.reverse());
-                setNameAgency(res.data.nameAgency);
-                setListProducts(res.data.products);
-                setStorage(resStorage.data.agency.storage);
+                setNameLab(res.data.nameLab);
+                setListBooks(res.data.books);
+                setStorage(resStorage.data.lab.storage);
             } catch (err) {
                 console.error(err);
             }
@@ -69,10 +69,10 @@ function AgencySold() {
     };
 
     const getPriceByID = (id) => {
-        const product = listProducts.find((product) => {
-            return product._id === id;
+        const book = listBooks.find((book) => {
+            return book._id === id;
         });
-        return product.price;
+        return book.price;
     };
 
     const getDate = (data) => {
@@ -101,28 +101,28 @@ function AgencySold() {
 
     const handleCreateOrder = async () => {
         const rest = storage.filter((item) => {
-            return item.id !== codeProduct;
+            return item.id !== codeBook;
         });
-        const productImport = storage.find((item) => {
-            return item.id === codeProduct;
+        const bookImport = storage.find((item) => {
+            return item.id === codeBook;
         });
-        var amount = productImport.amount - 1;
+        var amount = bookImport.amount - 1;
         console.log(amount);
 
         try {
-            await axios.post('http://localhost:5001/agency/updateAmount', {
+            await axios.post('http://localhost:5001/lab/updateAmount', {
                 id: localStorage.getItem('idPage'),
-                storage: [{ id: codeProduct, amount: amount }, ...rest],
+                storage: [{ id: codeBook, amount: amount }, ...rest],
             });
 
-            const res = await axios.post('http://localhost:5001/agency/createOder', {
-                idAgency: localStorage.getItem('idPage'),
-                nameAgency: nameAgency,
+            const res = await axios.post('http://localhost:5001/lab/createOder', {
+                idLab: localStorage.getItem('idPage'),
+                nameLab: nameLab,
                 nameCustomer: nameCustomer,
                 sdt: sdt,
                 address: address,
                 price: Number(price),
-                idProduct: codeProduct,
+                idBook: codeBook,
             });
 
             if (res.data.create) {
@@ -135,11 +135,11 @@ function AgencySold() {
     };
     const handleGuaranteeOrder = async () => {
         try {
-            const res = await axios.post('http://localhost:5001/agency/createGuaranteeOrder', {
+            const res = await axios.post('http://localhost:5001/lab/createGuaranteeOrder', {
                 idOrder: idOrder,
                 error: error,
-                idAgency: localStorage.getItem('idPage'),
-                status: 'agency',
+                idLab: localStorage.getItem('idPage'),
+                status: 'lab',
             });
             if (res.data.create) {
                 alert(res.data.msg);
@@ -162,7 +162,7 @@ function AgencySold() {
                     overflowY: 'scroll',
                 }}
             >
-                <Button onClick={() => navigate('/agency')} variant="outlined" sx={{ margin: '10px' }}>
+                <Button onClick={() => navigate('/lab')} variant="outlined" sx={{ margin: '10px' }}>
                     <KeyboardArrowLeftOutlinedIcon />
                     Quay lại
                 </Button>
@@ -198,7 +198,7 @@ function AgencySold() {
                                     >
                                         <TableCell>{index + 1}</TableCell>
                                         <TableCell component="th" scope="row" sortDirection="desc">
-                                            {row.nameProduct}
+                                            {row.nameBook}
                                         </TableCell>
                                         <TableCell>{row.idCustomer}</TableCell>
                                         <TableCell>{PriceVND(row.price)}</TableCell>
@@ -281,7 +281,7 @@ function AgencySold() {
                             variant="standard"
                             fullWidth
                             type="text"
-                            value={nameAgency}
+                            value={nameLab}
                         />
                         <TextField
                             sx={{ margin: '10px 0' }}
@@ -315,18 +315,18 @@ function AgencySold() {
                             <Select
                                 labelId="demo-simple-select-label"
                                 id="demo-simple-select"
-                                value={codeProduct}
+                                value={codeBook}
                                 label="Mã sản phẩm"
                                 onChange={(e) => {
                                     console.log(e.target.value);
-                                    setCodeProduct(e.target.value);
+                                    setCodeBook(e.target.value);
                                     setPrice(getPriceByID(e.target.value));
                                 }}
                             >
-                                {listProducts.map((product) => {
+                                {listBooks.map((book) => {
                                     return (
-                                        <MenuItem key={product._id} value={product._id}>
-                                            {product.code}
+                                        <MenuItem key={book._id} value={book._id}>
+                                            {book.code}
                                         </MenuItem>
                                     );
                                 })}
@@ -412,4 +412,4 @@ function AgencySold() {
     );
 }
 
-export default AgencySold;
+export default LabSold;

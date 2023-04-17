@@ -2,7 +2,7 @@ import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import {
     publicRoutes,
     privateAdminRoutes,
-    privateAgencyRoutes,
+    privateLabRoutes,
     privateGuaranteeRoutes,
     privateFactoryRoutes,
 } from './routes';
@@ -11,8 +11,8 @@ import SideBarAdmin from './components/Admin/components/SideBar';
 import TopBarAdmin from './components/Admin/components/TopBar';
 import SideBarFactory from './components/Factory/components/SideBar';
 import TopBarFactory from './components/Factory/components/TopBar';
-import SideBarAgency from './components/Agency/components/SideBar';
-import TopBarAgency from './components/Agency/components/TopBar';
+import SideBarLab from './components/Lab/components/SideBar';
+import TopBarLab from './components/Lab/components/TopBar';
 import SideBarGuarantee from './components/Guarantee/components/SideBar';
 import TopBarGuarantee from '~/components/Guarantee/components/TopBar';
 
@@ -31,12 +31,12 @@ function App() {
                             })}
                         </Routes>
                     </>
-                ) : localStorage.getItem('role') === 'agency' ? (
+                ) : localStorage.getItem('role') === 'lab' ? (
                     <>
-                        <SideBarAgency />
-                        <TopBarAgency />
+                        <SideBarLab />
+                        <TopBarLab />
                         <Routes>
-                            {privateAgencyRoutes.map((route, i) => {
+                            {privateLabRoutes.map((route, i) => {
                                 return <Route key={i} path={route.path} element={<route.component />} />;
                             })}
                         </Routes>

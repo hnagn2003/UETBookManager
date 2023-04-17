@@ -30,7 +30,7 @@ function FactoryStorage() {
             try {
                 const res = await axios.get(`http://localhost:5001/factory/${localStorage.getItem('idPage')}`);
                 console.log(res.data);
-                setRows(res.data.products);
+                setRows(res.data.books);
                 setStorage(res.data.factory.storage);
             } catch (err) {
                 console.error(err);

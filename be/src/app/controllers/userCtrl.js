@@ -125,9 +125,9 @@ const userCtrl = {
       return res.status(500).json({ msg: error.message });
     }
   },
-  getUserAgency: async (req, res) => {
+  getUserLab: async (req, res) => {
     try {
-      const user = await Users.find({ role: "agency" });
+      const user = await Users.find({ role: "lab" });
       if (user) {
         res.json(user);
       } else {

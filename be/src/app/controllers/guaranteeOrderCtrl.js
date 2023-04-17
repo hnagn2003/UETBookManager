@@ -4,8 +4,8 @@ const Orders = require("../models/orderModel");
 const guaranteeOrderCtrl = {
   createGuaranteeOrder: async (req, res) => {
     try {
-      const { idOrder, error, idAgency, status } = req.body;
-      // console.log(idOrder + " " + error + " " + idAgency + " " + status);
+      const { idOrder, error, idLab, status } = req.body;
+      // console.log(idOrder + " " + error + " " + idLab + " " + status);
       const order = await Orders.findOne({ _id: idOrder });
       if (!order) {
         return res.json({
@@ -21,7 +21,7 @@ const guaranteeOrderCtrl = {
       const newGuaranteeOrder = new GuaranteeOrders({
         idOrder: idOrder,
         error: error,
-        idAgency: idAgency,
+        idLab: idLab,
         status: status,
       });
       await newGuaranteeOrder.save();
@@ -62,22 +62,22 @@ const guaranteeOrderCtrl = {
     }
   },
 
-  getGuaranteeOrderByIdAgency: async (req, res) => {
+  getGuaranteeOrderByIdLab: async (req, res) => {
     try {
       const id = req.params.id;
       const guaranteeOrders = await GuaranteeOrders.find({
-        idAgency: id,
-        status: "agency",
+        idLab: id,
+        status: "lab",
       });
 
       if (guaranteeOrders) {
-        let productGuarantees = await Promise.all(
+        let bookGuarantees = await Promise.all(
           guaranteeOrders.map(async (guaranteeOrder) => {
             return await Orders.findOne({ _id: guaranteeOrder.idOrder });
           })
         );
         res.json({
-          productGuarantees: productGuarantees,
+          bookGuarantees: bookGuarantees,
           guaranteeOrders: guaranteeOrders,
         });
       } else {
@@ -97,13 +97,13 @@ const guaranteeOrderCtrl = {
       });
 
       if (guaranteeOrders) {
-        let productGuarantees = await Promise.all(
+        let bookGuarantees = await Promise.all(
           guaranteeOrders.map(async (guaranteeOrder) => {
             return await Orders.findOne({ _id: guaranteeOrder.idOrder });
           })
         );
         res.json({
-          productGuarantees: productGuarantees,
+          bookGuarantees: bookGuarantees,
           guaranteeOrders: guaranteeOrders,
         });
       } else {
@@ -123,13 +123,13 @@ const guaranteeOrderCtrl = {
       });
 
       if (guaranteeOrders) {
-        let productGuarantees = await Promise.all(
+        let bookGuarantees = await Promise.all(
           guaranteeOrders.map(async (guaranteeOrder) => {
             return await Orders.findOne({ _id: guaranteeOrder.idOrder });
           })
         );
         res.json({
-          productGuarantees: productGuarantees,
+          bookGuarantees: bookGuarantees,
           guaranteeOrders: guaranteeOrders,
         });
       } else {

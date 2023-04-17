@@ -1,23 +1,23 @@
 import AdminPage from "~/pages/AdminPage";
-import AdminAgency from "~/pages/AdminPage/AdminAgency";
-import AgencyDetails from "~/pages/AdminPage/AdminAgency/AdminAgencyDetails";
+import AdminLab from "~/pages/AdminPage/AdminLab";
+import LabDetails from "~/pages/AdminPage/AdminLab/AdminLabDetails";
 import AdminFactory from "~/pages/AdminPage/AdminFactory";
 import FactoryDetails from "~/pages/AdminPage/AdminFactory/AdminFactoryDetails";
 import AdminGuarantee from "~/pages/AdminPage/AdminGuarantee";
 import GuaranteeDetails from "~/pages/AdminPage/AdminGuarantee/AdminGuaranteeDetails";
-import Products from "~/pages/AdminPage/AdminProduct";
+import Books from "~/pages/AdminPage/AdminBook";
 import AdminUser from "~/pages/AdminPage/AdminUser";
 import UserAdminDetails from "~/pages/AdminPage/AdminUser/UserAdminPage";
-import UserAgencyDetails from "~/pages/AdminPage/AdminUser/UserAgencyPage";
+import UserLabDetails from "~/pages/AdminPage/AdminUser/UserLabPage";
 import UserFactoryDetails from "~/pages/AdminPage/AdminUser/UserFactoryPage";
 import UserGuaranteeDetails from "~/pages/AdminPage/AdminUser/UserGuaranteePage";
-import AgencyPage from "~/pages/AgencyPage";
-import AgencyDelivery from "~/pages/AgencyPage/AgencyDelivery";
-import AgencyGuarantee from "~/pages/AgencyPage/AgencyGuarantee";
-import AgencyImport from "~/pages/AgencyPage/AgencyImport";
-import AgencyProduct from "~/pages/AgencyPage/AgencyProduct";
-import AgencySold from "~/pages/AgencyPage/AgencySold";
-import AgencyStorage from "~/pages/AgencyPage/AgencyStorage";
+import LabPage from "~/pages/LabPage";
+import LabDelivery from "~/pages/LabPage/LabDelivery";
+import LabGuarantee from "~/pages/LabPage/LabGuarantee";
+import LabImport from "~/pages/LabPage/LabImport";
+import LabBook from "~/pages/LabPage/LabBook";
+import LabSold from "~/pages/LabPage/LabSold";
+import LabStorage from "~/pages/LabPage/LabStorage";
 import FactoryPage from "~/pages/FactoryPage";
 import FactoryDelivery from "~/pages/FactoryPage/FactoryDelivery";
 import FactoryExport from "~/pages/FactoryPage/FactoryExport";
@@ -26,7 +26,7 @@ import FactoryImport from "~/pages/FactoryPage/FactoryImport";
 import FactoryStorage from "~/pages/FactoryPage/FactoryStorage";
 import GuaranteePage from "~/pages/GuaranteePage";
 import GuaranteeDelivery from "~/pages/GuaranteePage/GuaranteeDelivery";
-import GuaranteeProduct from "~/pages/GuaranteePage/GuaranteeProduct";
+import GuaranteeBook from "~/pages/GuaranteePage/GuaranteeBook";
 import LoginPage from "~/pages/LoginPage";
 
 const publicRoutes = [
@@ -51,8 +51,8 @@ const privateAdminRoutes = [
         component: UserAdminDetails,
     },
     {
-        path: '/Admin/agencyUsers',
-        component: UserAgencyDetails,
+        path: '/Admin/labUsers',
+        component: UserLabDetails,
     },
     {
         path: '/Admin/guaranteeUsers',
@@ -71,12 +71,12 @@ const privateAdminRoutes = [
         component: FactoryDetails,
     },
     {
-        path: '/Admin/agency',
-        component: AdminAgency,
+        path: '/Admin/lab',
+        component: AdminLab,
     },
     {
-        path: '/Admin/agency/:id',
-        component: AgencyDetails,
+        path: '/Admin/lab/:id',
+        component: LabDetails,
     },
     {
         path: '/Admin/guarantee',
@@ -87,8 +87,8 @@ const privateAdminRoutes = [
         component: GuaranteeDetails,
     },
     {
-        path: '/Admin/products',
-        component: Products,
+        path: '/Admin/books',
+        component: Books,
     },
 ];
 
@@ -119,34 +119,34 @@ const privateFactoryRoutes = [
     },
 ];
 
-const privateAgencyRoutes = [
+const privateLabRoutes = [
     {
-        path: '/Agency',
-        component: AgencyPage,
+        path: '/Lab',
+        component: LabPage,
     },
     {
-        path: '/Agency/product',
-        component: AgencyProduct,
+        path: '/Lab/book',
+        component: LabBook,
     },
     {
-        path: '/Agency/storage',
-        component: AgencyStorage,
+        path: '/Lab/storage',
+        component: LabStorage,
     },
     {
-        path: '/Agency/import',
-        component: AgencyImport,
+        path: '/Lab/import',
+        component: LabImport,
     },
     {
-        path: '/Agency/sold',
-        component: AgencySold,
+        path: '/Lab/sold',
+        component: LabSold,
     },
     {
-        path: '/Agency/delivery',
-        component: AgencyDelivery,
+        path: '/Lab/delivery',
+        component: LabDelivery,
     },
     {
-        path: '/Agency/guarantee',
-        component: AgencyGuarantee,
+        path: '/Lab/guarantee',
+        component: LabGuarantee,
     },
 ];
 
@@ -164,11 +164,11 @@ const privateGuaranteeRoutes = [
         component: GuaranteeDelivery,
     },
     {
-        path: '/Guarantee/product',
-        component: GuaranteeProduct,
+        path: '/Guarantee/book',
+        component: GuaranteeBook,
     },
 ];
 
 
 
-export { publicRoutes, privateAdminRoutes, privateFactoryRoutes, privateAgencyRoutes,  privateGuaranteeRoutes};
+export { publicRoutes, privateAdminRoutes, privateFactoryRoutes, privateLabRoutes,  privateGuaranteeRoutes};

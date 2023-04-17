@@ -1,11 +1,11 @@
-import Agency from "~/components/Agency";
+import Lab from "~/components/Lab";
 
-function AgencyPage() {
+function LabPage() {
     return (
         <>
-            <Agency />
+            <Lab />
         </>
     );
 }
 
-export default AgencyPage;
+export default LabPage;

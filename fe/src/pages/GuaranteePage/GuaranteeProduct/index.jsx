@@ -28,10 +28,10 @@ const styleModal = {
     p: 3,
 };
 
-function GuaranteeProduct() {
+function GuaranteeBook() {
     const [rows, setRows] = useState([]);
     const navigate = useNavigate();
-    const [listProducts, setListProducts] = useState([]);
+    const [listBooks, setListBooks] = useState([]);
     const [listFactories, setListFactories] = useState([]);
 
     const [openModalCustomer, setOpenModalCustomer] = useState(false);
@@ -54,8 +54,8 @@ function GuaranteeProduct() {
                 if (res) {
                     // console.log(res.data);
                     setRows(res.data.guaranteeOrders.reverse());
-                    setListProducts(res.data.productGuarantees);
-                    // console.log(res.data.productGuarantees);
+                    setListBooks(res.data.bookGuarantees);
+                    // console.log(res.data.bookGuarantees);
                 }
             } catch (err) {
                 console.error(err);
@@ -64,11 +64,11 @@ function GuaranteeProduct() {
         getData();
     }, []);
 
-    const getNameProduct = (id) => {
-        let product = listProducts.find((product) => {
-            return product._id === id;
+    const getNameBook = (id) => {
+        let book = listBooks.find((book) => {
+            return book._id === id;
         });
-        return product.nameProduct;
+        return book.nameBook;
     };
 
     // const getDate = (data) => {
@@ -108,10 +108,10 @@ function GuaranteeProduct() {
         }
     };
 
-    const handleDeliveryAgency = async () => {
+    const handleDeliveryLab = async () => {
         // console.log(idOrder);
         try {
-            const res = await axios.put(`http://localhost:5001/agency/updateNotGuaranteeOrder/${idGuaranteeOrder}`);
+            const res = await axios.put(`http://localhost:5001/lab/updateNotGuaranteeOrder/${idGuaranteeOrder}`);
             if (res.data.update) {
                 alert(res.data.msg);
                 window.location.reload();
@@ -163,7 +163,7 @@ function GuaranteeProduct() {
                                         <TableCell component="th" scope="row" sx={{ maxWidth: '200px' }}>
                                             {row.idOrder}
                                         </TableCell>
-                                        <TableCell sx={{ maxWidth: '200px' }}>{getNameProduct(row.idOrder)}</TableCell>
+                                        <TableCell sx={{ maxWidth: '200px' }}>{getNameBook(row.idOrder)}</TableCell>
                                         <TableCell>{row.error}</TableCell>
                                         <TableCell>
                                             <Button
@@ -207,7 +207,7 @@ function GuaranteeProduct() {
                     )}
                 </TableContainer>
             </Box>
-            {/* Modal delivery agency */}
+            {/* Modal delivery lab */}
             <Modal
                 aria-labelledby="transition-modal-title"
                 aria-describedby="transition-modal-description"
@@ -244,7 +244,7 @@ function GuaranteeProduct() {
                                 sx={{ marginTop: '10px', marginLeft: '10px' }}
                                 variant="contained"
                                 type="submit"
-                                onClick={handleDeliveryAgency}
+                                onClick={handleDeliveryLab}
                             >
                                 Xác nhận
                             </Button>
@@ -322,4 +322,4 @@ function GuaranteeProduct() {
     );
 }
 
-export default GuaranteeProduct;
+export default GuaranteeBook;

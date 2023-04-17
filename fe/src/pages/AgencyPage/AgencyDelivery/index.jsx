@@ -6,7 +6,7 @@ import KeyboardArrowLeftOutlinedIcon from '@mui/icons-material/KeyboardArrowLeft
 import List from '@mui/material/List';
 import ListItem from '@mui/material/ListItem';
 
-function AgencyDelivery() {
+function LabDelivery() {
     const [deliveries, setDeliveries] = useState([]);
     const navigate = useNavigate();
 
@@ -51,7 +51,7 @@ function AgencyDelivery() {
                     overflowY: 'scroll',
                 }}
             >
-                <Button onClick={() => navigate('/agency')} variant="outlined" sx={{ margin: '10px' }}>
+                <Button onClick={() => navigate('/lab')} variant="outlined" sx={{ margin: '10px' }}>
                     <KeyboardArrowLeftOutlinedIcon />
                     Quay lại
                 </Button>
@@ -121,4 +121,4 @@ function AgencyDelivery() {
     );
 }
 
-export default AgencyDelivery;
+export default LabDelivery;

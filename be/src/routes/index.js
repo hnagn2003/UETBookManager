@@ -1,16 +1,16 @@
 const userRouter = require('./userRouter');
-const productRouter = require('./productRouter');
+const bookRouter = require('./bookRouter');
 const factoryRouter = require('./factoryRouter');
-const agencyRouter = require('./agencyRouter');
+const labRouter = require('./labRouter');
 const deliveryRouter = require('./deliveryRouter');
 const guaranteeRouter = require('./guaranteeRouter');
 
 
 function route(app) {
     app.use('/user', userRouter);
-    app.use('/product', productRouter);
+    app.use('/book', bookRouter);
     app.use('/factory', factoryRouter);
-    app.use('/agency', agencyRouter);
+    app.use('/lab', labRouter);
     app.use('/delivery', deliveryRouter);
     app.use('/guarantee', guaranteeRouter);
 }

@@ -82,7 +82,7 @@ function FactoryDelivery() {
                             >
                                 <Box sx={{ width: '100%', display: 'flex', justifyContent: 'space-between' }}>
                                     <Typography sx={{ color: '#666', fontSize: '1rem' }} variant="span">
-                                        {delivery.nameProduct}
+                                        {delivery.nameBook}
                                     </Typography>
                                     <Typography sx={{ color: '#666', fontSize: '1rem' }} variant="span">
                                         Số lượng: {delivery.amount}

@@ -2,19 +2,19 @@ const mongoose = require("mongoose");
 
 const orderModel = new mongoose.Schema (
   {
-    idAgency: {
+    idLab: {
       type: String,
     },
-    nameAgency: {
+    nameLab: {
       type: String,
     },
     idCustomer: {
       type: String,
     },
-    idProduct: {
+    idBook: {
       type: String,
     },
-    nameProduct: {
+    nameBook: {
       type: String,
     },
     price: {

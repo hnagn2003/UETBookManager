@@ -33,7 +33,7 @@ function FactoryImport() {
     const [storage, setStorage] = useState([]);
     const [openModal, setOpenModal] = useState(false);
 
-    const [idProduct, setIdProduct] = useState('');
+    const [idBook, setIdBook] = useState('');
     const [amountImport, setAmountImport] = useState(0);
 
     const navigate = useNavigate();
@@ -49,7 +49,7 @@ function FactoryImport() {
         const getData = async () => {
             try {
                 const res = await axios.get(`http://localhost:5001/factory/${localStorage.getItem('idPage')}`);
-                setRows(res.data.products);
+                setRows(res.data.books);
                 setStorage(res.data.factory.storage);
             } catch (err) {
                 console.error(err);
@@ -60,14 +60,14 @@ function FactoryImport() {
 
     const handleClickImport = async () => {
         const rest = storage.filter((item) => {
-            return item.id !== idProduct;
+            return item.id !== idBook;
         });
-        var amount = Number(amountImport) + getAmount(idProduct);
+        var amount = Number(amountImport) + getAmount(idBook);
 
         try {
             const res = await axios.post('http://localhost:5001/factory/updateAmount', {
                 id: localStorage.getItem('idPage'),
-                storage: [{ id: idProduct, amount: amount }, ...rest],
+                storage: [{ id: idBook, amount: amount }, ...rest],
             });
             if (res.data.update) {
                 window.location.reload();
@@ -127,7 +127,7 @@ function FactoryImport() {
                                                 color="secondary"
                                                 onClick={() => {
                                                     setOpenModal(true);
-                                                    setIdProduct(row._id);
+                                                    setIdBook(row._id);
                                                 }}
                                             >
                                                 Nhập hàng
@@ -151,7 +151,7 @@ function FactoryImport() {
                     )}
                 </TableContainer>
             </Box>
-            {/* Modal import amount product */}
+            {/* Modal import amount book */}
             <Modal
                 aria-labelledby="transition-modal-title"
                 aria-describedby="transition-modal-description"

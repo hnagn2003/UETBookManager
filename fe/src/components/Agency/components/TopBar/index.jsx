@@ -4,9 +4,9 @@ import { useState } from 'react';
 import './TopBar.scss';
 import { Link, useNavigate } from 'react-router-dom';
 import HomeOutlinedIcon from '@mui/icons-material/HomeOutlined';
-import avatar from '~/assets/image/agency.jpg';
+import avatar from '~/assets/image/lab.jpg';
 
-function TopBarAgency() {
+function TopBarLab() {
     // open profile user
     const [visible, setVisible] = useState(false);
     const show = () => setVisible(true);
@@ -36,7 +36,7 @@ function TopBarAgency() {
                     alignItems: 'center',
                 }}
             >
-                <Link to="/agency">
+                <Link to="/lab">
                     <Button
                         sx={{ color: '#666', fontSize: '16px', display: 'flex', alignItems: 'flex-start' }}
                         color="secondary"
@@ -90,4 +90,4 @@ function TopBarAgency() {
     );
 }
 
-export default TopBarAgency;
+export default TopBarLab;

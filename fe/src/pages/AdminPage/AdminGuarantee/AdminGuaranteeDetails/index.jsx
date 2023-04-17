@@ -16,7 +16,7 @@ import { Stack } from '@mui/system';
 function GuaranteeDetails() {
     const [rows, setRows] = useState([]);
     const navigate = useNavigate();
-    const [listProducts, setListProducts] = useState([]);
+    const [listBooks, setListBooks] = useState([]);
     const id = useParams();
 
     useEffect(() => {
@@ -27,8 +27,8 @@ function GuaranteeDetails() {
                 if (res) {
                     console.log(res.data);
                     setRows(res.data.guaranteeOrders);
-                    setListProducts(res.data.productGuarantees);
-                    // console.log(res.data.productGuarantees);
+                    setListBooks(res.data.bookGuarantees);
+                    // console.log(res.data.bookGuarantees);
                 }
             } catch (err) {
                 console.error(err);
@@ -37,11 +37,11 @@ function GuaranteeDetails() {
         getData();
     }, [id]);
 
-    const getNameProduct = (id) => {
-        let product = listProducts.find((product) => {
-            return product._id === id;
+    const getNameBook = (id) => {
+        let book = listBooks.find((book) => {
+            return book._id === id;
         });
-        return product.nameProduct;
+        return book.nameBook;
     };
 
     return (
@@ -84,7 +84,7 @@ function GuaranteeDetails() {
                                         <TableCell component="th" scope="row" sx={{ maxWidth: '200px' }}>
                                             {row.idOrder}
                                         </TableCell>
-                                        <TableCell sx={{ maxWidth: '200px' }}>{getNameProduct(row.idOrder)}</TableCell>
+                                        <TableCell sx={{ maxWidth: '200px' }}>{getNameBook(row.idOrder)}</TableCell>
                                         <TableCell>{row.error}</TableCell>
                                     </TableRow>
                                 ))}

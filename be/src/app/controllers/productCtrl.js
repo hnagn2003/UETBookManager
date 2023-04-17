@@ -1,30 +1,30 @@
-const Products = require("../models/productModel.js");
+const Books = require("../models/bookModel.js");
 
-const productCtrl = {
+const bookCtrl = {
 
   create: async (req, res) => {
     try {
       const { code, name, description, image, price } = req.body;
 
-      const product = await Products.findOne({ code: code });
-      if (product) {
-        return res.json({ msg: "Code product registered", create: false });
+      const book = await Books.findOne({ code: code });
+      if (book) {
+        return res.json({ msg: "Code book registered", create: false });
       }
-      const newProduct = new Products({
+      const newBook = new Books({
         code,
         name,
         description,
         image,
         price,
-        agency: [],
+        lab: [],
         guarantee: [],
         factory: [],
 
       });
 
       // Save mongodb
-      await newProduct.save();
-      res.json({ msg: "Create product successfully", create: true });
+      await newBook.save();
+      res.json({ msg: "Create book successfully", create: true });
     } catch (error) {
       return res.status(500).json({ msg: error.message });
     }
@@ -34,12 +34,12 @@ const productCtrl = {
     try {
       const { id } = req.body;
 
-      const product = await Products.findOne({ _id: id });
-      if (!product) {
-        return res.status(400).json({ msg: "Product not found" });
+      const book = await Books.findOne({ _id: id });
+      if (!book) {
+        return res.status(400).json({ msg: "Book not found" });
       }
-      await Products.findByIdAndUpdate(id, req.body, { new: true });
-      res.json({ msg: "Product updated", update: true });
+      await Books.findByIdAndUpdate(id, req.body, { new: true });
+      res.json({ msg: "Book updated", update: true });
     } catch (error) {
       return res.status(500).json({ msg: error.message });
     }
@@ -48,35 +48,35 @@ const productCtrl = {
   delete: async (req, res) => {
     try {
       const { id } = req.body;
-      const product = await Products.findOne({ _id: id });
-      if (!product) return res.json({ msg: "Product not found" });
-      await Products.findByIdAndDelete(id);
-      res.json({ msg: "Product deleted", delete: true });
+      const book = await Books.findOne({ _id: id });
+      if (!book) return res.json({ msg: "Book not found" });
+      await Books.findByIdAndDelete(id);
+      res.json({ msg: "Book deleted", delete: true });
     } catch (error) {
       return res.status(500).json({ msg: error.message });
     }
   },
 
-  getAllProducts: async (req, res) => {
+  getAllBooks: async (req, res) => {
     try {
-      const products = await Products.find();
-      if (products) {
-        res.json(products);
+      const books = await Books.find();
+      if (books) {
+        res.json(books);
       } else {
-        res.json({ msg: "Not products" });
+        res.json({ msg: "Not books" });
       }
     } catch (error) {
       return res.status(500).json({ msg: error.message });
     }
   },
-  getAllProductsFactory: async (req, res) => {
+  getAllBooksFactory: async (req, res) => {
     try {
       const id = req.params.id;
-      const products = await Products.find({factory: id});
-      if (products) {
-        res.json(products);
+      const books = await Books.find({factory: id});
+      if (books) {
+        res.json(books);
       } else {
-        res.json({ msg: "Not products" });
+        res.json({ msg: "Not books" });
       }
     } catch (error) {
       return res.status(500).json({ msg: error.message });
@@ -85,4 +85,4 @@ const productCtrl = {
 
 };
 
-module.exports = productCtrl;
+module.exports = bookCtrl;

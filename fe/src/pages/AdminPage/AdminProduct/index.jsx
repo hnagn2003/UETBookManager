@@ -1,4 +1,4 @@
-import './Product.scss';
+import './Book.scss';
 import Table from '@mui/material/Table';
 import TableBody from '@mui/material/TableBody';
 import TableCell from '@mui/material/TableCell';
@@ -34,7 +34,7 @@ const styleModal = {
     p: 3,
 };
 
-function AdminProduct() {
+function AdminBook() {
     const [rows, setRows] = useState([]);
     const [openModalCreate, setOpenModalCreate] = useState(false);
     const [openModalEdit, setOpenModalEdit] = useState(false);
@@ -52,7 +52,7 @@ function AdminProduct() {
     useEffect(() => {
         const getData = async () => {
             try {
-                const res = await axios.get('http://localhost:5001/product/allProducts');
+                const res = await axios.get('http://localhost:5001/book/allBooks');
                 setRows(res.data);
             } catch (err) {
                 console.log('fe : ' + err.message);
@@ -61,10 +61,10 @@ function AdminProduct() {
         getData();
     }, []);
 
-    // Create product
+    // Create book
     const handleCreate = async () => {
         try {
-            const res = await axios.post('http://localhost:5001/product/create', {
+            const res = await axios.post('http://localhost:5001/book/create', {
                 code,
                 name,
                 description,
@@ -80,10 +80,10 @@ function AdminProduct() {
         }
     };
 
-    // update product
+    // update book
     const handleEdit = async () => {
         try {
-            const res = await axios.post('http://localhost:5001/product/update', {
+            const res = await axios.post('http://localhost:5001/book/update', {
                 id,
                 code,
                 name,
@@ -100,10 +100,10 @@ function AdminProduct() {
         }
     };
 
-    // delete product
+    // delete book
     const handleDelete = async () => {
         try {
-            const res = await axios.post('http://localhost:5001/product/delete', {
+            const res = await axios.post('http://localhost:5001/book/delete', {
                 id,
             });
             if (res.data.delete) {
@@ -133,7 +133,7 @@ function AdminProduct() {
                 }}
             >
                 <Typography variant="h4" sx={{ margin: '10px', color: '#666' }}>
-                    Products
+                    Books
                 </Typography>
 
                 {/* btn new user */}
@@ -230,7 +230,7 @@ function AdminProduct() {
                     )}
                 </TableContainer>
             </Box>
-            {/* Modal Create product */}
+            {/* Modal Create book */}
             <Modal
                 aria-labelledby="transition-modal-title"
                 aria-describedby="transition-modal-description"
@@ -245,7 +245,7 @@ function AdminProduct() {
                 <Fade in={openModalCreate}>
                     <Box sx={styleModal}>
                         <Typography id="transition-modal-title" variant="h6" component="h2">
-                            New product
+                            New book
                         </Typography>
                         <ValidatorForm onSubmit={handleCreate}>
                             <TextValidator
@@ -317,7 +317,7 @@ function AdminProduct() {
                     </Box>
                 </Fade>
             </Modal>
-            {/* Modal Edit Product*/}
+            {/* Modal Edit Book*/}
             <Modal
                 aria-labelledby="transition-modal-title"
                 aria-describedby="transition-modal-description"
@@ -332,7 +332,7 @@ function AdminProduct() {
                 <Fade in={openModalEdit}>
                     <Box sx={styleModal}>
                         <Typography id="transition-modal-title" variant="h6" component="h2">
-                            Edit Product
+                            Edit Book
                         </Typography>
                         <ValidatorForm onSubmit={handleEdit}>
                             <TextValidator
@@ -419,7 +419,7 @@ function AdminProduct() {
                 <Fade in={openModalDelete}>
                     <Box sx={styleModal}>
                         <Typography sx={{ color: '#666' }} variant="h6" component="h2">
-                            Delete Product ?
+                            Delete Book ?
                         </Typography>
                         <Box
                             sx={{
@@ -448,4 +448,4 @@ function AdminProduct() {
     );
 }
 
-export default AdminProduct;
+export default AdminBook;
