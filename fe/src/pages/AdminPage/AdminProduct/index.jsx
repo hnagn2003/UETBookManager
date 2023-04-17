@@ -15,6 +15,7 @@ import DeleteSweepOutlinedIcon from '@mui/icons-material/DeleteSweepOutlined';
 import Skeleton from '@mui/material/Skeleton';
 import { useEffect, useState } from 'react';
 import axios from 'axios';
+import SearchIcon from '@mui/icons-material/Search';
 
 import Backdrop from '@mui/material/Backdrop';
 import Modal from '@mui/material/Modal';
@@ -103,7 +104,6 @@ function AdminProduct() {
             console.log('Register failed: ' + err.message);
         }
     };
-
     // delete product
     const handleDelete = async () => {
         try {
@@ -162,7 +162,7 @@ function AdminProduct() {
                     color="secondary"
                     sx={{ margin: '10px' }}
                     onClick={() => setOpenModalSearch(true)}>
-                    <AddCircleOutlineOutlinedIcon sx={{ marginRight: '5px' }} /> Tìm kiếm
+                    <SearchIcon sx={{ marginRight: '5px' }} /> Search
                 </Button>
                 <TableContainer sx={{ marginBottom: '40px' }} component={Paper}>
                     {rows.length > 0 ? (
@@ -327,7 +327,6 @@ function AdminProduct() {
                     </Box>
                 </Fade>
             </Modal>
-            {/* Modal Edit Product*/}
             <Modal
                 aria-labelledby="transition-modal-title"
                 aria-describedby="transition-modal-description"
@@ -455,8 +454,8 @@ function AdminProduct() {
                 </Fade>
             </Modal>
             <Modal
-                // aria-labelledby="transition-modal-title"
-                // aria-describedby="transition-modal-description"
+                aria-labelledby="transition-modal-title"
+                aria-describedby="transition-modal-description"
                 open={openModalSearch}
                 onClose={() => setOpenModalSearch(false)}
                 closeAfterTransition
@@ -479,25 +478,38 @@ function AdminProduct() {
                             p: 3,
                         }}
                     >
-                    <ValidatorForm onSubmit={handleSearch}>
-                        <TextValidator
-                            label="Nhập thông tin"
-                            variant="outlined"
-                            margin="dense"
-                            value={searchValue}
-                            onChange={(event) => setSearchValue(event.target.value)}
-                            validators={['required']}
-                            errorMessages={['Vui lòng nhập từ khóa tìm kiếm']}
-                        />
-                        <Button type="submit" variant="contained">
-                            Xác nhận
-                        </Button>
-                    </ValidatorForm>
-                </Box>
-            </Fade>
-        </Modal >
+                        <Typography id="transition-modal-title" variant="h6" component="h2">
+                            Tìm kiếm
+                        </Typography>
+                        <ValidatorForm onSubmit={handleSearch}>
+                            <TextValidator
+                                sx={{ marginTop: '10px' }}
+                                variant="standard"
+                                color="secondary"
+                                fullWidth
+                                label="Nhập thông tin"
+                                //variant="outlined"
+                                margin="dense"
+                                value={searchValue}
+                                onChange={(event) => setSearchValue(event.target.value)}
+                                validators={['required']}
+                                errorMessages={['Vui lòng nhập từ khóa tìm kiếm']}
+                            />
+                            <Button
+                                sx={{
+                                    marginTop: '10px',
+                                    textAlign: 'center'
+                                }}
+                                variant="contained"
+                                startIcon={<SendIcon />}
+                                type="submit">
+                                Xác nhận
+                            </Button>
+                        </ValidatorForm>
+                    </Box>
+                </Fade>
+            </Modal >
         </>
     );
 }
-
 export default AdminProduct;
