@@ -74,7 +74,7 @@ function LabDetails() {
                                         id={row._id}
                                         className="row"
                                         key={row._id}
-                                        sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
+                                        sx={{ '&:last-child td, &:last-child th': { brent: 0 } }}
                                     >
                                         <TableCell>{index + 1}</TableCell>
                                         <TableCell component="th" scope="row" sortDirection="desc">

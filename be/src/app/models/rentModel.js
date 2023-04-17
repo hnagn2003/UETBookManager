@@ -1,6 +1,6 @@
 const mongoose = require("mongoose");
 
-const orderModel = new mongoose.Schema (
+const rentModel = new mongoose.Schema (
   {
     idLab: {
       type: String,
@@ -29,4 +29,4 @@ const orderModel = new mongoose.Schema (
   }
 );
 
-module.exports = mongoose.model("Orders", orderModel);
+module.exports = mongoose.model("Rents", rentModel);

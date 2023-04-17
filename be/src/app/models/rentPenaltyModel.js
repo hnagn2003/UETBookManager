@@ -1,8 +1,8 @@
 const mongoose = require("mongoose");
 
-const orderPenaltyModel = new mongoose.Schema (
+const rentPenaltyModel = new mongoose.Schema (
   {
-    idOrder: {
+    idRent: {
       type: String,
     },   
     error: {
@@ -29,4 +29,4 @@ const orderPenaltyModel = new mongoose.Schema (
   }
 );
 
-module.exports = mongoose.model("OrderPenalties", orderPenaltyModel);
+module.exports = mongoose.model("RentPenalties", rentPenaltyModel);

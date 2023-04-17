@@ -77,7 +77,7 @@ function LibDelivery() {
                                     display: 'flex',
                                     flexDirection: 'column',
                                     padding: '5px',
-                                    borderBottom: '1px solid #ccc',
+                                    brentBottom: '1px solid #ccc',
                                 }}
                             >
                                 <Box sx={{ width: '100%', display: 'flex', justifyContent: 'space-between' }}>

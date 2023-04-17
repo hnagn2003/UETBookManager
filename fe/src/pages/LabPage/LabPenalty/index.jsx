@@ -24,7 +24,7 @@ const styleModal = {
     width: 500,
     bgcolor: 'background.paper',
     boxShadow: 24,
-    borderRadius: '10px',
+    brentRadius: '10px',
     p: 3,
 };
 
@@ -35,7 +35,7 @@ function LabPenalty() {
     const [listPenalties, setListPenalties] = useState([]);
 
     const [openModalStudent, setOpenModalStudent] = useState(false);
-    const [idPenaltyOrder, setIdPenaltyOrder] = useState('');
+    const [idPenaltyRent, setIdPenaltyRent] = useState('');
 
     const [openModalPenalty, setOpenModalPenalty] = useState(false);
     const [idPenaltyExport, setIdPenaltyExport] = useState('');
@@ -44,7 +44,7 @@ function LabPenalty() {
         const getData = async () => {
             try {
                 const res = await axios.get(
-                    `http://localhost:5001/lab/penaltyOrder/${localStorage.getItem('idPage')}`,
+                    `http://localhost:5001/lab/penaltyRent/${localStorage.getItem('idPage')}`,
                 );
                 const resPenalties = await axios.get('http://localhost:5001/penalty');
                 if (resPenalties) {
@@ -53,7 +53,7 @@ function LabPenalty() {
                 }
                 if (res) {
                     // console.log(res.data);
-                    setRows(res.data.penaltyOrders);
+                    setRows(res.data.penaltyRents);
                     setListBooks(res.data.bookPenalties);
                 }
             } catch (err) {
@@ -87,7 +87,7 @@ function LabPenalty() {
     };
 
     const handleDeliveryPenalty = async () => {
-        // console.log(localStorage.getItem('idPage'), localStorage.getItem('name'), idPenaltyExport, idPenaltyOrder);
+        // console.log(localStorage.getItem('idPage'), localStorage.getItem('name'), idPenaltyExport, idPenaltyRent);
         // console.log(idPenaltyExport);
 
         let penalty = listPenalties.find((penalty) => {
@@ -100,7 +100,7 @@ function LabPenalty() {
                 nameFrom: localStorage.getItem('name'),
                 to: idPenaltyExport,
                 nameTo: penalty.name,
-                idPenaltyOrder: idPenaltyOrder,
+                idPenaltyRent: idPenaltyRent,
                 status: 'Đang giao hàng',
             });
             if (res.data.create) {
@@ -113,9 +113,9 @@ function LabPenalty() {
     };
 
     const handleDeliveryStudent = async () => {
-        // console.log(idOrder);
+        // console.log(idRent);
         try {
-            const res = await axios.put(`http://localhost:5001/lab/updateNotPenaltyOrder/${idPenaltyOrder}`);
+            const res = await axios.put(`http://localhost:5001/lab/updateNotPenaltyRent/${idPenaltyRent}`);
             if (res.data.update) {
                 alert(res.data.msg);
                 window.location.reload();
@@ -162,19 +162,19 @@ function LabPenalty() {
                                         id={row._id}
                                         className="row"
                                         key={row._id}
-                                        sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
+                                        sx={{ '&:last-child td, &:last-child th': { brent: 0 } }}
                                     >
                                         <TableCell>{index + 1}</TableCell>
                                         <TableCell component="th" scope="row" sx={{ maxWidth: '200px' }}>
-                                            {row.idOrder}
+                                            {row.idRent}
                                         </TableCell>
-                                        <TableCell sx={{ maxWidth: '200px' }}>{getNameBook(row.idOrder)}</TableCell>
+                                        <TableCell sx={{ maxWidth: '200px' }}>{getNameBook(row.idRent)}</TableCell>
                                         <TableCell>{row.error}</TableCell>
                                         <TableCell>{getDate(row.createdAt)}</TableCell>
                                         <TableCell>
                                             <Button
                                                 onClick={() => {
-                                                    setIdPenaltyOrder(row._id);
+                                                    setIdPenaltyRent(row._id);
                                                     setOpenModalStudent(true);
                                                 }}
                                                 variant="outlined"
@@ -186,7 +186,7 @@ function LabPenalty() {
                                         <TableCell>
                                             <Button
                                                 onClick={() => {
-                                                    setIdPenaltyOrder(row._id);
+                                                    setIdPenaltyRent(row._id);
                                                     setOpenModalPenalty(true);
                                                 }}
                                                 variant="outlined"

@@ -16,7 +16,7 @@ html {
 * {
     margin: 0;
     padding: 0;
-    box-sizing: border-box;
+    box-sizing: brent-box;
 }
 
 body {
@@ -38,7 +38,7 @@ a {
 
 #style-2::-webkit-scrollbar {
     width: 4px;
-    border-radius: 10px;
+    brent-radius: 10px;
 }
 
 #style-2::-webkit-scrollbar-track {

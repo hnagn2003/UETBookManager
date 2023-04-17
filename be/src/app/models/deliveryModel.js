@@ -20,7 +20,7 @@ const deliverySchema = new mongoose.Schema (
     idBook: {
       type: String,
     },
-    idPenaltyOrder: {
+    idPenaltyRent: {
       type: String,
     },
     amount: {

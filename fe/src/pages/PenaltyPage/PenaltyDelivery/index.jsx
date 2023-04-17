@@ -42,15 +42,15 @@ function PenaltyDelivery() {
         return dt + '/' + month + '/' + year;
     };
 
-    const handleClickAccept = async (idPenaltyOrder, idDelivery) => {
-        // console.log(idPenaltyOrder);
+    const handleClickAccept = async (idPenaltyRent, idDelivery) => {
+        // console.log(idPenaltyRent);
 
         try {
             const res = await axios.put(`http://localhost:5001/delivery/updateStatus/${idDelivery}`, {
                 status: 'Giao hàng thành công',
             });
             const resUpdateStatusPenalty = await axios.put(
-                `http://localhost:5001/penalty/updateStatusPenalty/${idPenaltyOrder}`,
+                `http://localhost:5001/penalty/updateStatusPenalty/${idPenaltyRent}`,
                 {
                     status: 'penalty',
                 },
@@ -102,7 +102,7 @@ function PenaltyDelivery() {
                                     display: 'flex',
                                     flexDirection: 'column',
                                     padding: '5px',
-                                    borderBottom: '1px solid #ccc',
+                                    brentBottom: '1px solid #ccc',
                                 }}
                             >
                                 <Box sx={{ width: '100%', display: 'flex', justifyContent: 'space-between' }}>
@@ -110,7 +110,7 @@ function PenaltyDelivery() {
                                         Mã bảo hành
                                     </Typography>
                                     <Typography sx={{ color: '#666', fontSize: '1rem' }} variant="span">
-                                        {delivery.idPenaltyOrder}
+                                        {delivery.idPenaltyRent}
                                     </Typography>
                                 </Box>
                                 <Box sx={{ width: '100%', display: 'flex', justifyContent: 'space-between' }}>
@@ -138,7 +138,7 @@ function PenaltyDelivery() {
                                     }}
                                 >
                                     <Button
-                                        onClick={() => handleClickAccept(delivery.idPenaltyOrder, delivery._id)}
+                                        onClick={() => handleClickAccept(delivery.idPenaltyRent, delivery._id)}
                                         variant="contained"
                                         color="primary"
                                     >

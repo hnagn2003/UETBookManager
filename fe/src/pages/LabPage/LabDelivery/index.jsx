@@ -77,7 +77,7 @@ function LabDelivery() {
                                     display: 'flex',
                                     flexDirection: 'column',
                                     padding: '5px',
-                                    borderBottom: '1px solid #ccc',
+                                    brentBottom: '1px solid #ccc',
                                 }}
                             >
                                 <Box sx={{ width: '100%', display: 'flex', justifyContent: 'space-between' }}>
@@ -85,7 +85,7 @@ function LabDelivery() {
                                         Mã bảo hành
                                     </Typography>
                                     <Typography sx={{ color: '#666', fontSize: '1rem' }} variant="span">
-                                        {delivery.idPenaltyOrder}
+                                        {delivery.idPenaltyRent}
                                     </Typography>
                                 </Box>
                                 <Box sx={{ width: '100%', display: 'flex', justifyContent: 'space-between' }}>

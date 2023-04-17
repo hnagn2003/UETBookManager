@@ -28,7 +28,7 @@ function TopBarLab() {
                 sx={{
                     padding: '0 20px',
                     backgroundColor: '#fff',
-                    borderBottom: '1px solid #ccc',
+                    brentBottom: '1px solid #ccc',
                     float: 'top',
                     height: 'var(--default-layout-height-header)',
                     display: 'flex',
@@ -55,7 +55,7 @@ function TopBarLab() {
                             <Box
                                 sx={{
                                     padding: '12px 20px',
-                                    borderBottom: '1px solid #ccc',
+                                    brentBottom: '1px solid #ccc',
                                     minWidth: '200px',
                                 }}
                             >
@@ -69,7 +69,7 @@ function TopBarLab() {
                             <Box
                                 sx={{
                                     padding: '5px 20px',
-                                    borderBottom: '1px solid #ccc',
+                                    brentBottom: '1px solid #ccc',
                                 }}
                             >
                                 <Button variant="text" fullWidth onClick={handleClickLogout}>

@@ -24,7 +24,7 @@ const styleModal = {
     width: 500,
     bgcolor: 'background.paper',
     boxShadow: 24,
-    borderRadius: '10px',
+    brentRadius: '10px',
     p: 3,
 };
 
@@ -43,16 +43,16 @@ function LabSold() {
     const [price, setPrice] = useState(0);
 
     const [openModalPenalty, setOpenModalPenalty] = useState(false);
-    const [idOrder, setIdOrder] = useState('');
+    const [idRent, setIdRent] = useState('');
     const [error, setError] = useState('');
 
     useEffect(() => {
         const getData = async () => {
             try {
-                const res = await axios.get(`http://localhost:5001/lab/order/${localStorage.getItem('idPage')}`);
+                const res = await axios.get(`http://localhost:5001/lab/rent/${localStorage.getItem('idPage')}`);
                 const resStorage = await axios.get(`http://localhost:5001/lab/${localStorage.getItem('idPage')}`);
                 console.log(res.data);
-                setRows(res.data.orders.reverse());
+                setRows(res.data.rents.reverse());
                 setNameLab(res.data.nameLab);
                 setListBooks(res.data.books);
                 setStorage(resStorage.data.lab.storage);
@@ -99,7 +99,7 @@ function LabSold() {
         return Math.ceil((ms2 - ms1) / (24 * 60 * 60 * 1000));
     };
 
-    const handleCreateOrder = async () => {
+    const handleCreateRent = async () => {
         const rest = storage.filter((item) => {
             return item.id !== codeBook;
         });
@@ -133,10 +133,10 @@ function LabSold() {
             console.log(e);
         }
     };
-    const handlePenaltyOrder = async () => {
+    const handlePenaltyRent = async () => {
         try {
-            const res = await axios.post('http://localhost:5001/lab/createPenaltyOrder', {
-                idOrder: idOrder,
+            const res = await axios.post('http://localhost:5001/lab/createPenaltyRent', {
+                idRent: idRent,
                 error: error,
                 idLab: localStorage.getItem('idPage'),
                 status: 'lab',
@@ -194,7 +194,7 @@ function LabSold() {
                                         id={row._id}
                                         className="row"
                                         key={row._id}
-                                        sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
+                                        sx={{ '&:last-child td, &:last-child th': { brent: 0 } }}
                                     >
                                         <TableCell>{index + 1}</TableCell>
                                         <TableCell component="th" scope="row" sortDirection="desc">
@@ -218,7 +218,7 @@ function LabSold() {
                                                     {row.status === 'not penalty' ? (
                                                         <Button
                                                             onClick={() => {
-                                                                setIdOrder(row._id);
+                                                                setIdRent(row._id);
                                                                 setOpenModalPenalty(true);
                                                             }}
                                                             variant="outlined"
@@ -231,7 +231,7 @@ function LabSold() {
                                                             onClick={() => {}}
                                                             sx={{
                                                                 color: 'red !important',
-                                                                border: '1px solid red !important',
+                                                                brent: '1px solid red !important',
                                                             }}
                                                             disabled
                                                             variant="outlined"
@@ -258,7 +258,7 @@ function LabSold() {
                     )}
                 </TableContainer>
             </Box>
-            {/* Modal create order */}
+            {/* Modal create rent */}
             <Modal
                 aria-labelledby="transition-modal-title"
                 aria-describedby="transition-modal-description"
@@ -347,14 +347,14 @@ function LabSold() {
                             variant="contained"
                             fullWidth
                             type="submit"
-                            onClick={handleCreateOrder}
+                            onClick={handleCreateRent}
                         >
                             Xác nhận
                         </Button>
                     </Box>
                 </Fade>
             </Modal>
-            {/* Modal penalty order */}
+            {/* Modal penalty rent */}
             <Modal
                 aria-labelledby="transition-modal-title"
                 aria-describedby="transition-modal-description"
@@ -400,7 +400,7 @@ function LabSold() {
                                 sx={{ marginTop: '10px', marginLeft: '10px' }}
                                 variant="contained"
                                 type="submit"
-                                onClick={handlePenaltyOrder}
+                                onClick={handlePenaltyRent}
                             >
                                 Xác nhận
                             </Button>

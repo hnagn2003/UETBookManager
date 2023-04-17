@@ -22,11 +22,11 @@ function LibPenalty() {
         const getData = async () => {
             try {
                 const res = await axios.get(
-                    `http://localhost:5001/lib/penaltyOrder/${localStorage.getItem('idPage')}`,
+                    `http://localhost:5001/lib/penaltyRent/${localStorage.getItem('idPage')}`,
                 );
 
                 if (res) {
-                    setRows(res.data.penaltyOrders);
+                    setRows(res.data.penaltyRents);
                     setListBooks(res.data.bookPenalties);
                 }
             } catch (err) {
@@ -93,13 +93,13 @@ function LibPenalty() {
                                         id={row._id}
                                         className="row"
                                         key={row._id}
-                                        sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
+                                        sx={{ '&:last-child td, &:last-child th': { brent: 0 } }}
                                     >
                                         <TableCell>{index + 1}</TableCell>
                                         <TableCell component="th" scope="row" sx={{ maxWidth: '200px' }}>
-                                            {row.idOrder}
+                                            {row.idRent}
                                         </TableCell>
-                                        <TableCell sx={{ maxWidth: '200px' }}>{getNameBook(row.idOrder)}</TableCell>
+                                        <TableCell sx={{ maxWidth: '200px' }}>{getNameBook(row.idRent)}</TableCell>
                                         <TableCell>{row.error}</TableCell>
                                     </TableRow>
                                 ))}

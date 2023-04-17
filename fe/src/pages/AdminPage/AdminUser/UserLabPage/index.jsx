@@ -32,7 +32,7 @@ const styleModal = {
     width: 500,
     bgcolor: 'background.paper',
     boxShadow: 24,
-    borderRadius: '10px',
+    brentRadius: '10px',
     p: 3,
 };
 
@@ -185,7 +185,7 @@ function UserLabDetails() {
                                         id={row._id}
                                         className="row"
                                         key={index}
-                                        sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
+                                        sx={{ '&:last-child td, &:last-child th': { brent: 0 } }}
                                     >
                                         <TableCell>{index + 1}</TableCell>
                                         <TableCell component="th" scope="row" sortDirection="desc">

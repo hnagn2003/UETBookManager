@@ -24,7 +24,7 @@ const styleModal = {
     width: 500,
     bgcolor: 'background.paper',
     boxShadow: 24,
-    borderRadius: '10px',
+    brentRadius: '10px',
     p: 3,
 };
 
@@ -35,7 +35,7 @@ function PenaltyBook() {
     const [listLibs, setListLibs] = useState([]);
 
     const [openModalStudent, setOpenModalStudent] = useState(false);
-    const [idPenaltyOrder, setIdPenaltyOrder] = useState('');
+    const [idPenaltyRent, setIdPenaltyRent] = useState('');
 
     const [openModalLib, setOpenModalLib] = useState(false);
     const [idLibExport, setIdLibExport] = useState('');
@@ -44,7 +44,7 @@ function PenaltyBook() {
         const getData = async () => {
             try {
                 const res = await axios.get(
-                    `http://localhost:5001/penalty/penaltyOrder/${localStorage.getItem('idPage')}`,
+                    `http://localhost:5001/penalty/penaltyRent/${localStorage.getItem('idPage')}`,
                 );
                 const resLibs = await axios.get('http://localhost:5001/lib');
                 if (resLibs) {
@@ -53,7 +53,7 @@ function PenaltyBook() {
                 }
                 if (res) {
                     // console.log(res.data);
-                    setRows(res.data.penaltyOrders.reverse());
+                    setRows(res.data.penaltyRents.reverse());
                     setListBooks(res.data.bookPenalties);
                     // console.log(res.data.bookPenalties);
                 }
@@ -89,11 +89,11 @@ function PenaltyBook() {
 
     const handleDeliveryLib = async () => {
         console.log(idLibExport);
-        console.log(idPenaltyOrder);
+        console.log(idPenaltyRent);
 
         try {
             const resUpdateStatusPenalty = await axios.put(
-                `http://localhost:5001/penalty/updateStatusPenalty/${idPenaltyOrder}`,
+                `http://localhost:5001/penalty/updateStatusPenalty/${idPenaltyRent}`,
                 {
                     idLib: idLibExport,
                     status: 'lib',
@@ -109,9 +109,9 @@ function PenaltyBook() {
     };
 
     const handleDeliveryLab = async () => {
-        // console.log(idOrder);
+        // console.log(idRent);
         try {
-            const res = await axios.put(`http://localhost:5001/lab/updateNotPenaltyOrder/${idPenaltyOrder}`);
+            const res = await axios.put(`http://localhost:5001/lab/updateNotPenaltyRent/${idPenaltyRent}`);
             if (res.data.update) {
                 alert(res.data.msg);
                 window.location.reload();
@@ -157,18 +157,18 @@ function PenaltyBook() {
                                         id={row._id}
                                         className="row"
                                         key={row._id}
-                                        sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
+                                        sx={{ '&:last-child td, &:last-child th': { brent: 0 } }}
                                     >
                                         <TableCell>{index + 1}</TableCell>
                                         <TableCell component="th" scope="row" sx={{ maxWidth: '200px' }}>
-                                            {row.idOrder}
+                                            {row.idRent}
                                         </TableCell>
-                                        <TableCell sx={{ maxWidth: '200px' }}>{getNameBook(row.idOrder)}</TableCell>
+                                        <TableCell sx={{ maxWidth: '200px' }}>{getNameBook(row.idRent)}</TableCell>
                                         <TableCell>{row.error}</TableCell>
                                         <TableCell>
                                             <Button
                                                 onClick={() => {
-                                                    setIdPenaltyOrder(row._id);
+                                                    setIdPenaltyRent(row._id);
                                                     setOpenModalStudent(true);
                                                 }}
                                                 variant="outlined"
@@ -180,7 +180,7 @@ function PenaltyBook() {
                                         <TableCell>
                                             <Button
                                                 onClick={() => {
-                                                    setIdPenaltyOrder(row._id);
+                                                    setIdPenaltyRent(row._id);
                                                     setOpenModalLib(true);
                                                 }}
                                                 variant="outlined"

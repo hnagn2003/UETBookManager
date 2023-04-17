@@ -1,23 +1,23 @@
-const Orders = require("../models/orderModel");
+const Rents = require("../models/rentModel");
 const Labs = require("../models/labModel");
 const Books = require("../models/bookModel");
 const Students = require("../models/studentModel");
 
-const orderCtrl = {
+const rentCtrl = {
   getOderFromIdLab: async (req, res) => {
     try {
       const id = req.params.id;
-      const orders = await Orders.find({ idLab: id });
+      const rents = await Rents.find({ idLab: id });
       const lab = await Labs.findOne({ _id: id });
       const books = await Books.find();
-      if (orders && lab) {
+      if (rents && lab) {
         res.json({
-          orders: orders,
+          rents: rents,
           nameLab: lab.name,
           books: books,
         });
       } else {
-        res.json({ msg: "Not orders" });
+        res.json({ msg: "Not rents" });
       }
     } catch (error) {
       return res.status(500).json({ msg: error.message });
@@ -43,7 +43,7 @@ const orderCtrl = {
       await newStudent.save();
 
       const book = await Books.findOne({_id: idBook})
-      const newOrder = new Orders({
+      const newRent = new Rents({
         idLab: idLab,
         nameLab: nameLab,
         idStudent: newStudent._id,
@@ -52,8 +52,8 @@ const orderCtrl = {
         price: price,
         status: 'not penalty',
       })
-      newOrder.save();
-      res.json({create: true, msg: 'Create order'});
+      newRent.save();
+      res.json({create: true, msg: 'Create rent'});
 
     } catch (error) {
       return res.status(500).json({ msg: error.message });
@@ -61,4 +61,4 @@ const orderCtrl = {
   },
 };
 
-module.exports = orderCtrl;
+module.exports = rentCtrl;

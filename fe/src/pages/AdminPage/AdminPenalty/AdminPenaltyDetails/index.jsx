@@ -23,10 +23,10 @@ function PenaltyDetails() {
         const getData = async () => {
             console.log(id);
             try {
-                const res = await axios.get(`http://localhost:5001/penalty/penaltyOrder/${id.id}`);
+                const res = await axios.get(`http://localhost:5001/penalty/penaltyRent/${id.id}`);
                 if (res) {
                     console.log(res.data);
-                    setRows(res.data.penaltyOrders);
+                    setRows(res.data.penaltyRents);
                     setListBooks(res.data.bookPenalties);
                     // console.log(res.data.bookPenalties);
                 }
@@ -78,13 +78,13 @@ function PenaltyDetails() {
                                         id={row._id}
                                         className="row"
                                         key={row._id}
-                                        sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
+                                        sx={{ '&:last-child td, &:last-child th': { brent: 0 } }}
                                     >
                                         <TableCell>{index + 1}</TableCell>
                                         <TableCell component="th" scope="row" sx={{ maxWidth: '200px' }}>
-                                            {row.idOrder}
+                                            {row.idRent}
                                         </TableCell>
-                                        <TableCell sx={{ maxWidth: '200px' }}>{getNameBook(row.idOrder)}</TableCell>
+                                        <TableCell sx={{ maxWidth: '200px' }}>{getNameBook(row.idRent)}</TableCell>
                                         <TableCell>{row.error}</TableCell>
                                     </TableRow>
                                 ))}
