@@ -39,7 +39,8 @@ function AdminProduct() {
     const [openModalCreate, setOpenModalCreate] = useState(false);
     const [openModalEdit, setOpenModalEdit] = useState(false);
     const [openModalDelete, setOpenModalDelete] = useState(false);
-
+    const [openModalSearch, setOpenModalSearch] = useState(false);
+    const [searchValue, setSearchValue] = useState('');
     const [code, setCode] = useState('');
     const [name, setName] = useState('');
     const [description, setDescription] = useState('');
@@ -48,6 +49,9 @@ function AdminProduct() {
 
     const [id, setId] = useState('');
 
+    const handleSearch = (event) => {
+        event.preventDefault();
+    };
     // Get data
     useEffect(() => {
         const getData = async () => {
@@ -153,7 +157,13 @@ function AdminProduct() {
                     <AddCircleOutlineOutlinedIcon sx={{ marginRight: '5px' }} />
                     New
                 </Button>
-
+                <Button
+                    variant="outlined"
+                    color="secondary"
+                    sx={{ margin: '10px' }}
+                    onClick={() => setOpenModalSearch(true)}>
+                    <AddCircleOutlineOutlinedIcon sx={{ marginRight: '5px' }} /> Tìm kiếm
+                </Button>
                 <TableContainer sx={{ marginBottom: '40px' }} component={Paper}>
                     {rows.length > 0 ? (
                         <Table sx={{ minWidth: 650 }} size="small" aria-label="a dense table">
@@ -218,7 +228,7 @@ function AdminProduct() {
                         </Table>
                     ) : (
                         <>
-                            <Stack spacing={1} sx={{padding: '0 10px'}}>
+                            <Stack spacing={1} sx={{ padding: '0 10px' }}>
                                 <Skeleton variant="rounded" width={'100%'} height={40} />
                                 <Skeleton variant="rounded" width={'100%'} height={40} />
                                 <Skeleton variant="rounded" width={'100%'} height={40} />
@@ -444,6 +454,48 @@ function AdminProduct() {
                     </Box>
                 </Fade>
             </Modal>
+            <Modal
+                // aria-labelledby="transition-modal-title"
+                // aria-describedby="transition-modal-description"
+                open={openModalSearch}
+                onClose={() => setOpenModalSearch(false)}
+                closeAfterTransition
+                BackdropComponent={Backdrop}
+                BackdropProps={{
+                    timeout: 500,
+                }}
+            >
+                <Fade in={openModalSearch}>
+                    <Box
+                        sx={{
+                            position: 'absolute',
+                            top: '50%',
+                            left: '50%',
+                            transform: 'translate(-50%, -50%)',
+                            width: 300,
+                            bgcolor: 'background.paper',
+                            boxShadow: 50,
+                            borderRadius: '10px',
+                            p: 3,
+                        }}
+                    >
+                    <ValidatorForm onSubmit={handleSearch}>
+                        <TextValidator
+                            label="Nhập thông tin"
+                            variant="outlined"
+                            margin="dense"
+                            value={searchValue}
+                            onChange={(event) => setSearchValue(event.target.value)}
+                            validators={['required']}
+                            errorMessages={['Vui lòng nhập từ khóa tìm kiếm']}
+                        />
+                        <Button type="submit" variant="contained">
+                            Xác nhận
+                        </Button>
+                    </ValidatorForm>
+                </Box>
+            </Fade>
+        </Modal >
         </>
     );
 }
