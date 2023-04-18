@@ -7,9 +7,9 @@ const deliveryCtrl = {
     try {
       const {
         from,
-        nameFrom,
+        // nameFrom,
         to,
-        nameTo,
+        // nameTo,
         idBook,
         amount,
         description,
@@ -22,10 +22,10 @@ const deliveryCtrl = {
       console.log(book.code);
       const newDelivery = new Deliveries({
         from: from,
-        nameFrom: nameFrom,
+        // nameFrom: nameFrom,
         to: to,
-        nameTo: nameTo,
-        nameBook: book.code,
+        // nameTo: nameTo,
+        // nameBook: book.code,
         idBook: idBook,
         amount: amount,
         description: description,
@@ -39,41 +39,41 @@ const deliveryCtrl = {
     }
   },
 
-  createDeliveryByLab: async (req, res) => {
-    try {
-      const { from, nameFrom, to, nameTo, idPenaltyRent, status } = req.body;
-      // console.log(
-      //   from + " " + nameFrom + " " + to + " " + idPenaltyRent + " " + status
-      // );
-      const penaltyRent = await PenaltyRents.findOne({
-        _id: idPenaltyRent,
-      });
-      if (penaltyRent) {
-        console.log(penaltyRent);
-        await PenaltyRents.findByIdAndUpdate(
-          idPenaltyRent,
-          { 
-            idPenalty: to, 
-            status: "",
-          },
-          { new: true }
-        );
-      }
-      const newDelivery = new Deliveries({
-        from: from,
-        nameFrom: nameFrom,
-        to: to,
-        nameTo: nameTo,
-        idPenaltyRent: idPenaltyRent,
-        status: status,
-      });
-      // Save mongodb
-      await newDelivery.save();
-      res.json({ msg: "Delivery book successfully", create: true });
-    } catch (error) {
-      return res.status(500).json({ msg: error.message });
-    }
-  },
+  // createDeliveryByLab: async (req, res) => {
+  //   try {
+  //     // const { from, nameFrom, to, nameTo, idPenaltyRent, status } = req.body;
+  //     const { from, to, idPenaltyRent, status } = req.body;
+
+  //     // console.log(
+  //     //   from + " " + nameFrom + " " + to + " " + idPenaltyRent + " " + status
+  //     // );
+  //     const penaltyRent = await PenaltyRents.findOne({
+  //       _id: idPenaltyRent,
+  //     });
+  //     if (penaltyRent) {
+  //       console.log(penaltyRent);
+  //       await PenaltyRents.findByIdAndUpdate(
+  //         idPenaltyRent,
+  //         { 
+  //           idPenalty: to, 
+  //           status: "",
+  //         },
+  //         { new: true }
+  //       );
+  //     }
+  //     const newDelivery = new Deliveries({
+  //       from: from,
+  //       to: to,
+  //       idPenaltyRent: idPenaltyRent,
+  //       status: status,
+  //     });
+  //     // Save mongodb
+  //     await newDelivery.save();
+  //     res.json({ msg: "Delivery book successfully", create: true });
+  //   } catch (error) {
+  //     return res.status(500).json({ msg: error.message });
+  //   }
+  // },
 
   getDeliveriesFromId: async (req, res) => {
     try {

@@ -2,6 +2,33 @@ const PenaltyRents = require("../models/rentPenaltyModel");
 const Rents = require("../models/rentModel");
 
 const penaltyRentCtrl = {
+  getAllPenalties: async (req, res) => {
+    try {
+      const penalties = await Penalties.find();
+      if (penalties) {
+        res.json(penalties);
+      } else {
+        res.json({ msg: "Not labs" });
+      }
+    } catch (error) {
+      return res.status(500).json({ msg: error.message });
+    }
+  },
+  getPenaltyById: async (req, res) => {
+    try {
+      const id = req.params.id;
+      const penalty = await Penalties.findOne({_id : id});
+
+      if ( penalty) {
+        res.json(penalty);
+      } else {
+        res.json({ msg: "Not penalty" });
+      }
+    } catch (error) {
+      return res.status(500).json({ msg: error.message });
+    }
+  },
+
   createPenaltyRent: async (req, res) => {
     try {
       const { idRent, error, idLab, status } = req.body;
