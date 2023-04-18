@@ -50,7 +50,7 @@ function SideBarAdmin() {
                     </NavLink>
                     <NavLink to="/admin/lib" className="SideBarAdmin__link">
                         <AccountBalanceOutlinedIcon className="SideBarAdmin__link-icon" />
-                        Quản lý nhà phân phối
+                        Quản lý thư viện
                     </NavLink>
                     <NavLink to="/admin/lab" className="SideBarAdmin__link">
                         <StoreOutlinedIcon className="SideBarAdmin__link-icon" />
@@ -58,7 +58,7 @@ function SideBarAdmin() {
                     </NavLink>
                     <NavLink to="/admin/penalty" className="SideBarAdmin__link">
                         <WorkspacePremiumOutlinedIcon className="SideBarAdmin__link-icon" />
-                        Trung tâm bảo hành
+                        Lỗi hỏng sách
                     </NavLink>
                     <NavLink to="/admin/user" className="SideBarAdmin__link">
                         <ManageAccountsOutlinedIcon className="SideBarAdmin__link-icon" />

@@ -4,7 +4,7 @@ const Books = require("../models/bookModel");
 const Students = require("../models/studentModel");
 
 const rentCtrl = {
-  getOderFromIdLab: async (req, res) => {
+  getRentFromIdLab: async (req, res) => {
     try {
       const id = req.params.id;
       const rents = await Rents.find({ idLab: id });
@@ -23,7 +23,7 @@ const rentCtrl = {
       return res.status(500).json({ msg: error.message });
     }
   },
-  createOder: async (req, res) => {
+  createRent: async (req, res) => {
     try {
       const {
         idLab,

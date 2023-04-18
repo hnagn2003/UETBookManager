@@ -115,7 +115,7 @@ function LabSold() {
                 storage: [{ id: codeBook, amount: amount }, ...rest],
             });
 
-            const res = await axios.post('http://localhost:5001/lab/createOder', {
+            const res = await axios.post('http://localhost:5001/lab/createRent', {
                 idLab: localStorage.getItem('idPage'),
                 nameLab: nameLab,
                 nameStudent: nameStudent,

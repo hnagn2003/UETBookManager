@@ -6,8 +6,8 @@ const penaltyRentCtrl = require('../app/controllers/penaltyRentCtrl');
 
 
 router.post('/updateAmount', labCtrl.updateAmount);
-router.get('/rent/:id', rentCtrl.getOderFromIdLab);
-router.post('/createOder/', rentCtrl.createOder);
+router.get('/rent/:id', rentCtrl.getRentFromIdLab);
+router.post('/createRent/', rentCtrl.createRent);
 router.post('/createPenaltyRent/', penaltyRentCtrl.createPenaltyRent);
 router.put('/updateNotPenaltyRent/:id', penaltyRentCtrl.updateNotPenaltyRent);
 router.get('/penaltyRent/:id', penaltyRentCtrl.getPenaltyRentByIdLab);

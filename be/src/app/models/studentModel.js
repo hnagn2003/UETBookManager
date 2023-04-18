@@ -4,12 +4,28 @@ const studentSchema = new mongoose.Schema (
   {
     name: {
       type: String,
+      required: true,
+      trim: true,
     },
-    sdt: {
+    studentID: {
       type: String,
+      required: true,
+      trim: true,
     }, 
+    courseClass: {
+      type: String,
+      required: true,
+      trim: true,
+    },
+    phoneNumber: {
+      type: String,
+      required: true,
+      trim: true,
+    },
     address: {
       type: String,
+      required: true,
+      trim: true,
     },
   },
   {

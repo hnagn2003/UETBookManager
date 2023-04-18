@@ -12,8 +12,8 @@ app.use(express.json());
 const PORT = 5001;
 
 try {
-    // mongoose.connect(process.env.MONGODB_URL);
-    mongoose.connect('mongodb+srv://Cluster0:tt18062003@cluster0.av3ytgl.mongodb.net/UETBookManager?retryWrites=true');
+    mongoose.connect(process.env.MONGODB_URL);
+    // mongoose.connect('mongodb+srv://Cluster0:tt18062003@cluster0.av3ytgl.mongodb.net/UETBookManager?retryWrites=true');
     console.log('Connected to MongoDB');
 } catch (err) {
     console.log(err);

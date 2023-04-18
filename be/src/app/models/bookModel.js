@@ -22,10 +22,27 @@ const bookSchema = new mongoose.Schema (
       type: Number,
       required: true,
     },
+    category: {
+      type: String,
+      require: true,
+      trim: true,
+    },
+    author: {
+      type: String,
+      require: true,
+      trim: true,
+    },
     description: {
       type: String,
       required: true,
       trim: true,
+    },
+    language: {
+      type: String,
+      trim: true
+    },
+    publishYear: {
+      type: Number,
     },
     lib: {
       type: Array,

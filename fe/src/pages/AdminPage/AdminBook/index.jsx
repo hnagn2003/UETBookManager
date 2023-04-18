@@ -42,7 +42,11 @@ function AdminBook() {
 
     const [code, setCode] = useState('');
     const [name, setName] = useState('');
+    const [category, setCategory] = useState('');
+    const [author, setAuthor] = useState('');
     const [description, setDescription] = useState('');
+    const [language, setLanguage] = useState('');
+    const [publishYear, setPublishYear] = useState('');
     const [image, setImage] = useState('');
     const [price, setPrice] = useState(0);
 
@@ -67,7 +71,11 @@ function AdminBook() {
             const res = await axios.post('http://localhost:5001/book/create', {
                 code,
                 name,
+                category,
+                author,
                 description,
+                language,
+                publishYear,
                 image,
                 price,
             });
@@ -87,7 +95,11 @@ function AdminBook() {
                 id,
                 code,
                 name,
+                category,
+                author,
                 description,
+                language,
+                publishYear,
                 image,
                 price,
             });
@@ -189,7 +201,11 @@ function AdminBook() {
                                                 setId(row._id);
                                                 setName(row.name);
                                                 setCode(row.code);
+                                                setCategory(row.category);
+                                                setAuthor(row.author);
                                                 setDescription(row.description);
+                                                setLanguage(row.language);
+                                                setPublishYear(row.publishYear);
                                                 setImage(row.image);
                                                 setPrice(row.price);
                                             }}
@@ -252,22 +268,22 @@ function AdminBook() {
                                 sx={{ marginTop: '10px' }}
                                 fullWidth
                                 value={code}
-                                label="Mã sản phẩm"
+                                label="Mã sách"
                                 variant="standard"
                                 color="secondary"
                                 validators={['required']}
-                                errorMessages={['Vui lòng nhập mã sản phẩm']}
+                                errorMessages={['Vui lòng nhập mã sách']}
                                 onChange={(e) => setCode(e.target.value)}
                             />
                             <TextValidator
                                 sx={{ marginTop: '10px' }}
                                 fullWidth
                                 value={name}
-                                label="Tên sản phẩm"
+                                label="Tên Sách"
                                 variant="standard"
                                 color="secondary"
                                 validators={['required']}
-                                errorMessages={['Vui lòng nhập tên sản phẩm']}
+                                errorMessages={['Vui lòng nhập tên sách']}
                                 onChange={(e) => setName(e.target.value)}
                             />
                             <TextValidator
@@ -275,23 +291,67 @@ function AdminBook() {
                                 fullWidth
                                 value={price}
                                 type="number"
-                                label="Giá sản phẩm"
+                                label="Giá Sách"
                                 variant="standard"
                                 color="secondary"
                                 validators={['required']}
-                                errorMessages={['Vui lòng nhập giá sản phẩm']}
+                                errorMessages={['Vui lòng nhập giá sách']}
+                                onChange={(e) => setPrice(e.target.value)}
+                            />
+                            <TextValidator
+                                sx={{ marginTop: '10px' }}
+                                fullWidth
+                                value={category}
+                                type="number"
+                                label="Danh Mục"
+                                variant="standard"
+                                color="secondary"
+                                validators={['required']}
+                                errorMessages={['Vui lòng nhập danh mục sách']}
+                                onChange={(e) => setPrice(e.target.value)}
+                            />
+                                <TextValidator
+                                sx={{ marginTop: '10px' }}
+                                fullWidth
+                                value={author}
+                                type="number"
+                                label="Tác Giả"
+                                variant="standard"
+                                color="secondary"
+                                validators={['required']}
+                                errorMessages={['Vui lòng nhập tên tác giả']}
                                 onChange={(e) => setPrice(e.target.value)}
                             />
                             <TextValidator
                                 sx={{ marginTop: '10px' }}
                                 fullWidth
                                 value={description}
-                                label="Mô tả"
+                                label="Mô Tả"
                                 variant="standard"
                                 color="secondary"
                                 validators={['required']}
                                 errorMessages={['Vui lòng nhập mô tả']}
                                 onChange={(e) => setDescription(e.target.value)}
+                            />
+                            <TextValidator
+                                sx={{ marginTop: '10px' }}
+                                fullWidth
+                                value={language}
+                                type="number"
+                                label="Ngôn Ngữ"
+                                variant="standard"
+                                color="secondary"
+                                onChange={(e) => setPrice(e.target.value)}
+                            />
+                            <TextValidator
+                                sx={{ marginTop: '10px' }}
+                                fullWidth
+                                value={category}
+                                type="number"
+                                label="Năm Xuất Bản"
+                                variant="standard"
+                                color="secondary"
+                                onChange={(e) => setPrice(e.target.value)}
                             />
                             <TextValidator
                                 sx={{ marginTop: '10px' }}
@@ -339,22 +399,22 @@ function AdminBook() {
                                 sx={{ marginTop: '10px' }}
                                 fullWidth
                                 value={code}
-                                label="Mã sản phẩm"
+                                label="Mã sách"
                                 variant="standard"
                                 color="secondary"
                                 validators={['required']}
-                                errorMessages={['Vui lòng nhập mã sản phẩm']}
+                                errorMessages={['Vui lòng nhập mã sách']}
                                 onChange={(e) => setCode(e.target.value)}
                             />
                             <TextValidator
                                 sx={{ marginTop: '10px' }}
                                 fullWidth
                                 value={name}
-                                label="Tên sản phẩm"
+                                label="Tên sách"
                                 variant="standard"
                                 color="secondary"
                                 validators={['required']}
-                                errorMessages={['Vui lòng nhập tên sản phẩm']}
+                                errorMessages={['Vui lòng nhập tên sách']}
                                 onChange={(e) => setName(e.target.value)}
                             />
                             <TextValidator
@@ -362,23 +422,67 @@ function AdminBook() {
                                 fullWidth
                                 value={price}
                                 type="number"
-                                label="Giá sản phẩm"
+                                label="Giá sách"
                                 variant="standard"
                                 color="secondary"
                                 validators={['required']}
-                                errorMessages={['Vui lòng nhập giá sản phẩm']}
+                                errorMessages={['Vui lòng nhập giá sách']}
+                                onChange={(e) => setPrice(e.target.value)}
+                            />
+                            <TextValidator
+                                sx={{ marginTop: '10px' }}
+                                fullWidth
+                                value={category}
+                                type="number"
+                                label="Danh Mục"
+                                variant="standard"
+                                color="secondary"
+                                validators={['required']}
+                                errorMessages={['Vui lòng nhập danh mục sách']}
+                                onChange={(e) => setPrice(e.target.value)}
+                            />
+                                <TextValidator
+                                sx={{ marginTop: '10px' }}
+                                fullWidth
+                                value={author}
+                                type="number"
+                                label="Tác Giả"
+                                variant="standard"
+                                color="secondary"
+                                validators={['required']}
+                                errorMessages={['Vui lòng nhập tên tác giả']}
                                 onChange={(e) => setPrice(e.target.value)}
                             />
                             <TextValidator
                                 sx={{ marginTop: '10px' }}
                                 fullWidth
                                 value={description}
-                                label="Mô tả"
+                                label="Mô Tả"
                                 variant="standard"
                                 color="secondary"
                                 validators={['required']}
                                 errorMessages={['Vui lòng nhập mô tả']}
                                 onChange={(e) => setDescription(e.target.value)}
+                            />
+                            <TextValidator
+                                sx={{ marginTop: '10px' }}
+                                fullWidth
+                                value={language}
+                                type="number"
+                                label="Ngôn Ngữ"
+                                variant="standard"
+                                color="secondary"
+                                onChange={(e) => setPrice(e.target.value)}
+                            />
+                            <TextValidator
+                                sx={{ marginTop: '10px' }}
+                                fullWidth
+                                value={category}
+                                type="number"
+                                label="Năm Xuất Bản"
+                                variant="standard"
+                                color="secondary"
+                                onChange={(e) => setPrice(e.target.value)}
                             />
                             <TextValidator
                                 sx={{ marginTop: '10px' }}
