@@ -8,7 +8,7 @@ import { CardActionArea } from '@mui/material';
 import adminImage from '~/assets/image/admin.jpg';
 import labImage from '~/assets/image/lab.jpg';
 import libImage from '~/assets/image/lib.png';
-import penaltyImage from '~/assets/image/penalty.png';
+// import penaltyImage from '~/assets/image/penalty.png';
 
 function AdminUser() {
     const navigate = useNavigate();
@@ -89,10 +89,10 @@ function AdminUser() {
                             </CardContent>
                         </CardActionArea>
                     </Card>
-                    <Card
+                    {/* <Card
                         sx={{ maxWidth: 345, margin: '0 20px' }}
                         onClick={() => {
-                            navigate('/admin/penaltyUsers');
+                            navigate('/admin/rentPenaltyUsers');
                         }}
                     >
                         <CardActionArea>
@@ -110,7 +110,7 @@ function AdminUser() {
                             </CardContent>
                             
                         </CardActionArea>
-                    </Card>
+                    </Card> */}
                 </Box>
             </Box>
         </>

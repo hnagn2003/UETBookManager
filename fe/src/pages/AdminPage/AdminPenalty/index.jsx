@@ -11,13 +11,13 @@ import axios from 'axios';
 
 function AdminPenalty() {
     const navigate = useNavigate();
-    const [penalty, setPenalty] = useState([]);
+    const [rentPenalty, setRentPenalty] = useState([]);
 
     useEffect(() => {
         const getData = async () => {
             try {
-                const res = await axios.get('http://localhost:5001/penalty');
-                setPenalty(res.data);
+                const res = await axios.get('http://localhost:5001/rentPenalty');
+                setRentPenalty(res.data);
                 // console.log(res.data);
             } catch (err) {
                 console.error(err);
@@ -40,14 +40,14 @@ function AdminPenalty() {
                     }}
                 >
                     <Box sx={{ display: 'flex', justifyContent: 'center', margin: '40px 0' }}>
-                        {penalty.length > 0 ? (
-                            penalty.map((penalty) => {
+                        {rentPenalty.length > 0 ? (
+                            rentPenalty.map((rentPenalty) => {
                                 return (
                                     <Card
-                                        key={penalty._id}
+                                        key={rentPenalty._id}
                                         sx={{ maxWidth: 345, margin: '0 20px' }}
                                         onClick={() => {
-                                            navigate(`/admin/penalty/${penalty._id}`);
+                                            navigate(`/admin/rentPenalty/${rentPenalty._id}`);
                                         }}
                                     >
                                         <CardActionArea>
@@ -59,7 +59,7 @@ function AdminPenalty() {
                                                     variant="h4"
                                                     component="div"
                                                 >
-                                                    {penalty.name}
+                                                    {rentPenalty.name}
                                                 </Typography>
                                             </CardContent>
                                         </CardActionArea>

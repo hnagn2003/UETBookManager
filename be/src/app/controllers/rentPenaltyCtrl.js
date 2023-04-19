@@ -1,10 +1,10 @@
-const PenaltyRents = require("../models/rentPenaltyModel");
+const RentPenalties = require("../models/rentPenaltyModel");
 const Rents = require("../models/rentModel");
 
-const penaltyRentCtrl = {
+const rentPenaltyCtrl = {
   getAllPenalties: async (req, res) => {
     try {
-      const penalties = await Penalties.find();
+      const penalties = await RentPenalties.find();
       if (penalties) {
         res.json(penalties);
       } else {
@@ -14,22 +14,22 @@ const penaltyRentCtrl = {
       return res.status(500).json({ msg: error.message });
     }
   },
-  getPenaltyById: async (req, res) => {
-    try {
-      const id = req.params.id;
-      const penalty = await Penalties.findOne({_id : id});
+  // getPenaltyById: async (req, res) => {
+  //   try {
+  //     const id = req.params.id;
+  //     const penalty = await RentPenalties.findOne({_id : id});
 
-      if ( penalty) {
-        res.json(penalty);
-      } else {
-        res.json({ msg: "Not penalty" });
-      }
-    } catch (error) {
-      return res.status(500).json({ msg: error.message });
-    }
-  },
+  //     if ( penalty) {
+  //       res.json(penalty);
+  //     } else {
+  //       res.json({ msg: "Not penalty" });
+  //     }
+  //   } catch (error) {
+  //     return res.status(500).json({ msg: error.message });
+  //   }
+  // },
 
-  createPenaltyRent: async (req, res) => {
+  createRentPenalty: async (req, res) => {
     try {
       const { idRent, error, idLab, status } = req.body;
       // console.log(idRent + " " + error + " " + idLab + " " + status);
@@ -45,33 +45,33 @@ const penaltyRentCtrl = {
         { status: "penalty" },
         { new: true }
       );
-      const newPenaltyRent = new PenaltyRents({
+      const newRentPenalty = new RentPenalties({
         idRent: idRent,
         error: error,
         idLab: idLab,
         status: status,
       });
-      await newPenaltyRent.save();
+      await newRentPenalty.save();
       res.json({ msg: "Create new Penalty Rent", create: true });
     } catch (error) {
       return res.status(500).json({ msg: error.message });
     }
   },
-  updateNotPenaltyRent: async (req, res) => {
+  updateNotRentPenalty: async (req, res) => {
     try {
-      const idPenaltyRent = req.params.id;
-      console.log(idPenaltyRent);
-      const penaltyRent = await PenaltyRents.findOne({
-        _id: idPenaltyRent,
+      const idRentPenalty = req.params.id;
+      console.log(idRentPenalty);
+      const rentPenalty = await RentPenalties.findOne({
+        _id: idRentPenalty,
       });
-      const rent = await Rents.findOne({ _id: penaltyRent.idRent });
+      const rent = await Rents.findOne({ _id: rentPenalty.idRent });
       if (!rent) {
         return res.json({
           msg: "Failure update new Penalty Rent",
           update: true,
         });
       }
-      if (!penaltyRent) {
+      if (!rentPenalty) {
         return res.json({
           msg: "Failure update new Penalty Rent",
           update: true,
@@ -82,85 +82,85 @@ const penaltyRentCtrl = {
         { status: "not penalty" },
         { new: true }
       );
-      await PenaltyRents.findByIdAndDelete(idPenaltyRent);
+      await RentPenalties.findByIdAndDelete(idRentPenalty);
       res.json({ msg: "Update", update: true });
     } catch (error) {
       return res.status(500).json({ msg: error.message });
     }
   },
 
-  getPenaltyRentByIdLab: async (req, res) => {
+  getRentPenaltyByIdLab: async (req, res) => {
     try {
       const id = req.params.id;
-      const penaltyRents = await PenaltyRents.find({
+      const rentPenalties = await RentPenalties.find({
         idLab: id,
         status: "lab",
       });
 
-      if (penaltyRents) {
+      if (rentPenalties) {
         let bookPenalties = await Promise.all(
-          penaltyRents.map(async (penaltyRent) => {
-            return await Rents.findOne({ _id: penaltyRent.idRent });
+          rentPenalties.map(async (rentPenalty) => {
+            return await Rents.findOne({ _id: rentPenalty.idRent });
           })
         );
         res.json({
           bookPenalties: bookPenalties,
-          penaltyRents: penaltyRents,
+          rentPenalties: rentPenalties,
         });
       } else {
-        res.json({ msg: "Not penaltyRents" });
+        res.json({ msg: "Not rentPenalties" });
       }
     } catch (error) {
       return res.status(500).json({ msg: error.message });
     }
   },
 
-  getPenaltyRentByIdPenalty: async (req, res) => {
+  getRentPenaltyByIdPenalty: async (req, res) => {
     try {
       const id = req.params.id;
-      const penaltyRents = await PenaltyRents.find({
+      const rentPenalties = await RentPenalties.find({
         idPenalty: id,
         status: "penalty",
       });
 
-      if (penaltyRents) {
+      if (rentPenalties) {
         let bookPenalties = await Promise.all(
-          penaltyRents.map(async (penaltyRent) => {
-            return await Rents.findOne({ _id: penaltyRent.idRent });
+          rentPenalties.map(async (rentPenalty) => {
+            return await Rents.findOne({ _id: rentPenalty.idRent });
           })
         );
         res.json({
           bookPenalties: bookPenalties,
-          penaltyRents: penaltyRents,
+          rentPenalties: rentPenalties,
         });
       } else {
-        res.json({ msg: "Not penaltyRents" });
+        res.json({ msg: "Not rentPenalties" });
       }
     } catch (error) {
       return res.status(500).json({ msg: error.message });
     }
   },
 
-  getPenaltyRentByIdLib: async (req, res) => {
+  getRentPenaltyByIdLib: async (req, res) => {
     try {
       const id = req.params.id;
-      const penaltyRents = await PenaltyRents.find({
+      const rentPenalties = await RentPenalties.find({
         idLib: id,
         status: "lib",
       });
 
-      if (penaltyRents) {
+      if (rentPenalties) {
         let bookPenalties = await Promise.all(
-          penaltyRents.map(async (penaltyRent) => {
-            return await Rents.findOne({ _id: penaltyRent.idRent });
+          rentPenalties.map(async (rentPenalty) => {
+            return await Rents.findOne({ _id: rentPenalty.idRent });
           })
         );
         res.json({
           bookPenalties: bookPenalties,
-          penaltyRents: penaltyRents,
+          rentPenalties: rentPenalties,
         });
       } else {
-        res.json({ msg: "Not penaltyRents" });
+        res.json({ msg: "Not rentPenalties" });
       }
     } catch (error) {
       return res.status(500).json({ msg: error.message });
@@ -169,14 +169,14 @@ const penaltyRentCtrl = {
 
   updateStatusPenalty: async (req, res) => {
     try {
-      const idPenaltyRent = req.params.id;
-      const penaltyRent = await PenaltyRents.findOne({
-        _id: idPenaltyRent,
+      const idRentPenalty = req.params.id;
+      const rentPenalty = await RentPenalties.findOne({
+        _id: idRentPenalty,
       });
-      if (penaltyRent) {
-        console.log(penaltyRent);
-        await PenaltyRents.findByIdAndUpdate(
-          idPenaltyRent,
+      if (rentPenalty) {
+        console.log(rentPenalty);
+        await RentPenalties.findByIdAndUpdate(
+          idRentPenalty,
           req.body,
           { new: true }
         );
@@ -188,4 +188,4 @@ const penaltyRentCtrl = {
   },
 };
 
-module.exports = penaltyRentCtrl;
+module.exports = rentPenaltyCtrl;

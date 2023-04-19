@@ -133,9 +133,9 @@ function LabSold() {
             console.log(e);
         }
     };
-    const handlePenaltyRent = async () => {
+    const handleRentPenalty = async () => {
         try {
-            const res = await axios.post('http://localhost:5001/lab/createPenaltyRent', {
+            const res = await axios.post('http://localhost:5001/lab/createRentPenalty', {
                 idRent: idRent,
                 error: error,
                 idLab: localStorage.getItem('idPage'),
@@ -400,7 +400,7 @@ function LabSold() {
                                 sx={{ marginTop: '10px', marginLeft: '10px' }}
                                 variant="contained"
                                 type="submit"
-                                onClick={handlePenaltyRent}
+                                onClick={handleRentPenalty}
                             >
                                 Xác nhận
                             </Button>

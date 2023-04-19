@@ -22,11 +22,11 @@ function LibPenalty() {
         const getData = async () => {
             try {
                 const res = await axios.get(
-                    `http://localhost:5001/lib/penaltyRent/${localStorage.getItem('idPage')}`,
+                    `http://localhost:5001/lib/rentPenalty/${localStorage.getItem('idPage')}`,
                 );
 
                 if (res) {
-                    setRows(res.data.penaltyRents);
+                    setRows(res.data.rentPenalties);
                     setListBooks(res.data.bookPenalties);
                 }
             } catch (err) {

@@ -3,7 +3,7 @@ const bookRouter = require('./bookRouter');
 const libRouter = require('./libRouter');
 const labRouter = require('./labRouter');
 const deliveryRouter = require('./deliveryRouter');
-const penaltyRouter = require('./penaltyRouter');
+const rentPenaltyRouter = require('./rentPenaltyRouter');
 
 
 function route(app) {
@@ -12,7 +12,7 @@ function route(app) {
     app.use('/lib', libRouter);
     app.use('/lab', labRouter);
     app.use('/delivery', deliveryRouter);
-    app.use('/penalty', penaltyRouter);
+    app.use('/rentPenalty', rentPenaltyRouter);
 }
 
 module.exports = route;

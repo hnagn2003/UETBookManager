@@ -63,18 +63,18 @@ function UserPenaltyDetails() {
         });
     });
 
-    // Get data
-    useEffect(() => {
-        const getData = async () => {
-            try {
-                const res = await axios.get('http://localhost:5001/user/userPenalty');
-                setRows(res.data);
-            } catch (err) {
-                console.log('fe : ' + err.message);
-            }
-        };
-        getData();
-    }, []);
+    // // Get data
+    // useEffect(() => {
+    //     const getData = async () => {
+    //         try {
+    //             const res = await axios.get('http://localhost:5001/user/userPenalty');
+    //             setRows(res.data);
+    //         } catch (err) {
+    //             console.log('fe : ' + err.message);
+    //         }
+    //     };
+    //     getData();
+    // }, []);
 
     // Create user
     const handleCreateUser = async () => {

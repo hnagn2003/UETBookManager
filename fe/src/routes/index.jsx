@@ -54,10 +54,10 @@ const privateAdminRoutes = [
         path: '/Admin/labUsers',
         component: UserLabDetails,
     },
-    {
-        path: '/Admin/penaltyUsers',
-        component: UserPenaltyDetails,
-    },
+    // {
+    //     path: '/Admin/penaltyUsers',
+    //     component: UserPenaltyDetails,
+    // },
     {
         path: '/Admin/libUsers',
         component: UserLibDetails,
@@ -79,11 +79,11 @@ const privateAdminRoutes = [
         component: LabDetails,
     },
     {
-        path: '/Admin/penalty',
+        path: '/Admin/rentPenalty',
         component: AdminPenalty,
     },
     {
-        path: '/Admin/penalty/:id',
+        path: '/Admin/rentPenalty/:id',
         component: PenaltyDetails,
     },
     {

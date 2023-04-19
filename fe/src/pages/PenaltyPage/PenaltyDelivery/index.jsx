@@ -42,15 +42,15 @@ function PenaltyDelivery() {
         return dt + '/' + month + '/' + year;
     };
 
-    const handleClickAccept = async (idPenaltyRent, idDelivery) => {
-        // console.log(idPenaltyRent);
+    const handleClickAccept = async (idRentPenalty, idDelivery) => {
+        // console.log(idRentPenalty);
 
         try {
             const res = await axios.put(`http://localhost:5001/delivery/updateStatus/${idDelivery}`, {
                 status: 'Giao hàng thành công',
             });
             const resUpdateStatusPenalty = await axios.put(
-                `http://localhost:5001/penalty/updateStatusPenalty/${idPenaltyRent}`,
+                `http://localhost:5001/penalty/updateStatusPenalty/${idRentPenalty}`,
                 {
                     status: 'penalty',
                 },
@@ -110,7 +110,7 @@ function PenaltyDelivery() {
                                         Mã bảo hành
                                     </Typography>
                                     <Typography sx={{ color: '#666', fontSize: '1rem' }} variant="span">
-                                        {delivery.idPenaltyRent}
+                                        {delivery.idRentPenalty}
                                     </Typography>
                                 </Box>
                                 <Box sx={{ width: '100%', display: 'flex', justifyContent: 'space-between' }}>
@@ -138,7 +138,7 @@ function PenaltyDelivery() {
                                     }}
                                 >
                                     <Button
-                                        onClick={() => handleClickAccept(delivery.idPenaltyRent, delivery._id)}
+                                        onClick={() => handleClickAccept(delivery.idRentPenalty, delivery._id)}
                                         variant="contained"
                                         color="primary"
                                     >

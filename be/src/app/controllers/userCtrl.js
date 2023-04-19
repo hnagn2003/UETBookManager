@@ -137,18 +137,18 @@ const userCtrl = {
       return res.status(500).json({ msg: error.message });
     }
   },
-  getUserPenalty: async (req, res) => {
-    try {
-      const user = await Users.find({ role: "penalty" });
-      if (user) {
-        res.json(user);
-      } else {
-        res.json({ msg: "Not user admin" });
-      }
-    } catch (error) {
-      return res.status(500).json({ msg: error.message });
-    }
-  },
+  // getUserPenalty: async (req, res) => {
+  //   try {
+  //     const user = await Users.find({ role: "penalty" });
+  //     if (user) {
+  //       res.json(user);
+  //     } else {
+  //       res.json({ msg: "Not user admin" });
+  //     }
+  //   } catch (error) {
+  //     return res.status(500).json({ msg: error.message });
+  //   }
+  // },
   getUserLib: async (req, res) => {
     try {
       const user = await Users.find({ role: "lib" });

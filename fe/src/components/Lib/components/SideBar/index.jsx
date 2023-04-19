@@ -55,7 +55,7 @@ function SideBarLib() {
                         <FileUploadOutlinedIcon className="SideBarLib__link-icon" />
                         Chuyển hàng
                     </NavLink>
-                    <NavLink to="/lib/penalty" className="SideBarLib__link">
+                    <NavLink to="/lib/rentPenalty" className="SideBarLib__link">
                         <WorkspacePremiumOutlinedIcon className="SideBarLib__link-icon" />
                         Sản Phẩm lỗi
                     </NavLink>

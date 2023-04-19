@@ -35,7 +35,7 @@ function LabPenalty() {
     const [listPenalties, setListPenalties] = useState([]);
 
     const [openModalStudent, setOpenModalStudent] = useState(false);
-    const [idPenaltyRent, setIdPenaltyRent] = useState('');
+    const [idRentPenalty, setIdRentPenalty] = useState('');
 
     const [openModalPenalty, setOpenModalPenalty] = useState(false);
     const [idPenaltyExport, setIdPenaltyExport] = useState('');
@@ -44,16 +44,16 @@ function LabPenalty() {
         const getData = async () => {
             try {
                 const res = await axios.get(
-                    `http://localhost:5001/lab/penaltyRent/${localStorage.getItem('idPage')}`,
+                    `http://localhost:5001/lab/rentPenalty/${localStorage.getItem('idPage')}`,
                 );
-                const resPenalties = await axios.get('http://localhost:5001/penalty');
+                const resPenalties = await axios.get('http://localhost:5001/rentPenalty');
                 if (resPenalties) {
                     setListPenalties(resPenalties.data);
                     console.log(resPenalties.data);
                 }
                 if (res) {
                     // console.log(res.data);
-                    setRows(res.data.penaltyRents);
+                    setRows(res.data.rentPenalties);
                     setListBooks(res.data.bookPenalties);
                 }
             } catch (err) {
@@ -87,7 +87,7 @@ function LabPenalty() {
     };
 
     const handleDeliveryPenalty = async () => {
-        // console.log(localStorage.getItem('idPage'), localStorage.getItem('name'), idPenaltyExport, idPenaltyRent);
+        // console.log(localStorage.getItem('idPage'), localStorage.getItem('name'), idPenaltyExport, idRentPenalty);
         // console.log(idPenaltyExport);
 
         let penalty = listPenalties.find((penalty) => {
@@ -100,7 +100,7 @@ function LabPenalty() {
                 nameFrom: localStorage.getItem('name'),
                 to: idPenaltyExport,
                 nameTo: penalty.name,
-                idPenaltyRent: idPenaltyRent,
+                idRentPenalty: idRentPenalty,
                 status: 'Đang giao hàng',
             });
             if (res.data.create) {
@@ -115,7 +115,7 @@ function LabPenalty() {
     const handleDeliveryStudent = async () => {
         // console.log(idRent);
         try {
-            const res = await axios.put(`http://localhost:5001/lab/updateNotPenaltyRent/${idPenaltyRent}`);
+            const res = await axios.put(`http://localhost:5001/lab/updateNotRentPenalty/${idRentPenalty}`);
             if (res.data.update) {
                 alert(res.data.msg);
                 window.location.reload();
@@ -174,7 +174,7 @@ function LabPenalty() {
                                         <TableCell>
                                             <Button
                                                 onClick={() => {
-                                                    setIdPenaltyRent(row._id);
+                                                    setIdRentPenalty(row._id);
                                                     setOpenModalStudent(true);
                                                 }}
                                                 variant="outlined"
@@ -186,7 +186,7 @@ function LabPenalty() {
                                         <TableCell>
                                             <Button
                                                 onClick={() => {
-                                                    setIdPenaltyRent(row._id);
+                                                    setIdRentPenalty(row._id);
                                                     setOpenModalPenalty(true);
                                                 }}
                                                 variant="outlined"

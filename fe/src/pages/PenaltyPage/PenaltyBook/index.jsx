@@ -35,7 +35,7 @@ function PenaltyBook() {
     const [listLibs, setListLibs] = useState([]);
 
     const [openModalStudent, setOpenModalStudent] = useState(false);
-    const [idPenaltyRent, setIdPenaltyRent] = useState('');
+    const [idRentPenalty, setIdRentPenalty] = useState('');
 
     const [openModalLib, setOpenModalLib] = useState(false);
     const [idLibExport, setIdLibExport] = useState('');
@@ -44,7 +44,7 @@ function PenaltyBook() {
         const getData = async () => {
             try {
                 const res = await axios.get(
-                    `http://localhost:5001/penalty/penaltyRent/${localStorage.getItem('idPage')}`,
+                    `http://localhost:5001/penalty/rentPenalty/${localStorage.getItem('idPage')}`,
                 );
                 const resLibs = await axios.get('http://localhost:5001/lib');
                 if (resLibs) {
@@ -53,7 +53,7 @@ function PenaltyBook() {
                 }
                 if (res) {
                     // console.log(res.data);
-                    setRows(res.data.penaltyRents.reverse());
+                    setRows(res.data.rentPenalties.reverse());
                     setListBooks(res.data.bookPenalties);
                     // console.log(res.data.bookPenalties);
                 }
@@ -89,11 +89,11 @@ function PenaltyBook() {
 
     const handleDeliveryLib = async () => {
         console.log(idLibExport);
-        console.log(idPenaltyRent);
+        console.log(idRentPenalty);
 
         try {
             const resUpdateStatusPenalty = await axios.put(
-                `http://localhost:5001/penalty/updateStatusPenalty/${idPenaltyRent}`,
+                `http://localhost:5001/penalty/updateStatusPenalty/${idRentPenalty}`,
                 {
                     idLib: idLibExport,
                     status: 'lib',
@@ -111,7 +111,7 @@ function PenaltyBook() {
     const handleDeliveryLab = async () => {
         // console.log(idRent);
         try {
-            const res = await axios.put(`http://localhost:5001/lab/updateNotPenaltyRent/${idPenaltyRent}`);
+            const res = await axios.put(`http://localhost:5001/lab/updateNotRentPenalty/${idRentPenalty}`);
             if (res.data.update) {
                 alert(res.data.msg);
                 window.location.reload();
@@ -168,7 +168,7 @@ function PenaltyBook() {
                                         <TableCell>
                                             <Button
                                                 onClick={() => {
-                                                    setIdPenaltyRent(row._id);
+                                                    setIdRentPenalty(row._id);
                                                     setOpenModalStudent(true);
                                                 }}
                                                 variant="outlined"
@@ -180,7 +180,7 @@ function PenaltyBook() {
                                         <TableCell>
                                             <Button
                                                 onClick={() => {
-                                                    setIdPenaltyRent(row._id);
+                                                    setIdRentPenalty(row._id);
                                                     setOpenModalLib(true);
                                                 }}
                                                 variant="outlined"

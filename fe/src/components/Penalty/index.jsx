@@ -8,14 +8,14 @@ import { CardActionArea } from '@mui/material';
 import penaltyImage from '~/assets/image/penaltylogo.jpg';
 
 function Penalty() {
-    const [penalty, setPenalty] = useState();
+    const [rentPenalty, setRentPenalty] = useState();
 
     useEffect(() => {
         const getData = async () => {
             try {
-                const res = await axios.get(`http://localhost:5001/penalty/${localStorage.getItem('idPage')}`);
+                const res = await axios.get(`http://localhost:5001/rentPenalty/${localStorage.getItem('idPage')}`);
                 console.log(res.data);
-                setPenalty(res.data);
+                setRentPenalty(res.data);
             } catch (e) {
                 console.error(e);
             }
@@ -36,7 +36,7 @@ function Penalty() {
                 }}
             >
                 <Box sx={{ display: 'flex', justifyContent: 'center', margin: '40px 0' }}>
-                    {penalty ? (
+                    {rentPenalty ? (
                         <>
                             <Card sx={{ maxWidth: 750, margin: '0 20px' }}>
                                 <CardActionArea>
@@ -54,7 +54,7 @@ function Penalty() {
                                             variant="h7"
                                             component="div"
                                         >
-                                            {penalty.name}
+                                            {rentPenalty.name}
                                         </Typography>
                                         <Typography
                                             sx={{ marginTop: '10px', textAlign: 'center', fontSize: '1.4rem' }}
@@ -62,7 +62,7 @@ function Penalty() {
                                             variant="h7"
                                             component="div"
                                         >
-                                            {penalty.address}
+                                            {rentPenalty.address}
                                         </Typography>
                                         <Typography
                                             sx={{ marginTop: '10px', textAlign: 'center', fontSize: '1.4rem' }}

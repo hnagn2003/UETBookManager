@@ -1,6 +1,6 @@
 const Deliveries = require("../models/deliveryModel");
 const Books = require("../models/bookModel.js");
-const PenaltyRents = require("../models/rentPenaltyModel");
+const RentPenalties = require("../models/rentPenaltyModel");
 
 const deliveryCtrl = {
   createDeliveryByLib: async (req, res) => {
@@ -41,19 +41,19 @@ const deliveryCtrl = {
 
   // createDeliveryByLab: async (req, res) => {
   //   try {
-  //     // const { from, nameFrom, to, nameTo, idPenaltyRent, status } = req.body;
-  //     const { from, to, idPenaltyRent, status } = req.body;
+  //     // const { from, nameFrom, to, nameTo, idRentPenalty, status } = req.body;
+  //     const { from, to, idRentPenalty, status } = req.body;
 
   //     // console.log(
-  //     //   from + " " + nameFrom + " " + to + " " + idPenaltyRent + " " + status
+  //     //   from + " " + nameFrom + " " + to + " " + idRentPenalty + " " + status
   //     // );
-  //     const penaltyRent = await PenaltyRents.findOne({
-  //       _id: idPenaltyRent,
+  //     const rentPenalty = await RentPenalties.findOne({
+  //       _id: idRentPenalty,
   //     });
-  //     if (penaltyRent) {
-  //       console.log(penaltyRent);
-  //       await PenaltyRents.findByIdAndUpdate(
-  //         idPenaltyRent,
+  //     if (rentPenalty) {
+  //       console.log(rentPenalty);
+  //       await RentPenalties.findByIdAndUpdate(
+  //         idRentPenalty,
   //         { 
   //           idPenalty: to, 
   //           status: "",
@@ -64,7 +64,7 @@ const deliveryCtrl = {
   //     const newDelivery = new Deliveries({
   //       from: from,
   //       to: to,
-  //       idPenaltyRent: idPenaltyRent,
+  //       idRentPenalty: idRentPenalty,
   //       status: status,
   //     });
   //     // Save mongodb

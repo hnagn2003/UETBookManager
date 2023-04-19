@@ -2,15 +2,15 @@ const express = require('express');
 const router = express.Router();
 const labCtrl = require('../app/controllers/labCtrl');
 const rentCtrl = require('../app/controllers/rentCtrl');
-const penaltyRentCtrl = require('../app/controllers/penaltyRentCtrl');
+const rentPenaltyCtrl = require('../app/controllers/rentPenaltyCtrl');
 
 
 router.post('/updateAmount', labCtrl.updateAmount);
 router.get('/rent/:id', rentCtrl.getRentFromIdLab);
 router.post('/createRent/', rentCtrl.createRent);
-router.post('/createPenaltyRent/', penaltyRentCtrl.createPenaltyRent);
-router.put('/updateNotPenaltyRent/:id', penaltyRentCtrl.updateNotPenaltyRent);
-router.get('/penaltyRent/:id', penaltyRentCtrl.getPenaltyRentByIdLab);
+router.post('/createRentPenalty/', rentPenaltyCtrl.createRentPenalty);
+router.put('/updateNotRentPenalty/:id', rentPenaltyCtrl.updateNotRentPenalty);
+router.get('/rentPenalty/:id', rentPenaltyCtrl.getRentPenaltyByIdLab);
 router.get('/', labCtrl.getAllLabs);
 router.get('/:id', labCtrl.getLabById);
 

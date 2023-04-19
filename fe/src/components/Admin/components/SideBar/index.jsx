@@ -56,7 +56,7 @@ function SideBarAdmin() {
                         <StoreOutlinedIcon className="SideBarAdmin__link-icon" />
                         Quản lý phòng thí nghiệm
                     </NavLink>
-                    <NavLink to="/admin/penalty" className="SideBarAdmin__link">
+                    <NavLink to="/admin/rentPenalty" className="SideBarAdmin__link">
                         <WorkspacePremiumOutlinedIcon className="SideBarAdmin__link-icon" />
                         Lỗi hỏng sách
                     </NavLink>

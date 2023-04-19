@@ -23,10 +23,10 @@ function PenaltyDetails() {
         const getData = async () => {
             console.log(id);
             try {
-                const res = await axios.get(`http://localhost:5001/penalty/penaltyRent/${id.id}`);
+                const res = await axios.get(`http://localhost:5001/rentPenalty/rentPenalty/${id.id}`);
                 if (res) {
                     console.log(res.data);
-                    setRows(res.data.penaltyRents);
+                    setRows(res.data.rentPenalties);
                     setListBooks(res.data.bookPenalties);
                     // console.log(res.data.bookPenalties);
                 }
@@ -56,7 +56,7 @@ function PenaltyDetails() {
                     overflowY: 'scroll',
                 }}
             >
-                <Button onClick={() => navigate('/admin/penalty')} variant="outlined" sx={{ margin: '10px' }}>
+                <Button onClick={() => navigate('/admin/rentPenalty')} variant="outlined" sx={{ margin: '10px' }}>
                     <KeyboardArrowLeftOutlinedIcon />
                     Quay lại
                 </Button>
