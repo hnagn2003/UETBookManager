@@ -16,7 +16,7 @@ function AdminLab() {
     useEffect(() => {
         const getData = async () => {
             try {
-                const res = await axios.get('http://localhost:5001/lab');
+                const res = await axios.get('http://localhost:5002/lab');
                 setLabs(res.data);
             } catch (err) {
                 console.error(err);

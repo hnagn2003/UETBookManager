@@ -34,11 +34,15 @@ function LabBook() {
     const [image, setImage] = useState('');
     const [price, setPrice] = useState(0);
     const [description, setDescription] = useState('');
+    const [category, setCategory] = useState('');
+    const [author, setAuthor] = useState('');
+    const [language, setLanguage] = useState('');
+    const [publishYear, setPublishYear] = useState('');
 
     useEffect(() => {
         const getData = async () => {
             try {
-                const res = await axios.get('http://localhost:5001/book/allBooks');
+                const res = await axios.get('http://localhost:5002/book/allBooks');
                 // console.log(res.data);
                 setBooks(res.data);
             } catch (e) {
@@ -92,6 +96,10 @@ function LabBook() {
                                         setImage(book.image);
                                         setPrice(book.price);
                                         setDescription(book.description);
+                                        setCategory(book.category);
+                                        setAuthor(book.author);
+                                        setLanguage(book.language);
+                                        setPublishYear(book.publishYear);
                                         setOpenModalBook(true);
                                     }}
                                 >

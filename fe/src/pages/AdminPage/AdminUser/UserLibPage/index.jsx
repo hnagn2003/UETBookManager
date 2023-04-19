@@ -66,7 +66,7 @@ function UserLibDetails() {
     useEffect(() => {
         const getData = async () => {
             try {
-                const res = await axios.get('http://localhost:5001/user/userLib');
+                const res = await axios.get('http://localhost:5002/user/userLib');
                 setRows(res.data);
             } catch (err) {
                 console.log('fe : ' + err.message);
@@ -78,7 +78,7 @@ function UserLibDetails() {
     // Create user
     const handleCreateUser = async () => {
         try {
-            const res = await axios.post('http://localhost:5001/user/register', {
+            const res = await axios.post('http://localhost:5002/user/register', {
                 name,
                 username: email,
                 password,
@@ -97,7 +97,7 @@ function UserLibDetails() {
     // Delete user
     const handleDeleteUser = async () => {
         try {
-            const res = await axios.post('http://localhost:5001/user/delete', {
+            const res = await axios.post('http://localhost:5002/user/delete', {
                 id,
             });
             if (res.data.delete) {
@@ -111,7 +111,7 @@ function UserLibDetails() {
 
     const handleEditUser = async () => {
         try {
-            const res = await axios.post('http://localhost:5001/user/update', {
+            const res = await axios.post('http://localhost:5002/user/update', {
                 id,
                 name,
                 email,

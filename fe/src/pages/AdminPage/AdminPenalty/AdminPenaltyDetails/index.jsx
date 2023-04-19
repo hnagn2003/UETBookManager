@@ -23,7 +23,7 @@ function PenaltyDetails() {
         const getData = async () => {
             console.log(id);
             try {
-                const res = await axios.get(`http://localhost:5001/rentPenalty/rentPenalty/${id.id}`);
+                const res = await axios.get(`http://localhost:5002/rentPenalty/rentPenalty/${id.id}`);
                 if (res) {
                     console.log(res.data);
                     setRows(res.data.rentPenalties);

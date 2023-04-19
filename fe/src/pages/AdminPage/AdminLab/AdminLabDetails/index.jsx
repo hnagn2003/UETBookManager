@@ -19,17 +19,14 @@ function LabDetails() {
     const [storage, setStorage] = useState([]);
     const navigate = useNavigate();
 
-    const getAmount = (id) => {
-        var result = storage.find((item) => {
-            return item.id === id;
-        });
-        return result.amount;
-    };
+    const getAmount = (id) => { 
+        const result = storage.filter((item) => item.id === id); 
+        return result.length > 0 ? result[0].amount : 0; };
 
     useEffect(() => {
         const getData = async () => {
             try {
-                const res = await axios.get(`http://localhost:5001/lab/${id}`);
+                const res = await axios.get(`http://localhost:5002/lab/${id}`);
                 setRows(res.data.books);
                 setStorage(res.data.lab.storage);
             } catch (err) {

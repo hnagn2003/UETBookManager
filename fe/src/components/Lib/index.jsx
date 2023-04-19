@@ -13,7 +13,7 @@ function Lib() {
     useEffect(() => {
         const getData = async () => {
             try {
-                const res = await axios.get(`http://localhost:5001/lib/${localStorage.getItem('idPage')}`);
+                const res = await axios.get(`http://localhost:5002/lib/${localStorage.getItem('idPage')}`);
                 setLib(res.data.lib);
             } catch (e) {
                 console.error(e);

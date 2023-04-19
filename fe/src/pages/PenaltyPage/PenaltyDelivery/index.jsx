@@ -13,7 +13,7 @@ function PenaltyDelivery() {
     useEffect(() => {
         const getData = async () => {
             try {
-                const res = await axios.get(`http://localhost:5001/delivery/to/${localStorage.getItem('idPage')}`);
+                const res = await axios.get(`http://localhost:5002/delivery/to/${localStorage.getItem('idPage')}`);
                 // console.log(res.data);
                 const newDeliveries = res.data.filter((delivery) => {
                     return delivery.status !== 'Giao hàng thành công';
@@ -46,11 +46,11 @@ function PenaltyDelivery() {
         // console.log(idRentPenalty);
 
         try {
-            const res = await axios.put(`http://localhost:5001/delivery/updateStatus/${idDelivery}`, {
+            const res = await axios.put(`http://localhost:5002/delivery/updateStatus/${idDelivery}`, {
                 status: 'Giao hàng thành công',
             });
             const resUpdateStatusPenalty = await axios.put(
-                `http://localhost:5001/penalty/updateStatusPenalty/${idRentPenalty}`,
+                `http://localhost:5002/penalty/updateStatusPenalty/${idRentPenalty}`,
                 {
                     status: 'penalty',
                 },

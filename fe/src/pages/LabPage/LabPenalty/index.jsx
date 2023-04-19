@@ -44,9 +44,9 @@ function LabPenalty() {
         const getData = async () => {
             try {
                 const res = await axios.get(
-                    `http://localhost:5001/lab/rentPenalty/${localStorage.getItem('idPage')}`,
+                    `http://localhost:5002/lab/rentPenalty/${localStorage.getItem('idPage')}`,
                 );
-                const resPenalties = await axios.get('http://localhost:5001/rentPenalty');
+                const resPenalties = await axios.get('http://localhost:5002/rentPenalty');
                 if (resPenalties) {
                     setListRentPenalties(resPenalties.data);
                     console.log(resPenalties.data);
@@ -97,7 +97,7 @@ function LabPenalty() {
     //     });
 
     //     try {
-    //         const res = await axios.post('http://localhost:5001/delivery/createDeliveryByLab', {
+    //         const res = await axios.post('http://localhost:5002/delivery/createDeliveryByLab', {
     //             from: localStorage.getItem('idPage'),
     //             nameFrom: localStorage.getItem('name'),
     //             to: idPenaltyExport,
@@ -117,7 +117,7 @@ function LabPenalty() {
     // const handleDeliveryStudent = async () => {
     //     // console.log(idRent);
     //     try {
-    //         const res = await axios.put(`http://localhost:5001/lab/updateNotRentPenalty/${idRentPenalty}`);
+    //         const res = await axios.put(`http://localhost:5002/lab/updateNotRentPenalty/${idRentPenalty}`);
     //         if (res.data.update) {
     //             alert(res.data.msg);
     //             window.location.reload();

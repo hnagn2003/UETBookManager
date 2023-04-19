@@ -16,7 +16,7 @@ function AdminLib() {
     useEffect(() => {
         const getData = async () => {
             try {
-                const res = await axios.get('http://localhost:5001/lib');
+                const res = await axios.get('http://localhost:5002/lib');
                 setLibs(res.data);
             } catch (err) {
                 console.error(err);

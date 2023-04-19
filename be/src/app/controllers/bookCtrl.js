@@ -4,7 +4,7 @@ const bookCtrl = {
 
   create: async (req, res) => {
     try {
-      const { code, name, description, image, price, author, category, language, publishYear, lib, lab } = req.body;
+      const { code, name, description, image, price, author, category, language, publishYear } = req.body;
 
       const book = await Books.findOne({ code: code });
       if (book) {

@@ -9,7 +9,7 @@ const route = require('./routes');
 app.use(cors());
 app.use(express.json());
 
-const PORT = 5001;
+const PORT = 5002;
 
 try {
     mongoose.connect(process.env.MONGODB_URL);

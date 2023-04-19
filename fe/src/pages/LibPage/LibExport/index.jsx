@@ -46,16 +46,14 @@ function LibExport() {
     const navigate = useNavigate();
 
     const getAmount = (id) => {
-        var result = storage.find((book) => {
-            return book.id === id;
-        });
-        return result.amount;
-    };
+        const result = storage.filter((item) => item.id === id);
+        return result.length > 0 ? result[0].amount : 0;
+      };
 
     useEffect(() => {
         const getData = async () => {
             try {
-                const res = await axios.get(`http://localhost:5001/lib/${localStorage.getItem('idPage')}`);
+                const res = await axios.get(`http://localhost:5002/lib/${localStorage.getItem('idPage')}`);
                 console.log(res.data);
                 setLabs(res.data.labs);
                 setRows(res.data.books);
@@ -83,11 +81,11 @@ function LibExport() {
         }
 
         try {
-            await axios.post('http://localhost:5001/lib/updateAmount', {
+            await axios.post('http://localhost:5002/lib/updateAmount', {
                 id: localStorage.getItem('idPage'),
                 storage: [{ id: idBook, amount: amount }, ...rest],
             });
-            const res2 = await axios.post('http://localhost:5001/delivery/createDeliveryByLib', {
+            const res2 = await axios.post('http://localhost:5002/delivery/createDeliveryByLib', {
                 from: localStorage.getItem('idPage'),
                 nameFrom: lib.name,
                 to: idLabExport,

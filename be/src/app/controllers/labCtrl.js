@@ -13,7 +13,7 @@ const labCtrl = {
     } catch (error) {
       return res.status(500).json({ msg: error.message });
     }
-  },
+  }, 
   getLabById: async (req, res) => {
     try {
       const id = req.params.id;

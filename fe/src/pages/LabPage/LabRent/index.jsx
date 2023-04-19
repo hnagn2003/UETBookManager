@@ -45,12 +45,12 @@ function LabRent() {
     const [openModalPenalty, setOpenModalPenalty] = useState(false);
     const [idRent, setIdRent] = useState('');
     const [error, setError] = useState('');
-
+ 
     useEffect(() => {
         const getData = async () => {
             try {
-                const res = await axios.get(`http://localhost:5001/lab/rent/${localStorage.getItem('idPage')}`);
-                const resStorage = await axios.get(`http://localhost:5001/lab/${localStorage.getItem('idPage')}`);
+                const res = await axios.get(`http://localhost:5002/lab/rent/${localStorage.getItem('idPage')}`);
+                const resStorage = await axios.get(`http://localhost:5002/lab/${localStorage.getItem('idPage')}`);
                 console.log(res.data);
                 setRows(res.data.rents.reverse());
                 setNameLab(res.data.nameLab);
@@ -110,12 +110,12 @@ function LabRent() {
         console.log(amount);
 
         try {
-            await axios.post('http://localhost:5001/lab/updateAmount', {
+            await axios.post('http://localhost:5002/lab/updateAmount', {
                 id: localStorage.getItem('idPage'),
                 storage: [{ id: codeBook, amount: amount }, ...rest],
             });
 
-            const res = await axios.post('http://localhost:5001/lab/createRent', {
+            const res = await axios.post('http://localhost:5002/lab/createRent', {
                 idLab: localStorage.getItem('idPage'),
                 nameLab: nameLab,
                 nameStudent: nameStudent,
@@ -135,7 +135,7 @@ function LabRent() {
     };
     const handleRentPenalty = async () => {
         try {
-            const res = await axios.post('http://localhost:5001/lab/createRentPenalty', {
+            const res = await axios.post('http://localhost:5002/lab/createRentPenalty', {
                 idRent: idRent,
                 error: error,
                 idLab: localStorage.getItem('idPage'),

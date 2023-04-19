@@ -42,21 +42,20 @@ function AdminBook() {
 
     const [code, setCode] = useState('');
     const [name, setName] = useState('');
-    const [category, setCategory] = useState('');
-    const [author, setAuthor] = useState('');
     const [description, setDescription] = useState('');
-    const [language, setLanguage] = useState('');
-    const [publishYear, setPublishYear] = useState('');
     const [image, setImage] = useState('');
     const [price, setPrice] = useState(0);
-
+    const [category, setCategory] = useState('');
+    const [author, setAuthor] = useState('');
+    const [language, setLanguage] = useState('');
+    const [publishYear, setPublishYear] = useState('');
     const [id, setId] = useState('');
 
     // Get data
     useEffect(() => { 
         const getData = async () => {
             try {
-                const res = await axios.get('http://localhost:5001/book/allBooks');
+                const res = await axios.get('http://localhost:5002/book/allBooks');
                 setRows(res.data);
             } catch (err) {
                 console.log('fe : ' + err.message);
@@ -68,16 +67,16 @@ function AdminBook() {
     // Create book 
     const handleCreate = async () => {
         try {
-            const res = await axios.post('http://localhost:5001/book/create', {
+            const res = await axios.post('http://localhost:5002/book/create', {
                 code,
                 name,
-                category,
-                author,
                 description,
-                language,
-                publishYear,
                 image,
                 price,
+                category,
+                author,
+                language,
+                publishYear,
             });
             if (res.data.create) {
                 window.location.reload();
@@ -91,17 +90,17 @@ function AdminBook() {
     // update book
     const handleEdit = async () => {
         try {
-            const res = await axios.post('http://localhost:5001/book/update', {
+            const res = await axios.post('http://localhost:5002/book/update', {
                 id,
                 code,
                 name,
-                category,
-                author,
                 description,
-                language,
-                publishYear,
                 image,
                 price,
+                category,
+                author,
+                language,
+                publishYear,
             });
             if (res.data.update) {
                 window.location.reload();
@@ -115,7 +114,7 @@ function AdminBook() {
     // delete book
     const handleDelete = async () => {
         try {
-            const res = await axios.post('http://localhost:5001/book/delete', {
+            const res = await axios.post('http://localhost:5002/book/delete', {
                 id,
             });
             if (res.data.delete) {
@@ -159,6 +158,10 @@ function AdminBook() {
                         setImage('');
                         setPrice(0);
                         setDescription('');
+                        setCategory('');
+                        setAuthor('');
+                        setLanguage('');
+                        setPublishYear('');
                         setOpenModalCreate(true);
                     }}
                 >
@@ -202,12 +205,12 @@ function AdminBook() {
                                                 setName(row.name);
                                                 setCode(row.code);
                                                 setCategory(row.category);
-                                                setAuthor(row.author);
+                                                setImage(row.image);
                                                 setDescription(row.description);
+                                                setPrice(row.price);
+                                                setAuthor(row.author);
                                                 setLanguage(row.language);
                                                 setPublishYear(row.publishYear);
-                                                setImage(row.image);
-                                                setPrice(row.price);
                                             }}
                                         >
                                             <Button variant="text">
@@ -298,30 +301,7 @@ function AdminBook() {
                                 errorMessages={['Vui lòng nhập giá sách']}
                                 onChange={(e) => setPrice(e.target.value)}
                             />
-                            <TextValidator
-                                sx={{ marginTop: '10px' }}
-                                fullWidth
-                                value={category}
-                                type="number"
-                                label="Danh Mục"
-                                variant="standard"
-                                color="secondary"
-                                validators={['required']}
-                                errorMessages={['Vui lòng nhập danh mục sách']}
-                                onChange={(e) => setPrice(e.target.value)}
-                            />
-                                <TextValidator
-                                sx={{ marginTop: '10px' }}
-                                fullWidth
-                                value={author}
-                                type="number"
-                                label="Tác Giả"
-                                variant="standard"
-                                color="secondary"
-                                validators={['required']}
-                                errorMessages={['Vui lòng nhập tên tác giả']}
-                                onChange={(e) => setPrice(e.target.value)}
-                            />
+                            
                             <TextValidator
                                 sx={{ marginTop: '10px' }}
                                 fullWidth
@@ -336,26 +316,6 @@ function AdminBook() {
                             <TextValidator
                                 sx={{ marginTop: '10px' }}
                                 fullWidth
-                                value={language}
-                                type="number"
-                                label="Ngôn Ngữ"
-                                variant="standard"
-                                color="secondary"
-                                onChange={(e) => setPrice(e.target.value)}
-                            />
-                            <TextValidator
-                                sx={{ marginTop: '10px' }}
-                                fullWidth
-                                value={category}
-                                type="number"
-                                label="Năm Xuất Bản"
-                                variant="standard"
-                                color="secondary"
-                                onChange={(e) => setPrice(e.target.value)}
-                            />
-                            <TextValidator
-                                sx={{ marginTop: '10px' }}
-                                fullWidth
                                 value={image}
                                 label="Link image"
                                 variant="standard"
@@ -363,6 +323,42 @@ function AdminBook() {
                                 validators={['required']}
                                 errorMessages={['Vui lòng nhập địa chỉ ảnh']}
                                 onChange={(e) => setImage(e.target.value)}
+                            />
+                            <TextValidator
+                                sx={{ marginTop: '10px' }}
+                                fullWidth
+                                value={category}
+                                label="Danh Mục"
+                                variant="standard"
+                                color="secondary"
+                                onChange={(e) => setCategory(e.target.value)}
+                            />
+                                <TextValidator
+                                sx={{ marginTop: '10px' }}
+                                fullWidth
+                                value={author}
+                                label="Tác Giả"
+                                variant="standard"
+                                color="secondary"
+                                onChange={(e) => setAuthor(e.target.value)}
+                            />
+                            <TextValidator
+                                sx={{ marginTop: '10px' }}
+                                fullWidth
+                                value={language}
+                                label="Ngôn Ngữ"
+                                variant="standard"
+                                color="secondary"
+                                onChange={(e) => setLanguage(e.target.value)}
+                            />
+                            <TextValidator
+                                sx={{ marginTop: '10px' }}
+                                fullWidth
+                                value={publishYear}
+                                label="Năm Xuất Bản"
+                                variant="standard"
+                                color="secondary"
+                                onChange={(e) => setPublishYear(e.target.value)}
                             />
                             <Button
                                 sx={{ marginTop: '10px' }}
@@ -429,30 +425,7 @@ function AdminBook() {
                                 errorMessages={['Vui lòng nhập giá sách']}
                                 onChange={(e) => setPrice(e.target.value)}
                             />
-                            <TextValidator
-                                sx={{ marginTop: '10px' }}
-                                fullWidth
-                                value={category}
-                                type="number"
-                                label="Danh Mục"
-                                variant="standard"
-                                color="secondary"
-                                validators={['required']}
-                                errorMessages={['Vui lòng nhập danh mục sách']}
-                                onChange={(e) => setPrice(e.target.value)}
-                            />
-                                <TextValidator
-                                sx={{ marginTop: '10px' }}
-                                fullWidth
-                                value={author}
-                                type="number"
-                                label="Tác Giả"
-                                variant="standard"
-                                color="secondary"
-                                validators={['required']}
-                                errorMessages={['Vui lòng nhập tên tác giả']}
-                                onChange={(e) => setPrice(e.target.value)}
-                            />
+                            
                             <TextValidator
                                 sx={{ marginTop: '10px' }}
                                 fullWidth
@@ -467,12 +440,41 @@ function AdminBook() {
                             <TextValidator
                                 sx={{ marginTop: '10px' }}
                                 fullWidth
+                                value={image}
+                                label="Link image"
+                                variant="standard"
+                                color="secondary"
+                                validators={['required']}
+                                errorMessages={['Vui lòng nhập địa chỉ ảnh']}
+                                onChange={(e) => setImage(e.target.value)}
+                            />
+                            <TextValidator
+                                sx={{ marginTop: '10px' }}
+                                fullWidth
+                                value={category}
+                                label="Danh Mục"
+                                variant="standard"
+                                color="secondary"
+                                onChange={(e) => setCategory(e.target.value)}
+                            />
+                                <TextValidator
+                                sx={{ marginTop: '10px' }}
+                                fullWidth
+                                value={author}
+                                label="Tác Giả"
+                                variant="standard"
+                                color="secondary"
+                                onChange={(e) => setAuthor(e.target.value)}
+                            />
+                            <TextValidator
+                                sx={{ marginTop: '10px' }}
+                                fullWidth
                                 value={language}
                                 type="number"
                                 label="Ngôn Ngữ"
                                 variant="standard"
                                 color="secondary"
-                                onChange={(e) => setPrice(e.target.value)}
+                                onChange={(e) => setLanguage(e.target.value)}
                             />
                             <TextValidator
                                 sx={{ marginTop: '10px' }}
@@ -482,18 +484,7 @@ function AdminBook() {
                                 label="Năm Xuất Bản"
                                 variant="standard"
                                 color="secondary"
-                                onChange={(e) => setPrice(e.target.value)}
-                            />
-                            <TextValidator
-                                sx={{ marginTop: '10px' }}
-                                fullWidth
-                                value={image}
-                                label="Link image"
-                                variant="standard"
-                                color="secondary"
-                                validators={['required']}
-                                errorMessages={['Vui lòng nhập địa chỉ ảnh']}
-                                onChange={(e) => setImage(e.target.value)}
+                                onChange={(e) => setPublishYear(e.target.value)}
                             />
                             <Button
                                 sx={{ marginTop: '10px' }}
