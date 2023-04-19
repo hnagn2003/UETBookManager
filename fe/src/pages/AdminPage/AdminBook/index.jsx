@@ -53,7 +53,7 @@ function AdminBook() {
     const [id, setId] = useState('');
 
     // Get data
-    useEffect(() => {
+    useEffect(() => { 
         const getData = async () => {
             try {
                 const res = await axios.get('http://localhost:5001/book/allBooks');
@@ -65,7 +65,7 @@ function AdminBook() {
         getData();
     }, []);
 
-    // Create book
+    // Create book 
     const handleCreate = async () => {
         try {
             const res = await axios.post('http://localhost:5001/book/create', {
@@ -110,7 +110,7 @@ function AdminBook() {
         } catch (err) {
             console.log('Register failed: ' + err.message);
         }
-    };
+    }; 
 
     // delete book
     const handleDelete = async () => {

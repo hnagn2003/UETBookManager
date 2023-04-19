@@ -59,7 +59,7 @@ function AdminPenalty() {
                                                     variant="h4"
                                                     component="div"
                                                 >
-                                                    {rentPenalty.name}
+                                                    {rentPenalty._id}
                                                 </Typography>
                                             </CardContent>
                                         </CardActionArea>

@@ -93,7 +93,7 @@ function PenaltyBook() {
 
         try {
             const resUpdateStatusPenalty = await axios.put(
-                `http://localhost:5001/penalty/updateStatusPenalty/${idRentPenalty}`,
+                `http://localhost:5001/rentPenalty/updateStatusPenalty/${idRentPenalty}`,
                 {
                     idLib: idLibExport,
                     status: 'lib',
@@ -104,7 +104,7 @@ function PenaltyBook() {
                 alert('Update');
             }
         } catch (e) {
-            console.log(e);
+            console.log(e); 
         }
     };
 
@@ -133,7 +133,7 @@ function PenaltyBook() {
                     overflowY: 'scroll',
                 }}
             >
-                <Button onClick={() => navigate('/penalty')} variant="outlined" sx={{ margin: '10px' }}>
+                <Button onClick={() => navigate('/rentPenalty')} variant="outlined" sx={{ margin: '10px' }}>
                     <KeyboardArrowLeftOutlinedIcon />
                     Quay lại
                 </Button>
@@ -286,10 +286,10 @@ function PenaltyBook() {
                                     setIdLibExport(e.target.value);
                                 }}
                             >
-                                {listLibs.map((penalty) => {
+                                {listLibs.map((rentPenalty) => {
                                     return (
-                                        <MenuItem key={penalty._id} value={penalty._id}>
-                                            {penalty.name}
+                                        <MenuItem key={rentPenalty._id} value={rentPenalty._id}>
+                                            {rentPenalty.name}
                                         </MenuItem>
                                     );
                                 })}

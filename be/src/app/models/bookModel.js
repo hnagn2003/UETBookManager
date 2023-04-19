@@ -50,9 +50,6 @@ const bookSchema = new mongoose.Schema (
     lab: {
       type: Array,
     },
-    penalty: {
-      type: Array,
-    },
   },
   {
     timestamps: true,

@@ -2,11 +2,11 @@ const RentPenalties = require("../models/rentPenaltyModel");
 const Rents = require("../models/rentModel");
 
 const rentPenaltyCtrl = {
-  getAllPenalties: async (req, res) => {
+  getAllRentPenalties: async (req, res) => {
     try {
-      const penalties = await RentPenalties.find();
-      if (penalties) {
-        res.json(penalties);
+      const rentPenalties = await RentPenalties.find();
+      if (rentPenalties) {
+        res.json(rentPenalties);
       } else {
         res.json({ msg: "Not labs" });
       }
@@ -98,13 +98,13 @@ const rentPenaltyCtrl = {
       });
 
       if (rentPenalties) {
-        let bookPenalties = await Promise.all(
+        let bookRentPenalties = await Promise.all(
           rentPenalties.map(async (rentPenalty) => {
             return await Rents.findOne({ _id: rentPenalty.idRent });
           })
         );
         res.json({
-          bookPenalties: bookPenalties,
+          bookRentPenalties: bookRentPenalties,
           rentPenalties: rentPenalties,
         });
       } else {
@@ -119,18 +119,18 @@ const rentPenaltyCtrl = {
     try {
       const id = req.params.id;
       const rentPenalties = await RentPenalties.find({
-        idPenalty: id,
+        idRentPenalty: id,
         status: "penalty",
       });
 
       if (rentPenalties) {
-        let bookPenalties = await Promise.all(
+        let bookRentPenalties = await Promise.all(
           rentPenalties.map(async (rentPenalty) => {
             return await Rents.findOne({ _id: rentPenalty.idRent });
           })
         );
         res.json({
-          bookPenalties: bookPenalties,
+          bookRentPenalties: bookRentPenalties,
           rentPenalties: rentPenalties,
         });
       } else {
@@ -150,13 +150,13 @@ const rentPenaltyCtrl = {
       });
 
       if (rentPenalties) {
-        let bookPenalties = await Promise.all(
+        let bookRentPenalties = await Promise.all(
           rentPenalties.map(async (rentPenalty) => {
             return await Rents.findOne({ _id: rentPenalty.idRent });
           })
         );
         res.json({
-          bookPenalties: bookPenalties,
+          bookRentPenalties: bookRentPenalties,
           rentPenalties: rentPenalties,
         });
       } else {

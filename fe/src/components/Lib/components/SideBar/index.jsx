@@ -57,7 +57,7 @@ function SideBarLib() {
                     </NavLink>
                     <NavLink to="/lib/rentPenalty" className="SideBarLib__link">
                         <WorkspacePremiumOutlinedIcon className="SideBarLib__link-icon" />
-                        Sản Phẩm lỗi
+                        Lỗi hỏng sách
                     </NavLink>
                     <NavLink to="/lib/delivery" className="SideBarLib__link">
                         <LocalShippingOutlinedIcon className="SideBarLib__link-icon" />

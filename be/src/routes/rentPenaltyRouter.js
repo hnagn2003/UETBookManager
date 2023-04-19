@@ -5,7 +5,7 @@ const rentPenaltyCtrl = require('../app/controllers/rentPenaltyCtrl');
 
 
 
-router.get('/', rentPenaltyCtrl.getAllPenalties);
+router.get('/', rentPenaltyCtrl.getAllRentPenalties);
 router.get('/:id', rentPenaltyCtrl.getRentPenaltyByIdPenalty);
 router.get('/rentPenalty/:id', rentPenaltyCtrl.getRentPenaltyByIdPenalty);
 router.put('/updateStatusPenalty/:id', rentPenaltyCtrl.updateStatusPenalty);

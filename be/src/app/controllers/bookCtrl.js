@@ -21,7 +21,6 @@ const bookCtrl = {
         language, 
         publishYear, 
         lab: [],
-        penalty: [],
         lib: [],
 
       });

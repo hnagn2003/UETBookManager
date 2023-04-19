@@ -32,13 +32,13 @@ function LabPenalty() {
     const [rows, setRows] = useState([]);
     const navigate = useNavigate();
     const [listBooks, setListBooks] = useState([]);
-    const [listPenalties, setListPenalties] = useState([]);
+    const [listRentPenalties, setListRentPenalties] = useState([]);
 
     const [openModalStudent, setOpenModalStudent] = useState(false);
     const [idRentPenalty, setIdRentPenalty] = useState('');
 
     const [openModalPenalty, setOpenModalPenalty] = useState(false);
-    const [idPenaltyExport, setIdPenaltyExport] = useState('');
+    // const [idPenaltyExport, setIdPenaltyExport] = useState('');
 
     useEffect(() => {
         const getData = async () => {
@@ -48,7 +48,7 @@ function LabPenalty() {
                 );
                 const resPenalties = await axios.get('http://localhost:5001/rentPenalty');
                 if (resPenalties) {
-                    setListPenalties(resPenalties.data);
+                    setListRentPenalties(resPenalties.data);
                     console.log(resPenalties.data);
                 }
                 if (res) {
@@ -86,44 +86,44 @@ function LabPenalty() {
         return dt + '/' + month + '/' + year;
     };
 
-    const handleDeliveryPenalty = async () => {
-        // console.log(localStorage.getItem('idPage'), localStorage.getItem('name'), idPenaltyExport, idRentPenalty);
-        // console.log(idPenaltyExport);
+    // const handleDeliveryPenalty = async () => {
+    //     console.log(localStorage.getItem('idPage'), localStorage.getItem('name'), idPenaltyExport, idRentPenalty);
+    //     console.log(idPenaltyExport);
 
-        let penalty = listPenalties.find((penalty) => {
-            return penalty._id === idPenaltyExport;
-        });
+    //     let penalty = listRentPenalties.find((penalty) => {
+    //         return penalty._id === idPenaltyExport;
+    //     });
 
-        try {
-            const res = await axios.post('http://localhost:5001/delivery/createDeliveryByLab', {
-                from: localStorage.getItem('idPage'),
-                nameFrom: localStorage.getItem('name'),
-                to: idPenaltyExport,
-                nameTo: penalty.name,
-                idRentPenalty: idRentPenalty,
-                status: 'Đang giao hàng',
-            });
-            if (res.data.create) {
-                alert(res.data.msg);
-                window.location.reload();
-            }
-        } catch (e) {
-            console.log(e);
-        }
-    };
+    //     try {
+    //         const res = await axios.post('http://localhost:5001/delivery/createDeliveryByLab', {
+    //             from: localStorage.getItem('idPage'),
+    //             nameFrom: localStorage.getItem('name'),
+    //             to: idPenaltyExport,
+    //             nameTo: penalty.name,
+    //             idRentPenalty: idRentPenalty,
+    //             status: 'Đang giao hàng',
+    //         });
+    //         if (res.data.create) {
+    //             alert(res.data.msg);
+    //             window.location.reload();
+    //         }
+    //     } catch (e) {
+    //         console.log(e);
+    //     }
+    // };
 
-    const handleDeliveryStudent = async () => {
-        // console.log(idRent);
-        try {
-            const res = await axios.put(`http://localhost:5001/lab/updateNotRentPenalty/${idRentPenalty}`);
-            if (res.data.update) {
-                alert(res.data.msg);
-                window.location.reload();
-            }
-        } catch (e) {
-            console.log(e);
-        }
-    };
+    // const handleDeliveryStudent = async () => {
+    //     // console.log(idRent);
+    //     try {
+    //         const res = await axios.put(`http://localhost:5001/lab/updateNotRentPenalty/${idRentPenalty}`);
+    //         if (res.data.update) {
+    //             alert(res.data.msg);
+    //             window.location.reload();
+    //         }
+    //     } catch (e) {
+    //         console.log(e);
+    //     }
+    // };
 
     return (
         <>
@@ -213,7 +213,7 @@ function LabPenalty() {
                     )}
                 </TableContainer>
             </Box>
-            {/* Modal delivery student */}
+            {/* Modal delivery student
             <Modal
                 aria-labelledby="transition-modal-title"
                 aria-describedby="transition-modal-description"
@@ -257,9 +257,9 @@ function LabPenalty() {
                         </Box>
                     </Box>
                 </Fade>
-            </Modal>
+            </Modal> */}
             {/* Modal delivery penalty */}
-            <Modal
+            {/* <Modal
                 aria-labelledby="transition-modal-title"
                 aria-describedby="transition-modal-description"
                 open={openModalPenalty}
@@ -292,7 +292,7 @@ function LabPenalty() {
                                     setIdPenaltyExport(e.target.value);
                                 }}
                             >
-                                {listPenalties.map((penalty) => {
+                                {listRentPenalties.map((penalty) => {
                                     return (
                                         <MenuItem key={penalty._id} value={penalty._id}>
                                             {penalty.name}
@@ -323,7 +323,7 @@ function LabPenalty() {
                         </Box>
                     </Box>
                 </Fade>
-            </Modal>
+            </Modal> */}
         </>
     );
 }
