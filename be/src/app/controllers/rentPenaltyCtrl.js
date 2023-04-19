@@ -94,7 +94,7 @@ const rentPenaltyCtrl = {
       const id = req.params.id;
       const rentPenalties = await RentPenalties.find({
         idLab: id,
-        status: "lab",
+        // status: "lab",
       });
 
       if (rentPenalties) {
@@ -104,7 +104,7 @@ const rentPenaltyCtrl = {
           })
         );
         res.json({
-          bookRentPenalties: bookRentPenalties,
+          bookRentPenalties: bookRentPenalties, // page dissapear
           rentPenalties: rentPenalties,
         });
       } else {
@@ -150,13 +150,13 @@ const rentPenaltyCtrl = {
       });
 
       if (rentPenalties) {
-        let bookRentPenalties = await Promise.all(
-          rentPenalties.map(async (rentPenalty) => {
-            return await Rents.findOne({ _id: rentPenalty.idRent });
-          })
-        );
+        // let bookRentPenalties = await Promise.all(
+        //   rentPenalties.map(async (rentPenalty) => {
+        //     return await Rents.findOne({ _id: rentPenalty.idRent });
+        //   })
+        // );
         res.json({
-          bookRentPenalties: bookRentPenalties,
+          // bookRentPenalties: bookRentPenalties,
           rentPenalties: rentPenalties,
         });
       } else {

@@ -15,5 +15,5 @@ router.get('/rentPenalty/:id', rentPenaltyCtrl.getRentPenaltyByIdLab);
 router.get('/', labCtrl.getAllLabs);
 router.get('/:id', labCtrl.getLabById);
 
- 
+  
 module.exports = router;

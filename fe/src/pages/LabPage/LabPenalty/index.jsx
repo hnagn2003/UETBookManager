@@ -52,9 +52,11 @@ function LabPenalty() {
                     console.log(resPenalties.data);
                 }
                 if (res) {
-                    // console.log(res.data);
+                    console.log(res.data);
                     setRows(res.data.rentPenalties);
-                    setListBooks(res.data.bookPenalties);
+                    setListBooks(res.data.bookRentPenalties); // page dissapear
+                    setListRentPenalties(resPenalties.data);
+
                 }
             } catch (err) {
                 console.error(err);
