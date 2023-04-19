@@ -17,6 +17,7 @@ function LibPenalty() {
     const [rows, setRows] = useState([]);
     const navigate = useNavigate();
     const [listBooks, setListBooks] = useState([]);
+    const [rents, setRents] = useState([]);
 
     useEffect(() => {
         const getData = async () => {
@@ -27,7 +28,7 @@ function LibPenalty() {
 
                 if (res) {
                     setRows(res.data.rentPenalties);
-                    setListBooks(res.data.bookPenalties);
+                    setRents(res.data.rents);
                 }
             } catch (err) {
                 console.error(err);

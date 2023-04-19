@@ -1,5 +1,8 @@
 const RentPenalties = require("../models/rentPenaltyModel");
 const Rents = require("../models/rentModel");
+const Students = require("../models/studentModel");
+const Books = require("../models/bookModel");
+
 
 const rentPenaltyCtrl = {
   getAllRentPenalties: async (req, res) => {
@@ -98,14 +101,26 @@ const rentPenaltyCtrl = {
       });
 
       if (rentPenalties) {
-        let bookRentPenalties = await Promise.all(
+        let rents = await Promise.all(
           rentPenalties.map(async (rentPenalty) => {
             return await Rents.findOne({ _id: rentPenalty.idRent });
           })
         );
+        let studentIds = rents.map(rent => rent.idStudent);
+        console.log(studentIds);
+        let students = await Promise.all(
+          rents.map(async (rent) => {
+            return await Students.findOne({ _id: rent.idStudent});
+          })
+        );
+        console.log(rents)
+
+        console.log(students);
         res.json({
-          bookRentPenalties: bookRentPenalties, // page dissapear
+          rents: rents, // page dissapear
           rentPenalties: rentPenalties,
+          students:students,
+          // books: ,
         });
       } else {
         res.json({ msg: "Not rentPenalties" });
@@ -115,31 +130,31 @@ const rentPenaltyCtrl = {
     }
   },
 
-  getRentPenaltyByIdPenalty: async (req, res) => {
-    try {
-      const id = req.params.id;
-      const rentPenalties = await RentPenalties.find({
-        idRentPenalty: id,
-        status: "penalty",
-      });
+  // getRentPenaltyByIdPenalty: async (req, res) => {
+  //   try {
+  //     const id = req.params.id;
+  //     const rentPenalties = await RentPenalties.find({
+  //       idRentPenalty: id,
+  //       status: "penalty",
+  //     });
 
-      if (rentPenalties) {
-        let bookRentPenalties = await Promise.all(
-          rentPenalties.map(async (rentPenalty) => {
-            return await Rents.findOne({ _id: rentPenalty.idRent });
-          })
-        );
-        res.json({
-          bookRentPenalties: bookRentPenalties,
-          rentPenalties: rentPenalties,
-        });
-      } else {
-        res.json({ msg: "Not rentPenalties" });
-      }
-    } catch (error) {
-      return res.status(500).json({ msg: error.message });
-    }
-  },
+  //     if (rentPenalties) {
+  //       let bookRentPenalties = await Promise.all(
+  //         rentPenalties.map(async (rentPenalty) => {
+  //           return await Rents.findOne({ _id: rentPenalty.idRent });
+  //         })
+  //       );
+  //       res.json({
+  //         bookRentPenalties: bookRentPenalties,
+  //         rentPenalties: rentPenalties,
+  //       });
+  //     } else {
+  //       res.json({ msg: "Not rentPenalties" });
+  //     }
+  //   } catch (error) {
+  //     return res.status(500).json({ msg: error.message });
+  //   }
+  // },
 
   getRentPenaltyByIdLib: async (req, res) => {
     try {

@@ -32,6 +32,8 @@ function LabRent() {
     const [rows, setRows] = useState([]);
     const navigate = useNavigate();
     const [listBooks, setListBooks] = useState([]);
+    const [listStudents, setListStudents] = useState([]);
+
     const [storage, setStorage] = useState([]);
 
     const [openModalCreate, setOpenModalCreate] = useState(false);
@@ -51,11 +53,12 @@ function LabRent() {
             try {
                 const res = await axios.get(`http://localhost:5002/lab/rent/${localStorage.getItem('idPage')}`);
                 const resStorage = await axios.get(`http://localhost:5002/lab/${localStorage.getItem('idPage')}`);
-                console.log(res.data);
+                // console.log(res.data);
                 setRows(res.data.rents.reverse());
                 setNameLab(res.data.nameLab);
                 setListBooks(res.data.books);
                 setStorage(resStorage.data.lab.storage);
+                setListStudents(res.data.students);
             } catch (err) {
                 console.error(err);
             }
@@ -69,6 +72,7 @@ function LabRent() {
     };
 
     const getPriceByID = (id) => {
+        console.log(id);
         const book = listBooks.find((book) => {
             return book._id === id;
         });
@@ -91,6 +95,13 @@ function LabRent() {
         return dt + '/' + month + '/' + year;
     };
 
+    const getStudentName = (id) => {
+        console.log(id)
+        let student = listStudents.find((student) =>  {
+            return student.id = id;
+        });
+        return student.name
+    }
     const compareDate = (data) => {
         let date = new Date(data);
         let today = new Date();
@@ -182,10 +193,10 @@ function LabRent() {
                                 <TableRow>
                                     <TableCell>STT</TableCell>
                                     <TableCell>Tên sản phẩm</TableCell>
-                                    <TableCell>ID khách hàng</TableCell>
-                                    <TableCell>Giá</TableCell>
+                                    <TableCell>Tên sinh viên</TableCell>
+                                    <TableCell>Status</TableCell>
                                     <TableCell>Thời gian</TableCell>
-                                    <TableCell>Bảo hành</TableCell>
+                                    {/* <TableCell>Bảo hành</TableCell> */}
                                 </TableRow>
                             </TableHead>
                             <TableBody>
@@ -198,12 +209,12 @@ function LabRent() {
                                     >
                                         <TableCell>{index + 1}</TableCell>
                                         <TableCell component="th" scope="row" sortDirection="desc">
-                                            {row.nameBook}
+                                            {row.idBook}
                                         </TableCell>
-                                        <TableCell>{row.idStudent}</TableCell>
-                                        <TableCell>{PriceVND(row.price)}</TableCell>
+                                        <TableCell>{getStudentName(row.idStudent)}</TableCell>
+                                        <TableCell>{row.status}</TableCell>
                                         <TableCell>{getDate(row.createdAt)}</TableCell>
-                                        <TableCell>
+                                        {/* <TableCell>
                                             {compareDate(row.createdAt) > 365 ? (
                                                 <Button
                                                     onClick={() => {}}
@@ -241,7 +252,7 @@ function LabRent() {
                                                     )}
                                                 </>
                                             )}
-                                        </TableCell>
+                                        </TableCell> */}
                                     </TableRow>
                                 ))}
                             </TableBody>

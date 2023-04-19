@@ -32,6 +32,8 @@ function LabPenalty() {
     const [rows, setRows] = useState([]);
     const navigate = useNavigate();
     const [listBooks, setListBooks] = useState([]);
+    const [listRents, setListRents] = useState([]);
+
     const [listRentPenalties, setListRentPenalties] = useState([]);
 
     const [openModalStudent, setOpenModalStudent] = useState(false);
@@ -47,15 +49,16 @@ function LabPenalty() {
                     `http://localhost:5002/lab/rentPenalty/${localStorage.getItem('idPage')}`,
                 );
                 const resPenalties = await axios.get('http://localhost:5002/rentPenalty');
-                if (resPenalties) {
-                    setListRentPenalties(resPenalties.data);
-                    console.log(resPenalties.data);
-                }
+                // if (resPenalties) {
+                //     setListRentPenalties(resPenalties.data);
+                //     console.log(resPenalties.data);
+                // }
                 if (res) {
-                    console.log(res.data);
-                    setRows(res.data.rentPenalties);
-                    setListBooks(res.data.bookRentPenalties); // page dissapear
-                    setListRentPenalties(resPenalties.data);
+                    // console.log(res.data);
+                    setRows(res.data.rentPenalties); // rentpenalty
+                    setListRents(res.data.bookRentPenalties); // rent 
+                    // setListRentPenalties(resPenalties.data);
+                    // console.log(res.data)
 
                 }
             } catch (err) {
@@ -66,7 +69,7 @@ function LabPenalty() {
     }, []);
 
     const getNameBook = (id) => {
-        let book = listBooks.find((book) => {
+        let book = listBooks.filter((book) => {
             return book._id === id;
         });
         return book.nameBook;
@@ -150,12 +153,10 @@ function LabPenalty() {
                             <TableHead>
                                 <TableRow>
                                     <TableCell>STT</TableCell>
-                                    <TableCell>Mã đơn hàng</TableCell>
+                                    <TableCell>Mã lỗi</TableCell>
                                     <TableCell>Tên sách</TableCell>
                                     <TableCell>Lỗi</TableCell>
                                     <TableCell>Thời gian</TableCell>
-                                    <TableCell></TableCell>
-                                    <TableCell></TableCell>
                                 </TableRow>
                             </TableHead>
                             <TableBody>
@@ -167,13 +168,16 @@ function LabPenalty() {
                                         sx={{ '&:last-child td, &:last-child th': { brent: 0 } }}
                                     >
                                         <TableCell>{index + 1}</TableCell>
+                                        {/* <TableCell component="th" scope="row" sx={{ maxWidth: '200px' }}>
+                                            {getRentId(row.idRent)}
+                                        </TableCell> */}
                                         <TableCell component="th" scope="row" sx={{ maxWidth: '200px' }}>
                                             {row.idRent}
                                         </TableCell>
                                         <TableCell sx={{ maxWidth: '200px' }}>{getNameBook(row.idRent)}</TableCell>
                                         <TableCell>{row.error}</TableCell>
                                         <TableCell>{getDate(row.createdAt)}</TableCell>
-                                        <TableCell>
+                                        {/* <TableCell>
                                             <Button
                                                 onClick={() => {
                                                     setIdRentPenalty(row._id);
@@ -196,7 +200,7 @@ function LabPenalty() {
                                             >
                                                 Trung tâm bảo hành
                                             </Button>
-                                        </TableCell>
+                                        </TableCell> */}
                                     </TableRow>
                                 ))}
                             </TableBody>

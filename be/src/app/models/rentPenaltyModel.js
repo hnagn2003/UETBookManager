@@ -8,10 +8,6 @@ const rentPenaltyModel = new mongoose.Schema (
     error: {
       type: String,
     },
-    idLib: {
-      type: String,
-      default: '',
-    },
     status: {
       type: String,
     },

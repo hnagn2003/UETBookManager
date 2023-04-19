@@ -45,20 +45,20 @@ function SideBarLib() {
                 >
                     <NavLink to="/lib/storage" className="SideBarLib__link">
                         <AccountBalanceOutlinedIcon className="SideBarLib__link-icon" />
-                        Quản lý nhà phân phối
+                        Quản lý phòng thí nghiệm
                     </NavLink>
                     <NavLink to="/lib/import" className="SideBarLib__link">
                         <FileDownloadOutlinedIcon className="SideBarLib__link-icon" />
-                        Nhập hàng
+                        Nhập sách
                     </NavLink>
                     <NavLink to="/lib/export" className="SideBarLib__link">
                         <FileUploadOutlinedIcon className="SideBarLib__link-icon" />
-                        Chuyển hàng
+                        Chuyển sách
                     </NavLink>
-                    <NavLink to="/lib/rentPenalty" className="SideBarLib__link">
+                    {/* <NavLink to="/lib/rentPenalty" className="SideBarLib__link">
                         <WorkspacePremiumOutlinedIcon className="SideBarLib__link-icon" />
                         Lỗi hỏng sách
-                    </NavLink>
+                    </NavLink> */}
                     <NavLink to="/lib/delivery" className="SideBarLib__link">
                         <LocalShippingOutlinedIcon className="SideBarLib__link-icon" />
                         Vận chuyển

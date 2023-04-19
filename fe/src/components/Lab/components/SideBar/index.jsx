@@ -47,28 +47,28 @@ function SideBarLab() {
                 >
                     <NavLink to="/lab/book" className="SideBarLab__link">
                         <Inventory2OutlinedIcon className="SideBarLab__link-icon" />
-                        Sản phẩm
+                        Sách
                     </NavLink>
                     <NavLink to="/lab/storage" className="SideBarLab__link">
                         <AccountBalanceOutlinedIcon className="SideBarLab__link-icon" />
-                        Quản lý nhà phân phối
+                        Quản lý thư viện
                     </NavLink>
                     <NavLink to="/lab/import" className="SideBarLab__link">
                         <FileDownloadOutlinedIcon className="SideBarLab__link-icon" />
-                        Nhập hàng
+                        Nhập sách
                     </NavLink>
                     <NavLink to="/lab/rent" className="SideBarLab__link">
                         <FileUploadOutlinedIcon className="SideBarLab__link-icon" />
-                        SP đã bán
+                        Sách đã cho mượn
                     </NavLink>
                     <NavLink to="/lab/rentPenalty" className="SideBarLab__link">
                         <WorkspacePremiumOutlinedIcon className="SideBarLab__link-icon" />
                         Lỗi hỏng sách
                     </NavLink>
-                    <NavLink to="/lab/delivery" className="SideBarLab__link">
+                    {/* <NavLink to="/lab/delivery" className="SideBarLab__link">
                         <LocalShippingOutlinedIcon className="SideBarLab__link-icon" />
                         Vận chuyển
-                    </NavLink>
+                    </NavLink> */}
                     
                 </Box>
             </Box>

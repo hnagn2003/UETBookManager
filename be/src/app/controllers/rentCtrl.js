@@ -10,15 +10,19 @@ const rentCtrl = {
       const rents = await Rents.find({ idLab: id });
       const lab = await Labs.findOne({ _id: id });
       const books = await Books.find();
+      const students = await Students.find();
       if (rents && lab) {
         res.json({
           rents: rents,
           nameLab: lab.name,
           books: books,
+          students: students,
         });
       } else {
         res.json({ msg: "Not rents" });
       }
+      console.log(lab.name);
+
     } catch (error) {
       return res.status(500).json({ msg: error.message });
     }
