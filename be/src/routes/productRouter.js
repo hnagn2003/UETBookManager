@@ -4,11 +4,9 @@ const productCtrl = require('../app/controllers/productCtrl');
 
 router.get('/allProducts', productCtrl.getAllProducts);
 router.get('/allProductsBySearch', productCtrl.getAllProductsBySearch);
+router.get('/autoComplete', productCtrl.autocomplete);
 router.post('/create', productCtrl.create);
 router.post('/update', productCtrl.update);
 router.post('/delete', productCtrl.delete);
-
-
-
 
 module.exports = router;
