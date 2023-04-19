@@ -149,7 +149,7 @@ function LabPenalty() {
                                 <TableRow>
                                     <TableCell>STT</TableCell>
                                     <TableCell>Mã đơn hàng</TableCell>
-                                    <TableCell>Tên sản phẩm</TableCell>
+                                    <TableCell>Tên sách</TableCell>
                                     <TableCell>Lỗi</TableCell>
                                     <TableCell>Thời gian</TableCell>
                                     <TableCell></TableCell>

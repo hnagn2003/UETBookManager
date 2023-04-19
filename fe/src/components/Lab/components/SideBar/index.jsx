@@ -57,13 +57,13 @@ function SideBarLab() {
                         <FileDownloadOutlinedIcon className="SideBarLab__link-icon" />
                         Nhập hàng
                     </NavLink>
-                    <NavLink to="/lab/sold" className="SideBarLab__link">
+                    <NavLink to="/lab/rent" className="SideBarLab__link">
                         <FileUploadOutlinedIcon className="SideBarLab__link-icon" />
                         SP đã bán
                     </NavLink>
                     <NavLink to="/lab/rentPenalty" className="SideBarLab__link">
                         <WorkspacePremiumOutlinedIcon className="SideBarLab__link-icon" />
-                        Sản Phẩm bảo hành
+                        Lỗi hỏng sách
                     </NavLink>
                     <NavLink to="/lab/delivery" className="SideBarLab__link">
                         <LocalShippingOutlinedIcon className="SideBarLab__link-icon" />

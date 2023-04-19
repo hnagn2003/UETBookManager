@@ -28,7 +28,7 @@ const styleModal = {
     p: 3,
 };
 
-function LabSold() {
+function LabRent() {
     const [rows, setRows] = useState([]);
     const navigate = useNavigate();
     const [listBooks, setListBooks] = useState([]);
@@ -412,4 +412,4 @@ function LabSold() {
     );
 }
 
-export default LabSold;
+export default LabRent;

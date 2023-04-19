@@ -16,7 +16,7 @@ import LabDelivery from "~/pages/LabPage/LabDelivery";
 import LabPenalty from "~/pages/LabPage/LabPenalty";
 import LabImport from "~/pages/LabPage/LabImport";
 import LabBook from "~/pages/LabPage/LabBook";
-import LabSold from "~/pages/LabPage/LabSold";
+import LabRent from "~/pages/LabPage/LabRent";
 import LabStorage from "~/pages/LabPage/LabStorage";
 import LibPage from "~/pages/LibPage";
 import LibDelivery from "~/pages/LibPage/LibDelivery";
@@ -137,15 +137,15 @@ const privateLabRoutes = [
         component: LabImport,
     },
     {
-        path: '/Lab/sold',
-        component: LabSold,
+        path: '/Lab/rent',
+        component: LabRent,
     },
     {
         path: '/Lab/delivery',
         component: LabDelivery,
     },
     {
-        path: '/Lab/penalty',
+        path: '/Lab/rentPenalty',
         component: LabPenalty,
     },
 ];
