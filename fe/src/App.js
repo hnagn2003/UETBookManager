@@ -16,7 +16,6 @@ import TopBarAgency from './components/Agency/components/TopBar';
 import SideBarGuarantee from './components/Guarantee/components/SideBar';
 import TopBarGuarantee from '~/components/Guarantee/components/TopBar';
 
-
 function App() {
     return (
         <Router>

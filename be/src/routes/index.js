@@ -3,8 +3,7 @@ const productRouter = require('./productRouter');
 const factoryRouter = require('./factoryRouter');
 const agencyRouter = require('./agencyRouter');
 const deliveryRouter = require('./deliveryRouter');
-const guaranteeRouter = require('./guaranteeRouter');
-
+const guaranteeRouter = require('./guaranteeRouter')
 
 function route(app) {
     app.use('/user', userRouter);

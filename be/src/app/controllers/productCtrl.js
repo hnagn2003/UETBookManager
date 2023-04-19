@@ -2,6 +2,25 @@ const Products = require("../models/productModel.js");
 
 const productCtrl = {
 
+//   searchProduct: async (req, res) => {
+//     try {
+//         const keyword = req.query.keyword;
+//         const products = await Products.find({
+//           $or: [
+//             { code: { $regex: keyword, $options: 'i' } },
+//             { name: { $regex: keyword, $options: 'i' } },
+//           ]
+//         });
+//         if (products.length) {
+//           res.json({ msg: "Search product successfully", searchProduct: true });
+//         } else {
+//           res.json({ msg: "No products found" });
+//         }
+//       } catch (error) {
+//         return res.status(500).json({ msg: error.message });
+//       }
+// },
+
   create: async (req, res) => {
     try {
       const { code, name, description, image, price } = req.body;
@@ -69,14 +88,19 @@ const productCtrl = {
       return res.status(500).json({ msg: error.message });
     }
   },
-  getAllProductsFactory: async (req, res) => {
+  getAllProductsBySearch: async (req, res) => {
     try {
-      const id = req.params.id;
-      const products = await Products.find({factory: id});
+      const keyword = req.query.searchValue;
+      const products = await Products.find({
+        $or: [
+          { code: { $regex: keyword, $options: 'i' } },
+          { name: { $regex: keyword, $options: 'i' } },
+        ]
+      });
       if (products) {
         res.json(products);
       } else {
-        res.json({ msg: "Not products" });
+        res.json({ msg: "Not found products" });
       }
     } catch (error) {
       return res.status(500).json({ msg: error.message });

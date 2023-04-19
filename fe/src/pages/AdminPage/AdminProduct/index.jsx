@@ -41,30 +41,53 @@ function AdminProduct() {
     const [openModalEdit, setOpenModalEdit] = useState(false);
     const [openModalDelete, setOpenModalDelete] = useState(false);
     const [openModalSearch, setOpenModalSearch] = useState(false);
+
     const [searchValue, setSearchValue] = useState('');
     const [code, setCode] = useState('');
     const [name, setName] = useState('');
     const [description, setDescription] = useState('');
     const [image, setImage] = useState('');
     const [price, setPrice] = useState(0);
-
     const [id, setId] = useState('');
 
-    const handleSearch = (event) => {
-        event.preventDefault();
+    const handleSearch = async () => {
     };
-    // Get data
     useEffect(() => {
-        const getData = async () => {
+        const fetchSearchResults = async () => {
             try {
-                const res = await axios.get('http://localhost:5001/product/allProducts');
-                setRows(res.data);
-            } catch (err) {
-                console.log('fe : ' + err.message);
+                const res = await axios.get('http://localhost:5001/product/allProductsBySearch', {
+                    params: { searchValue }
+                });
+                setRows(res.data)
+            } catch (error) {
+                console.log(error.message);
             }
         };
-        getData();
-    }, []);
+        if (searchValue !== '') {
+            fetchSearchResults();
+        } else {
+            const getAllProducts = async () => {
+                try {
+                    const res = await axios.get('http://localhost:5001/product/allProducts');
+                    setRows(res.data);
+                } catch (err) {
+                    console.log('fe : ' + err.message);
+                }
+            };
+            getAllProducts();
+        }
+    }, [searchValue]);
+    // useEffect(() => {
+    //     const getData = async () => {
+    //         try {
+    //             const res = await axios.get('http://localhost:5001/product/allProducts');
+    //             setRows(res.data);
+    //         } catch (err) {
+    //             console.log('fe : ' + err.message);
+    //         }
+    //     };
+    //     getData();
+    // }, []);
 
     // Create product
     const handleCreate = async () => {
@@ -161,7 +184,11 @@ function AdminProduct() {
                     variant="outlined"
                     color="secondary"
                     sx={{ margin: '10px' }}
-                    onClick={() => setOpenModalSearch(true)}>
+                    onClick={() => {
+                        setSearchValue('');
+                        setOpenModalSearch(true);
+                    }}
+                >
                     <SearchIcon sx={{ marginRight: '5px' }} /> Search
                 </Button>
                 <TableContainer sx={{ marginBottom: '40px' }} component={Paper}>
@@ -488,10 +515,9 @@ function AdminProduct() {
                                 color="secondary"
                                 fullWidth
                                 label="Nhập thông tin"
-                                //variant="outlined"
-                                margin="dense"
                                 value={searchValue}
-                                onChange={(event) => setSearchValue(event.target.value)}
+                                onChange={(e) => setSearchValue(e.target.value)}
+                                margin="dense"
                                 validators={['required']}
                                 errorMessages={['Vui lòng nhập từ khóa tìm kiếm']}
                             />
