@@ -39,6 +39,7 @@ const factoryCtrl = {
 
       const factory = await Factories.findOne({ _id: id });
       if (!factory) {
+        logger.error("Không tìm thấy kho hàng");
         return res.status(400).json({ msg: "factory not found" });
       }
 

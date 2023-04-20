@@ -11,6 +11,7 @@ const agencyCtrl = {
         res.json({ msg: "Not agencies" });
       }
     } catch (error) {
+      logger.error("Lỗi khi hiển thị agency");
       return res.status(500).json({ msg: error.message });
     }
   },
@@ -36,6 +37,7 @@ const agencyCtrl = {
 
       const agency = await Agencies.findOne({ _id: id });
       if (!agency) {
+        logger.error("Không tìm thấy sinh viên");
         return res.status(400).json({ msg: "agency not found" });
       }
 
@@ -46,6 +48,7 @@ const agencyCtrl = {
       );
 
       res.json({ msg: "Agency updated", update: true });
+      logger.info("Update thông tin sinh viên");
     } catch (error) {
       return res.status(500).json({ msg: error.message });
     }

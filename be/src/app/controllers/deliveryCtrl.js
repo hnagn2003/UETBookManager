@@ -1,6 +1,7 @@
 const Deliveries = require("../models/deliveryModel");
 const Products = require("../models/productModel.js");
 const GuaranteeOrders = require("../models/orderGuaranteeModel");
+const logger = require("../../../log");
 
 const deliveryCtrl = {
   createDeliveryByFactory: async (req, res) => {
@@ -15,11 +16,13 @@ const deliveryCtrl = {
         description,
         status,
       } = req.body;
+      logger.info("Kho đã tạo đơn hàng")
       console.log(
         from + " " + to + " " + idProduct + " " + amount + " " + description
       );
       const product = await Products.findOne({ _id: idProduct });
       console.log(product.code);
+      
       const newDelivery = new Deliveries({
         from: from,
         nameFrom: nameFrom,
@@ -42,6 +45,7 @@ const deliveryCtrl = {
   createDeliveryByAgency: async (req, res) => {
     try {
       const { from, nameFrom, to, nameTo, idGuaranteeOrder, status } = req.body;
+      logger.info("Phòng thí nghiệm tạo đơn hàng")
       // console.log(
       //   from + " " + nameFrom + " " + to + " " + idGuaranteeOrder + " " + status
       // );
@@ -82,8 +86,10 @@ const deliveryCtrl = {
       if (!deliveries) {
         return res.json("Not delivery");
       }
+     // logger.info("Tìm đơn hàng theo ID");
       return res.json(deliveries);
     } catch (error) {
+    //  logger.error("Lỗi khi tìm đơn hàng");
       return res.status(500).json({ msg: error.message });
     }
   },
@@ -107,6 +113,7 @@ const deliveryCtrl = {
       const delivery = await Deliveries.findOne({ _id: id });
       if (!delivery) return res.json({ msg: "Delivery not found" });
       await Deliveries.findByIdAndUpdate(id, req.body, { new: true });
+      logger.info("Update thành công đơn hàng");
       res.json({ msg: "Delivery update", update: true });
     } catch (error) {
       return res.status(500).json({ msg: error.message });

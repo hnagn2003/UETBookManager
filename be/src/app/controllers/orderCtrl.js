@@ -2,6 +2,7 @@ const Orders = require("../models/orderModel");
 const Agencies = require("../models/agencyModel");
 const Products = require("../models/productModel");
 const Customers = require("../models/customerModel");
+const logger = require("../../../log");
 
 const orderCtrl = {
   getOderFromIdAgency: async (req, res) => {
@@ -54,9 +55,11 @@ const orderCtrl = {
       })
       newOrder.save();
       res.json({create: true, msg: 'Create order'});
+      logger.info("Tạo một đơn đặt hàng");
 
     } catch (error) {
       return res.status(500).json({ msg: error.message });
+      logger.error("Lỗi khi tạo đơn đặt hàng");
     }
   },
 };

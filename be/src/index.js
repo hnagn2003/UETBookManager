@@ -4,6 +4,7 @@ require('dotenv').config();
 const app = express();
 const cors = require('cors');
 const route = require('./routes');
+const logger = require('../log');
 const router = express.Router()
 
 app.use(cors());
@@ -14,14 +15,14 @@ const PORT = 5001;
 try {
     mongoose.connect(process.env.MONGODB_URL, {useUnifiedTopology: true,
         useNewUrlParser: true, });
-    console.log('Connected to MongoDB');
+    logger.info("Connected to MongoDB");
 } catch (err) {
-    console.log(err);
+    logger.error('Cant connect to MongoDB');
 }
 
 route(app);
 
 
 app.listen(PORT, () => {
-    console.log(`App listening at http://localhost:${PORT}`);
+    logger.info(`App listening at http://localhost:${PORT}`);
 })
