@@ -2,6 +2,7 @@ const RentPenalties = require("../models/rentPenaltyModel");
 const Rents = require("../models/rentModel");
 const Students = require("../models/studentModel");
 const Books = require("../models/bookModel");
+const logger = require("../../../log");
 
 
 const rentPenaltyCtrl = {
@@ -38,6 +39,7 @@ const rentPenaltyCtrl = {
       // console.log(idRent + " " + error + " " + idLab + " " + status);
       const rent = await Rents.findOne({ _id: idRent });
       if (!rent) {
+        logger.error("Lỗi khi tạo");
         return res.json({
           msg: "Failure Create new Penalty Rent",
           create: true,
@@ -55,8 +57,10 @@ const rentPenaltyCtrl = {
         status: status,
       });
       await newRentPenalty.save();
+      logger.info("Create new Penalty Rent");
       res.json({ msg: "Create new Penalty Rent", create: true });
     } catch (error) {
+      logger.error("Error: Create new Penalty Rent");
       return res.status(500).json({ msg: error.message });
     }
   },
@@ -69,12 +73,14 @@ const rentPenaltyCtrl = {
       });
       const rent = await Rents.findOne({ _id: rentPenalty.idRent });
       if (!rent) {
+        logger.error("Failure update new Penalty Rent");
         return res.json({
           msg: "Failure update new Penalty Rent",
           update: true,
         });
       }
       if (!rentPenalty) {
+        logger.error("Failure update new Penalty Rent");
         return res.json({
           msg: "Failure update new Penalty Rent",
           update: true,
@@ -86,8 +92,10 @@ const rentPenaltyCtrl = {
         { new: true }
       );
       await RentPenalties.findByIdAndDelete(idRentPenalty);
+      logger.info("Update new Penalty Rent");
       res.json({ msg: "Update", update: true });
     } catch (error) {
+      logger.error("Lỗi catch");
       return res.status(500).json({ msg: error.message });
     }
   },
@@ -116,6 +124,7 @@ const rentPenaltyCtrl = {
         console.log(rents)
 
         console.log(students);
+        logger.info("get RentPenalty by ID Lab");
         res.json({
           rents: rents, // page dissapear
           rentPenalties: rentPenalties,
@@ -123,9 +132,11 @@ const rentPenaltyCtrl = {
           // books: ,
         });
       } else {
+        logger.error("Not RentPenalty");
         res.json({ msg: "Not rentPenalties" });
       }
     } catch (error) {
+      logger.error("Error: get RentPenalty by ID Lab");
       return res.status(500).json({ msg: error.message });
     }
   },
@@ -170,14 +181,17 @@ const rentPenaltyCtrl = {
         //     return await Rents.findOne({ _id: rentPenalty.idRent });
         //   })
         // );
+        logger.info("get RentPenalty by ID Lib");
         res.json({
           // bookRentPenalties: bookRentPenalties,
           rentPenalties: rentPenalties,
         });
       } else {
+        logger.error("Not rentPenalties");
         res.json({ msg: "Not rentPenalties" });
       }
     } catch (error) {
+      logger.error("Error: get RentPenalty by ID Lib");
       return res.status(500).json({ msg: error.message });
     }
   },
@@ -195,9 +209,11 @@ const rentPenaltyCtrl = {
           req.body,
           { new: true }
         );
+        logger.info("Updated Status Penalty ")
         return res.json({update: true});
       }
     } catch (error) {
+      logger.error("Error: Update Status Penalty");
       return res.status(500).json({ msg: error.message });
     }
   },

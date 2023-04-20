@@ -2,6 +2,7 @@ const Libs = require("../models/libModel");
 const Books = require("../models/bookModel");
 const Labs = require("../models/labModel");
 const bcrypt = require("bcrypt");
+const logger = require("../../../log");
 
 const libCtrl = {
   getAllLibs: async (req, res) => {
@@ -24,11 +25,13 @@ const libCtrl = {
       const labs = await Labs.find();
 
       if (books && lib && labs) {
+        logger.info("Tìm lib bằng ID");
         res.json({ books, lib, labs});
       } else {
         res.json({ msg: "Not books" });
       }
     } catch (error) {
+      logger.error("Lỗi khi tìm lib bằng ID");
       return res.status(500).json({ msg: error.message });
     }
   },
@@ -47,9 +50,10 @@ const libCtrl = {
         { storage:  storage},
         { new: true }
       );
-
+      logger.info("Update lib thành công");
       res.json({ msg: "Lib updated", update: true });
     } catch (error) {
+      logger.error("Lỗi khi update lib");
       return res.status(500).json({ msg: error.message });
     }
   },

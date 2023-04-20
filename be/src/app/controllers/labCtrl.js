@@ -1,5 +1,6 @@
 const Labs = require("../models/labModel");
 const Books = require("../models/bookModel");
+const logger = require("../../../log");
 
 const labCtrl = {
   getAllLabs: async (req, res) => {
@@ -21,11 +22,14 @@ const labCtrl = {
       const lab = await Labs.findOne({_id : id});
 
       if (books && lab) {
+        logger.info("Tìm lab bằng id");
         res.json({books, lab});
       } else {
+        logger.error("Không tìm thấy lab");
         res.json({ msg: "Not lab" });
       }
     } catch (error) {
+      logger.error("Lỗi khi tìm lab bằng ID");
       return res.status(500).json({ msg: error.message });
     }
   },
@@ -44,9 +48,10 @@ const labCtrl = {
         { storage:  storage},
         { new: true }
       );
-
+      logger.info("Update thành công Lab");
       res.json({ msg: "Lab updated", update: true });
     } catch (error) {
+      logger.error("Lỗi khi update lab");
       return res.status(500).json({ msg: error.message });
     }
   },
