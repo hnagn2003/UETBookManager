@@ -40,7 +40,7 @@ function Factory() {
                                 <CardActionArea>
                                     <CardMedia
                                         component="img"
-                                        height="300"
+                                        height="400"
                                         image={factoryImage}
                                         alt="Image"
                                         backgroundColor="black"

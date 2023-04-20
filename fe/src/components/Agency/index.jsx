@@ -41,7 +41,7 @@ function Agency() {
                                 <CardActionArea>
                                     <CardMedia
                                         component="img"
-                                        height="300"
+                                        height="400"
                                         image={agencyImage}
                                         alt="Image"
                                         backgroundColor="black"

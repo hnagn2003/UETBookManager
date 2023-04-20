@@ -16,12 +16,13 @@ import Skeleton from '@mui/material/Skeleton';
 import { useEffect, useState } from 'react';
 import axios from 'axios';
 import SearchIcon from '@mui/icons-material/Search';
-
+import ButtonBase from '@mui/material/ButtonBase';
 import Backdrop from '@mui/material/Backdrop';
 import Modal from '@mui/material/Modal';
 import Fade from '@mui/material/Fade';
 import { TextValidator, ValidatorForm } from 'react-material-ui-form-validator';
 import { Stack } from '@mui/system';
+
 
 const styleModal = {
     position: 'absolute',
@@ -41,30 +42,59 @@ function AdminProduct() {
     const [openModalEdit, setOpenModalEdit] = useState(false);
     const [openModalDelete, setOpenModalDelete] = useState(false);
     const [openModalSearch, setOpenModalSearch] = useState(false);
+    const [searchResults, setSearchResults] = useState([]);
     const [searchValue, setSearchValue] = useState('');
+    const [searchFinalValue, setFinalSearchValue] = useState('');
     const [code, setCode] = useState('');
     const [name, setName] = useState('');
     const [description, setDescription] = useState('');
     const [image, setImage] = useState('');
     const [price, setPrice] = useState(0);
-
     const [id, setId] = useState('');
 
-    const handleSearch = (event) => {
-        event.preventDefault();
+    const handleSearch = async () => {
+        const res = await axios.get('http://localhost:5001/product/autoComplete', {
+            params: { searchValue }
+        });
+        setSearchResults(res.data);
     };
-    // Get data
+    const handleResultClick = (result) => {
+        console.log(result.name);
+        setSearchValue(result.name);
+        setSearchResults([]);
+    };
+    const handleInputChange = (event) => {
+        const value = event.target.value;
+        setSearchValue(value);
+        if (value !== '') {
+            handleSearch();
+        }
+    }
     useEffect(() => {
-        const getData = async () => {
+        const fetchSearchResults = async () => {
             try {
-                const res = await axios.get('http://localhost:5001/product/allProducts');
-                setRows(res.data);
-            } catch (err) {
-                console.log('fe : ' + err.message);
+                const res = await axios.get('http://localhost:5001/product/allProductsBySearch', {
+                    params: { searchValue }
+                });
+                setRows(res.data)
+            } catch (error) {
+                console.log(error.message);
             }
         };
-        getData();
-    }, []);
+        if (searchValue !== '') {
+            fetchSearchResults();
+        } else {
+            const getAllProducts = async () => {
+                try {
+                    const res = await axios.get('http://localhost:5001/product/allProducts');
+                    setRows(res.data);
+                } catch (err) {
+                    console.log('fe : ' + err.message);
+                }
+            };
+            getAllProducts();
+        }
+    }, [searchValue]);
 
     // Create product
     const handleCreate = async () => {
@@ -161,7 +191,11 @@ function AdminProduct() {
                     variant="outlined"
                     color="secondary"
                     sx={{ margin: '10px' }}
-                    onClick={() => setOpenModalSearch(true)}>
+                    onClick={() => {
+                        setSearchValue('');
+                        setOpenModalSearch(true);
+                    }}
+                >
                     <SearchIcon sx={{ marginRight: '5px' }} /> Search
                 </Button>
                 <TableContainer sx={{ marginBottom: '40px' }} component={Paper}>
@@ -468,10 +502,10 @@ function AdminProduct() {
                     <Box
                         sx={{
                             position: 'absolute',
-                            top: '50%',
+                            top: '20%',
                             left: '50%',
                             transform: 'translate(-50%, -50%)',
-                            width: 300,
+                            width: 400,
                             bgcolor: 'background.paper',
                             boxShadow: 50,
                             borderRadius: '10px',
@@ -482,29 +516,31 @@ function AdminProduct() {
                             Tìm kiếm
                         </Typography>
                         <ValidatorForm onSubmit={handleSearch}>
-                            <TextValidator
-                                sx={{ marginTop: '10px' }}
-                                variant="standard"
-                                color="secondary"
-                                fullWidth
-                                label="Nhập thông tin"
-                                //variant="outlined"
-                                margin="dense"
-                                value={searchValue}
-                                onChange={(event) => setSearchValue(event.target.value)}
-                                validators={['required']}
-                                errorMessages={['Vui lòng nhập từ khóa tìm kiếm']}
-                            />
-                            <Button
-                                sx={{
-                                    marginTop: '10px',
-                                    textAlign: 'center'
-                                }}
-                                variant="contained"
-                                startIcon={<SendIcon />}
-                                type="submit">
-                                Xác nhận
-                            </Button>
+                            <div>
+                                <TextValidator
+                                    sx={{ marginTop: '10px' }}
+                                    variant="standard"
+                                    color="secondary"
+                                    fullWidth
+                                    label="Nhập thông tin"
+                                    value={searchValue}
+                                    onChange={handleInputChange}
+                                    margin="dense"
+                                    validators={['required']}
+                                    errorMessages={['Vui lòng nhập từ khóa tìm kiếm']}
+                                />
+                                {searchResults && searchResults.length > 0 &&
+                                    <div style={{ marginTop: '10px', backgroundColor: 'white', borderRadius: '4px', boxShadow: '0px 0px 4px 0px rgba(0,0,0,0.1)', overflow: 'hidden' }}>
+                                        {searchResults.map((result) => (
+                                            <ButtonBase key={result._id} style={{ width: '100%', textAlign: 'left', padding: '10px', borderBottom: '1px solid #eee' }} onClick={() => handleResultClick(result)}>
+                                                <div style={{ fontSize: '12px', fontWeight: 'bold', color: '#333' }}>
+                                                    {result.name}
+                                                </div>
+                                            </ButtonBase>
+                                        ))}
+                                    </div>
+                                }
+                            </div>
                         </ValidatorForm>
                     </Box>
                 </Fade>
