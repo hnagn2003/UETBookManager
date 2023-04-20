@@ -14,7 +14,7 @@ import AddCircleOutlineOutlinedIcon from '@mui/icons-material/AddCircleOutlineOu
 import KeyboardArrowLeftOutlinedIcon from '@mui/icons-material/KeyboardArrowLeftOutlined';
 import { useNavigate } from 'react-router-dom';
 import SendIcon from '@mui/icons-material/Send';
-
+import SearchIcon from '@mui/icons-material/Search';
 import { useEffect, useState } from 'react';
 import axios from 'axios';
 
@@ -29,7 +29,7 @@ const styleModal = {
     top: '50%',
     left: '50%',
     transform: 'translate(-50%, -50%)',
-    width: 500,
+    width: 400,
     bgcolor: 'background.paper',
     boxShadow: 24,
     brentRadius: '10px',
@@ -42,7 +42,8 @@ function UserLibDetails() {
     const [openModalCreate, setOpenModalCreate] = useState(false);
     const [openModalDelete, setOpenModalDelete] = useState(false);
     const [openModalEdit, setOpenModalEdit] = useState(false);
-
+    const [openModalSearch, setOpenModalSearch] = useState(false);
+    const [searchValue, setSearchValue] = useState('');
     const [name, setName] = useState('');
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
@@ -51,7 +52,9 @@ function UserLibDetails() {
     const [address, setAddress] = useState('');
 
     const [id, setId] = useState('');
-
+    const handleSearch = (event) => {
+        event.preventDefault();
+    };
     // validate custom
     useEffect(() => {
         ValidatorForm.addValidationRule('isPasswordMatch', (value) => {
@@ -163,7 +166,13 @@ function UserLibDetails() {
                     <AddCircleOutlineOutlinedIcon sx={{ marginRight: '5px' }} />
                     New
                 </Button>
-
+                <Button
+                    variant="outlined"
+                    color="secondary"
+                    sx={{ margin: '10px' }}
+                    onClick={() => setOpenModalSearch(true)}>
+                    <SearchIcon sx={{ marginRight: '5px' }} /> Search
+                </Button>
                 <TableContainer sx={{ marginBottom: '40px' }} component={Paper}>
                     {rows.length > 0 ? (
                         <Table sx={{ minWidth: 650 }} size="small" aria-label="a dense table">
@@ -456,6 +465,62 @@ function UserLibDetails() {
                     </Box>
                 </Fade>
             </Modal>
+            <Modal
+                aria-labelledby="transition-modal-title"
+                aria-describedby="transition-modal-description"
+                open={openModalSearch}
+                onClose={() => setOpenModalSearch(false)}
+                closeAfterTransition
+                BackdropComponent={Backdrop}
+                BackdropProps={{
+                    timeout: 500,
+                }}
+            >
+                <Fade in={openModalSearch}>
+                    <Box
+                        sx={{
+                            position: 'absolute',
+                            top: '50%',
+                            left: '50%',
+                            transform: 'translate(-50%, -50%)',
+                            width: 300,
+                            bgcolor: 'background.paper',
+                            boxShadow: 50,
+                            borderRadius: '10px',
+                            p: 3,
+                        }}
+                    >
+                        <Typography id="transition-modal-title" variant="h6" component="h2">
+                            Tìm kiếm
+                        </Typography>
+                        <ValidatorForm onSubmit={handleSearch}>
+                            <TextValidator
+                                sx={{ marginTop: '10px' }}
+                                variant="standard"
+                                color="secondary"
+                                fullWidth
+                                label="Nhập thông tin"
+                                //variant="outlined"
+                                margin="dense"
+                                value={searchValue}
+                                onChange={(event) => setSearchValue(event.target.value)}
+                                validators={['required']}
+                                errorMessages={['Vui lòng nhập từ khóa tìm kiếm']}
+                            />
+                            <Button
+                                sx={{
+                                    marginTop: '10px',
+                                    textAlign: 'center'
+                                }}
+                                variant="contained"
+                                startIcon={<SendIcon />}
+                                type="submit">
+                                Xác nhận
+                            </Button>
+                        </ValidatorForm>
+                    </Box>
+                </Fade>
+            </Modal >
         </>
     );
 }

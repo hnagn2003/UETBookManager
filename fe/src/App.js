@@ -16,7 +16,6 @@ import TopBarLab from './components/Lab/components/TopBar';
 import SideBarPenalty from './components/Penalty/components/SideBar';
 import TopBarPenalty from '~/components/Penalty/components/TopBar';
 
-
 function App() {
     return (
         <Router>
