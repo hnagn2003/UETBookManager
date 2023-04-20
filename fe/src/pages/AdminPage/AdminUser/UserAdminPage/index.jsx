@@ -70,7 +70,7 @@ function UserAdminDetails() {
     useEffect(() => {
         const getData = async () => {
             try {
-                const res = await axios.get('http://localhost:5002/user/useradmin');
+                const res = await axios.get('http://localhost:5002/user/userAdmin');
                 setRows(res.data);
             } catch (err) {
                 console.log('fe : ' + err.message);

@@ -1,7 +1,42 @@
 const Books = require("../models/bookModel.js");
 
 const bookCtrl = {
-
+  autocomplete: async (req, res) => {
+    try {
+      const keyword = req.query.searchValue;
+      const books = await Books.find({
+        $or: [
+          { code: { $regex: keyword, $options: 'i' } },
+          { name: { $regex: keyword, $options: 'i' } },
+        ]
+      }).limit(5);
+      if (books) {
+        res.json(books);
+      } else {
+        const books = await Books.aggregate([
+          {
+            $search: {
+              "autocomplete": {
+                "query": keyword,
+                "path": ["name", "code"],
+                "fuzzy": {
+                  "maxEdits": 2,
+                  "prefixLength": 2
+                }
+              }
+            }
+          },
+        ]).limit(5);
+        if (books) {
+          res.json(books);
+        } else {
+          res.json({ msg: "Not found books" });
+        }
+      }
+    } catch (error) {
+      return res.status(500).json({ msg: error.message });
+    }
+  },
   create: async (req, res) => {
     try {
       const { code, name, description, image, price, author, category, language, publishYear } = req.body;
@@ -72,14 +107,19 @@ const bookCtrl = {
       return res.status(500).json({ msg: error.message });
     }
   },
-  getAllBooksLib: async (req, res) => {
+  getAllBooksBySearch: async (req, res) => {
     try {
-      const id = req.params.id;
-      const books = await Books.find({lib: id});
+      const keyword = req.query.searchValue;
+      const books = await Books.find({
+        $or: [
+          { code: { $regex: keyword, $options: 'i' } },
+          { name: { $regex: keyword, $options: 'i' } },
+        ]
+      });
       if (books) {
         res.json(books);
       } else {
-        res.json({ msg: "Not books" });
+        res.json({ msg: "Not found products" });
       }
     } catch (error) {
       return res.status(500).json({ msg: error.message });
