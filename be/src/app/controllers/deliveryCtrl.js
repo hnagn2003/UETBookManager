@@ -1,6 +1,7 @@
 const Deliveries = require("../models/deliveryModel");
 const Books = require("../models/bookModel.js");
 const RentPenalties = require("../models/rentPenaltyModel");
+const logger = require("../../../log");
 
 const deliveryCtrl = {
   createDeliveryByLib: async (req, res) => {
@@ -20,6 +21,7 @@ const deliveryCtrl = {
       );
       const book = await Books.findOne({ _id: idBook });
       console.log(book.code);
+      logger.info(" Tạo delivery cho sách");
       const newDelivery = new Deliveries({
         from: from,
         // nameFrom: nameFrom,
@@ -80,6 +82,7 @@ const deliveryCtrl = {
       const id = req.params.id;
       const deliveries = await Deliveries.find({ from: id });
       if (!deliveries) {
+        logger.error("Không tồn tại delivery như yêu cầu");
         return res.json("Not delivery");
       }
       return res.json(deliveries);
@@ -105,8 +108,12 @@ const deliveryCtrl = {
     try {
       const id = req.params.id;
       const delivery = await Deliveries.findOne({ _id: id });
-      if (!delivery) return res.json({ msg: "Delivery not found" });
+      if (!delivery) {
+      logger.error("Không tồn tại delivery");
+       return res.json({ msg: "Delivery not found" });
+      }
       await Deliveries.findByIdAndUpdate(id, req.body, { new: true });
+      logger.info("Update thành công");
       res.json({ msg: "Delivery update", update: true });
     } catch (error) {
       return res.status(500).json({ msg: error.message });

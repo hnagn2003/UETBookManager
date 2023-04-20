@@ -1,4 +1,6 @@
 const Books = require("../models/bookModel.js");
+const logger = require("../../../log");
+const { error } = require("winston");
 
 const bookCtrl = {
 
@@ -8,6 +10,7 @@ const bookCtrl = {
 
       const book = await Books.findOne({ code: code });
       if (book) {
+        logger.error("Mã sách đã tồn tại");
         return res.json({ msg: "Code book registered", create: false });
       }
       const newBook = new Books({
@@ -24,11 +27,12 @@ const bookCtrl = {
         lib: [],
 
       });
-
+      logger.info("Tạo mới một quyển sách");
       // Save mongodb
       await newBook.save();
       res.json({ msg: "Create book successfully", create: true });
     } catch (error) {
+      logger.error("Lỗi khi tạo mới sách");
       return res.status(500).json({ msg: error.message });
     }
   },
@@ -36,14 +40,16 @@ const bookCtrl = {
   update: async (req, res) => {
     try {
       const { id } = req.body;
-
       const book = await Books.findOne({ _id: id });
       if (!book) {
+        logger.error("Không tìm thấy sách muốn update");
         return res.status(400).json({ msg: "Book not found" });
       }
+      logger.info("Update thành công sách");
       await Books.findByIdAndUpdate(id, req.body, { new: true });
       res.json({ msg: "Book updated", update: true });
     } catch (error) {
+      logger.error("Lỗi khi update sách");
       return res.status(500).json({ msg: error.message });
     }
   },
@@ -52,10 +58,15 @@ const bookCtrl = {
     try {
       const { id } = req.body;
       const book = await Books.findOne({ _id: id });
-      if (!book) return res.json({ msg: "Book not found" });
+      if (!book) {
+        logger.error("Không tìm thấy sách định xoá");
+        return res.json({ msg: "Book not found" });
+      }
       await Books.findByIdAndDelete(id);
+      logger.info("Xoá thành công sách");
       res.json({ msg: "Book deleted", delete: true });
     } catch (error) {
+      logger.error("Lỗi khi xoá sách");
       return res.status(500).json({ msg: error.message });
     }
   },
