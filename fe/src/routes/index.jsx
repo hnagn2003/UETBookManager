@@ -1,32 +1,32 @@
 import AdminPage from "~/pages/AdminPage";
-import AdminAgency from "~/pages/AdminPage/AdminAgency";
-import AgencyDetails from "~/pages/AdminPage/AdminAgency/AdminAgencyDetails";
-import AdminFactory from "~/pages/AdminPage/AdminFactory";
-import FactoryDetails from "~/pages/AdminPage/AdminFactory/AdminFactoryDetails";
-import AdminGuarantee from "~/pages/AdminPage/AdminGuarantee";
-import GuaranteeDetails from "~/pages/AdminPage/AdminGuarantee/AdminGuaranteeDetails";
-import Products from "~/pages/AdminPage/AdminProduct";
+import AdminLab from "~/pages/AdminPage/AdminLab";
+import LabDetails from "~/pages/AdminPage/AdminLab/AdminLabDetails";
+import AdminLib from "~/pages/AdminPage/AdminLib";
+import LibDetails from "~/pages/AdminPage/AdminLib/AdminLibDetails";
+import AdminPenalty from "~/pages/AdminPage/AdminPenalty";
+import PenaltyDetails from "~/pages/AdminPage/AdminPenalty/AdminPenaltyDetails";
+import Books from "~/pages/AdminPage/AdminBook";
 import AdminUser from "~/pages/AdminPage/AdminUser";
 import UserAdminDetails from "~/pages/AdminPage/AdminUser/UserAdminPage";
-import UserAgencyDetails from "~/pages/AdminPage/AdminUser/UserAgencyPage";
-import UserFactoryDetails from "~/pages/AdminPage/AdminUser/UserFactoryPage";
-import UserGuaranteeDetails from "~/pages/AdminPage/AdminUser/UserGuaranteePage";
-import AgencyPage from "~/pages/AgencyPage";
-import AgencyDelivery from "~/pages/AgencyPage/AgencyDelivery";
-import AgencyGuarantee from "~/pages/AgencyPage/AgencyGuarantee";
-import AgencyImport from "~/pages/AgencyPage/AgencyImport";
-import AgencyProduct from "~/pages/AgencyPage/AgencyProduct";
-import AgencySold from "~/pages/AgencyPage/AgencySold";
-import AgencyStorage from "~/pages/AgencyPage/AgencyStorage";
-import FactoryPage from "~/pages/FactoryPage";
-import FactoryDelivery from "~/pages/FactoryPage/FactoryDelivery";
-import FactoryExport from "~/pages/FactoryPage/FactoryExport";
-import FactoryGuarantee from "~/pages/FactoryPage/FactoryGuarantee";
-import FactoryImport from "~/pages/FactoryPage/FactoryImport";
-import FactoryStorage from "~/pages/FactoryPage/FactoryStorage";
-import GuaranteePage from "~/pages/GuaranteePage";
-import GuaranteeDelivery from "~/pages/GuaranteePage/GuaranteeDelivery";
-import GuaranteeProduct from "~/pages/GuaranteePage/GuaranteeProduct";
+import UserLabDetails from "~/pages/AdminPage/AdminUser/UserLabPage";
+import UserLibDetails from "~/pages/AdminPage/AdminUser/UserLibPage";
+import UserPenaltyDetails from "~/pages/AdminPage/AdminUser/UserPenaltyPage";
+import LabPage from "~/pages/LabPage";
+import LabDelivery from "~/pages/LabPage/LabDelivery";
+import LabPenalty from "~/pages/LabPage/LabPenalty";
+import LabImport from "~/pages/LabPage/LabImport";
+import LabBook from "~/pages/LabPage/LabBook";
+import LabRent from "~/pages/LabPage/LabRent";
+import LabStorage from "~/pages/LabPage/LabStorage";
+import LibPage from "~/pages/LibPage";
+import LibDelivery from "~/pages/LibPage/LibDelivery";
+import LibExport from "~/pages/LibPage/LibExport";
+import LibPenalty from "~/pages/LibPage/LibPenalty";
+import LibImport from "~/pages/LibPage/LibImport";
+import LibStorage from "~/pages/LibPage/LibStorage";
+import PenaltyPage from "~/pages/PenaltyPage";
+import PenaltyDelivery from "~/pages/PenaltyPage/PenaltyDelivery";
+import PenaltyBook from "~/pages/PenaltyPage/PenaltyBook";
 import LoginPage from "~/pages/LoginPage";
 
 const publicRoutes = [
@@ -51,124 +51,124 @@ const privateAdminRoutes = [
         component: UserAdminDetails,
     },
     {
-        path: '/Admin/agencyUsers',
-        component: UserAgencyDetails,
+        path: '/Admin/labUsers',
+        component: UserLabDetails,
+    },
+    // {
+    //     path: '/Admin/penaltyUsers',
+    //     component: UserPenaltyDetails,
+    // },
+    {
+        path: '/Admin/libUsers',
+        component: UserLibDetails,
     },
     {
-        path: '/Admin/guaranteeUsers',
-        component: UserGuaranteeDetails,
+        path: '/Admin/lib',
+        component: AdminLib,
     },
     {
-        path: '/Admin/factoryUsers',
-        component: UserFactoryDetails,
+        path: '/Admin/lib/:id',
+        component: LibDetails,
     },
     {
-        path: '/Admin/factory',
-        component: AdminFactory,
+        path: '/Admin/lab',
+        component: AdminLab,
     },
     {
-        path: '/Admin/factory/:id',
-        component: FactoryDetails,
+        path: '/Admin/lab/:id',
+        component: LabDetails,
     },
     {
-        path: '/Admin/agency',
-        component: AdminAgency,
+        path: '/Admin/rentPenalty',
+        component: AdminPenalty,
     },
     {
-        path: '/Admin/agency/:id',
-        component: AgencyDetails,
+        path: '/Admin/rentPenalty/:id',
+        component: PenaltyDetails,
     },
     {
-        path: '/Admin/guarantee',
-        component: AdminGuarantee,
-    },
-    {
-        path: '/Admin/guarantee/:id',
-        component: GuaranteeDetails,
-    },
-    {
-        path: '/Admin/products',
-        component: Products,
+        path: '/Admin/books',
+        component: Books,
     },
 ];
 
-const privateFactoryRoutes = [
+const privateLibRoutes = [
     {
-        path: '/Factory',
-        component: FactoryPage,
+        path: '/Lib',
+        component: LibPage,
     },
     {
-        path: '/Factory/storage',
-        component: FactoryStorage,
+        path: '/Lib/storage',
+        component: LibStorage,
     },
     {
-        path: '/Factory/import',
-        component: FactoryImport,
+        path: '/Lib/import',
+        component: LibImport,
     },
     {
-        path: '/Factory/export',
-        component: FactoryExport,
+        path: '/Lib/export',
+        component: LibExport,
     },
     {
-        path: '/Factory/delivery',
-        component: FactoryDelivery,
+        path: '/Lib/delivery',
+        component: LibDelivery,
     },
     {
-        path: '/Factory/guarantee',
-        component: FactoryGuarantee,
-    },
-];
-
-const privateAgencyRoutes = [
-    {
-        path: '/Agency',
-        component: AgencyPage,
-    },
-    {
-        path: '/Agency/product',
-        component: AgencyProduct,
-    },
-    {
-        path: '/Agency/storage',
-        component: AgencyStorage,
-    },
-    {
-        path: '/Agency/import',
-        component: AgencyImport,
-    },
-    {
-        path: '/Agency/sold',
-        component: AgencySold,
-    },
-    {
-        path: '/Agency/delivery',
-        component: AgencyDelivery,
-    },
-    {
-        path: '/Agency/guarantee',
-        component: AgencyGuarantee,
+        path: '/Lib/penalty',
+        component: LibPenalty,
     },
 ];
 
-const privateGuaranteeRoutes = [
+const privateLabRoutes = [
+    {
+        path: '/Lab',
+        component: LabPage,
+    },
+    {
+        path: '/Lab/book',
+        component: LabBook,
+    },
+    {
+        path: '/Lab/storage',
+        component: LabStorage,
+    },
+    {
+        path: '/Lab/import',
+        component: LabImport,
+    },
+    {
+        path: '/Lab/rent',
+        component: LabRent,
+    },
+    {
+        path: '/Lab/delivery',
+        component: LabDelivery,
+    },
+    {
+        path: '/Lab/rentPenalty',
+        component: LabPenalty,
+    },
+];
+
+const privatePenaltyRoutes = [
     {
         path: '/',
-        component: GuaranteePage,
+        component: PenaltyPage,
     },
     {
-        path: '/Guarantee',
-        component: GuaranteePage,
+        path: '/Penalty',
+        component: PenaltyPage,
     },
     {
-        path: '/Guarantee/delivery',
-        component: GuaranteeDelivery,
+        path: '/Penalty/delivery',
+        component: PenaltyDelivery,
     },
     {
-        path: '/Guarantee/product',
-        component: GuaranteeProduct,
+        path: '/Penalty/book',
+        component: PenaltyBook,
     },
 ];
 
 
 
-export { publicRoutes, privateAdminRoutes, privateFactoryRoutes, privateAgencyRoutes,  privateGuaranteeRoutes};
+export { publicRoutes, privateAdminRoutes, privateLibRoutes, privateLabRoutes,  privatePenaltyRoutes};

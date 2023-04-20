@@ -14,13 +14,13 @@ const deliverySchema = new mongoose.Schema (
     nameTo: {
       type: String,
     },
-    nameProduct: {
+    nameBook: {
       type: String,
     },
-    idProduct: {
+    idBook: {
       type: String,
     },
-    idGuaranteeOrder: {
+    idRentPenalty: {
       type: String,
     },
     amount: {

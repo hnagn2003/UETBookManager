@@ -27,7 +27,7 @@ export default function Login() {
     const handleSubmit = async () => {
         setLoading(true);
         try {
-            const res = await axios.post('http://localhost:5001/user/login', { username, password });
+            const res = await axios.post('http://localhost:5002/user/login', { username, password });
             setLoading(false);
             if (res.data.login) {
                 setUsername('');

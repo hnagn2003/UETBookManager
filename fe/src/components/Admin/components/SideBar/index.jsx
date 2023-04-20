@@ -44,22 +44,22 @@ function SideBarAdmin() {
                         height: 'var(--default-layout-height-header)',
                     }}
                 >
-                    <NavLink to="/admin/products" className="SideBarAdmin__link">
+                    <NavLink to="/admin/books" className="SideBarAdmin__link">
                         <Inventory2OutlinedIcon className="SideBarAdmin__link-icon" />
                         Quản lý sách
                     </NavLink>
-                    <NavLink to="/admin/factory" className="SideBarAdmin__link">
+                    <NavLink to="/admin/lib" className="SideBarAdmin__link">
                         <AccountBalanceOutlinedIcon className="SideBarAdmin__link-icon" />
-                        Quản lý nhà phân phối
+                        Quản lý thư viện
                     </NavLink>
-                    <NavLink to="/admin/agency" className="SideBarAdmin__link">
+                    <NavLink to="/admin/lab" className="SideBarAdmin__link">
                         <StoreOutlinedIcon className="SideBarAdmin__link-icon" />
                         Quản lý phòng thí nghiệm
                     </NavLink>
-                    <NavLink to="/admin/guarantee" className="SideBarAdmin__link">
+                    {/* <NavLink to="/admin/rentPenalty" className="SideBarAdmin__link">
                         <WorkspacePremiumOutlinedIcon className="SideBarAdmin__link-icon" />
-                        Trung tâm bảo hành
-                    </NavLink>
+                        Lỗi hỏng sách
+                    </NavLink> */}
                     <NavLink to="/admin/user" className="SideBarAdmin__link">
                         <ManageAccountsOutlinedIcon className="SideBarAdmin__link-icon" />
                         Quản lý tài khoản

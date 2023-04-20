@@ -6,9 +6,9 @@ import CardMedia from '@mui/material/CardMedia';
 import Typography from '@mui/material/Typography';
 import { CardActionArea } from '@mui/material';
 import adminImage from '~/assets/image/admin.jpg';
-import agencyImage from '~/assets/image/agency.jpg';
-import factoryImage from '~/assets/image/factory.png';
-import guaranteeImage from '~/assets/image/guarantee.png';
+import labImage from '~/assets/image/lab.jpg';
+import libImage from '~/assets/image/lib.png';
+// import penaltyImage from '~/assets/image/penalty.png';
 
 function AdminUser() {
     const navigate = useNavigate();
@@ -50,14 +50,14 @@ function AdminUser() {
                     <Card
                         sx={{ maxWidth: 345, margin: '0 20px' }}
                         onClick={() => {
-                            navigate('/admin/factoryUsers');
+                            navigate('/admin/libUsers');
                         }}
                     >
                         <CardActionArea>
                             <CardMedia
                                 component="img"
                                 height="200"
-                                image={factoryImage}
+                                image={libImage}
                                 alt="Image"
                                 backgroundColor="black"
                             />
@@ -71,14 +71,14 @@ function AdminUser() {
                     <Card
                         sx={{ maxWidth: 345, margin: '0 20px' }}
                         onClick={() => {
-                            navigate('/admin/agencyUsers');
+                            navigate('/admin/labUsers');
                         }}
                     >
                         <CardActionArea>
                             <CardMedia
                                 component="img"
                                 height="200"
-                                image={agencyImage}
+                                image={labImage}
                                 alt="Image"
                                 backgroundColor="black"
                             />
@@ -89,17 +89,17 @@ function AdminUser() {
                             </CardContent>
                         </CardActionArea>
                     </Card>
-                    <Card
+                    {/* <Card
                         sx={{ maxWidth: 345, margin: '0 20px' }}
                         onClick={() => {
-                            navigate('/admin/guaranteeUsers');
+                            navigate('/admin/rentPenaltyUsers');
                         }}
                     >
                         <CardActionArea>
                             <CardMedia
                                 component="img"
                                 height="200"
-                                image={guaranteeImage}
+                                image={penaltyImage}
                                 alt="Image"
                                 backgroundColor="black"
                             />
@@ -110,7 +110,7 @@ function AdminUser() {
                             </CardContent>
                             
                         </CardActionArea>
-                    </Card>
+                    </Card> */}
                 </Box>
             </Box>
         </>

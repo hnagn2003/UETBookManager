@@ -1,17 +1,18 @@
 const userRouter = require('./userRouter');
-const productRouter = require('./productRouter');
-const factoryRouter = require('./factoryRouter');
-const agencyRouter = require('./agencyRouter');
+const bookRouter = require('./bookRouter');
+const libRouter = require('./libRouter');
+const labRouter = require('./labRouter');
 const deliveryRouter = require('./deliveryRouter');
-const guaranteeRouter = require('./guaranteeRouter')
+const rentPenaltyRouter = require('./rentPenaltyRouter');
+
 
 function route(app) {
     app.use('/user', userRouter);
-    app.use('/product', productRouter);
-    app.use('/factory', factoryRouter);
-    app.use('/agency', agencyRouter);
+    app.use('/book', bookRouter);
+    app.use('/lib', libRouter);
+    app.use('/lab', labRouter);
     app.use('/delivery', deliveryRouter);
-    app.use('/guarantee', guaranteeRouter);
+    app.use('/rentPenalty', rentPenaltyRouter);
 }
 
 module.exports = route;
