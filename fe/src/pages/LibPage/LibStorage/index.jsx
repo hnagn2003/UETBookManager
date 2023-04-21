@@ -26,7 +26,7 @@ function LibStorage() {
     useEffect(() => {
         const getData = async () => {
             try {
-                const res = await axios.get(`http://localhost:5002/lib/${localStorage.getItem('idPage')}`);
+                const res = await axios.get(`http://localhost:5001/lib/${localStorage.getItem('idPage')}`);
                 console.log(res.data);
                 setRows(res.data.books);
                 setStorage(res.data.lib.storage);

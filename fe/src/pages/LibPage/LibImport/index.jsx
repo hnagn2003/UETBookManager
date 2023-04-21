@@ -46,7 +46,7 @@ function LibImport() {
     useEffect(() => {
         const getData = async () => {
             try {
-                const res = await axios.get(`http://localhost:5002/lib/${localStorage.getItem('idPage')}`);
+                const res = await axios.get(`http://localhost:5001/lib/${localStorage.getItem('idPage')}`);
                 setRows(res.data.books);
                 setStorage(res.data.lib.storage);
             } catch (err) {
@@ -63,7 +63,7 @@ function LibImport() {
         var amount = Number(amountImport) + getAmount(idBook);
 
         try {
-            const res = await axios.post('http://localhost:5002/lib/updateAmount', {
+            const res = await axios.post('http://localhost:5001/lib/updateAmount', {
                 id: localStorage.getItem('idPage'),
                 storage: [{ id: idBook, amount: amount }, ...rest],
             });

@@ -55,7 +55,7 @@ function AdminBook() {
     useEffect(() => { 
         const getData = async () => {
             try {
-                const res = await axios.get('http://localhost:5002/book/allBooks');
+                const res = await axios.get('http://localhost:5001/book/allBooks');
                 setRows(res.data);
             } catch (err) {
                 console.log('fe : ' + err.message);
@@ -67,7 +67,7 @@ function AdminBook() {
     // Create book 
     const handleCreate = async () => {
         try {
-            const res = await axios.post('http://localhost:5002/book/create', {
+            const res = await axios.post('http://localhost:5001/book/create', {
                 code,
                 name,
                 description,
@@ -90,7 +90,7 @@ function AdminBook() {
     // update book
     const handleEdit = async () => {
         try {
-            const res = await axios.post('http://localhost:5002/book/update', {
+            const res = await axios.post('http://localhost:5001/book/update', {
                 id,
                 code,
                 name,
@@ -114,7 +114,7 @@ function AdminBook() {
     // delete book
     const handleDelete = async () => {
         try {
-            const res = await axios.post('http://localhost:5002/book/delete', {
+            const res = await axios.post('http://localhost:5001/book/delete', {
                 id,
             });
             if (res.data.delete) {

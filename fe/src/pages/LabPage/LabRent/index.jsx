@@ -39,6 +39,8 @@ function LabRent() {
     const [openModalCreate, setOpenModalCreate] = useState(false);
     const [nameLab, setNameLab] = useState('');
     const [nameStudent, setNameStudent] = useState('');
+    const [studentCode, setStudentCode] = useState('');
+
     const [sdt, setSdt] = useState('');
     const [address, setAddress] = useState('');
     const [codeBook, setCodeBook] = useState('');
@@ -51,8 +53,8 @@ function LabRent() {
     useEffect(() => {
         const getData = async () => {
             try {
-                const res = await axios.get(`http://localhost:5002/lab/rent/${localStorage.getItem('idPage')}`);
-                const resStorage = await axios.get(`http://localhost:5002/lab/${localStorage.getItem('idPage')}`);
+                const res = await axios.get(`http://localhost:5001/lab/rent/${localStorage.getItem('idPage')}`);
+                const resStorage = await axios.get(`http://localhost:5001/lab/${localStorage.getItem('idPage')}`);
                 // console.log(res.data);
                 setRows(res.data.rents.reverse());
                 setNameLab(res.data.nameLab);
@@ -96,10 +98,11 @@ function LabRent() {
     };
 
     const getStudentName = (id) => {
-        console.log(id)
         let student = listStudents.find((student) =>  {
-            return student.id = id;
+            return student._id == id;
         });
+        console.log(student);
+
         return student.name
     }
     const compareDate = (data) => {
@@ -111,28 +114,31 @@ function LabRent() {
     };
 
     const handleCreateRent = async () => {
+        // console.log(codeBook);
         const rest = storage.filter((item) => {
             return item.id !== codeBook;
         });
         const bookImport = storage.find((item) => {
             return item.id === codeBook;
         });
-        var amount = bookImport.amount - 1;
-        console.log(amount);
+        if (bookImport) {
+            var amount = bookImport.amount - 1;
+            // console.log(amount);
+        }
 
         try {
-            await axios.post('http://localhost:5002/lab/updateAmount', {
+            await axios.post('http://localhost:5001/lab/updateAmount', {
                 id: localStorage.getItem('idPage'),
                 storage: [{ id: codeBook, amount: amount }, ...rest],
             });
 
-            const res = await axios.post('http://localhost:5002/lab/createRent', {
+            const res = await axios.post('http://localhost:5001/lab/createRent', {
                 idLab: localStorage.getItem('idPage'),
                 nameLab: nameLab,
-                nameStudent: nameStudent,
-                sdt: sdt,
-                address: address,
-                price: Number(price),
+                studentID: studentCode,
+                // sdt: sdt,
+                // address: address,
+                // price: Number(price),
                 idBook: codeBook,
             });
 
@@ -146,7 +152,7 @@ function LabRent() {
     };
     const handleRentPenalty = async () => {
         try {
-            const res = await axios.post('http://localhost:5002/lab/createRentPenalty', {
+            const res = await axios.post('http://localhost:5001/lab/createRentPenalty', {
                 idRent: idRent,
                 error: error,
                 idLab: localStorage.getItem('idPage'),
@@ -185,7 +191,7 @@ function LabRent() {
                         variant="outlined"
                         color="secondary"
                     >
-                        Tạo hóa đơn
+                        Tạo thẻ mượn
                     </Button>
                     {rows.length > 0 ? (
                         <Table sx={{ minWidth: 650 }} size="medium" aria-label="a dense table">
@@ -212,6 +218,7 @@ function LabRent() {
                                             {row.idBook}
                                         </TableCell>
                                         <TableCell>{getStudentName(row.idStudent)}</TableCell>
+                                        {/* {console.log(row.idStudent)} */}
                                         <TableCell>{row.status}</TableCell>
                                         <TableCell>{getDate(row.createdAt)}</TableCell>
                                         {/* <TableCell>
@@ -284,11 +291,11 @@ function LabRent() {
                 <Fade in={openModalCreate}>
                     <Box sx={styleModal}>
                         <Typography id="transition-modal-title" variant="h6" component="h2">
-                            Tạo hóa đơn
+                            Tạo thẻ mượn
                         </Typography>
                         <TextField
                             sx={{ margin: '10px 0' }}
-                            label="Tên Đại lý"
+                            label="Tên Phòng Thí Nghiệm"
                             variant="standard"
                             fullWidth
                             type="text"
@@ -296,14 +303,16 @@ function LabRent() {
                         />
                         <TextField
                             sx={{ margin: '10px 0' }}
-                            label="Tên khách hàng"
+                            label="Mã Sinh Viên"
                             variant="standard"
                             fullWidth
                             type="text"
-                            value={nameStudent}
-                            onChange={(e) => setNameStudent(e.target.value)}
+                            value={studentCode}
+                            onChange={(e) => setStudentCode(e.target.value)}
+                            required
+                            helperText="Vui lòng nhập mã sinh viên"
                         />
-                        <TextField
+                        {/* <TextField
                             sx={{ margin: '10px 0' }}
                             label="Số điện thoại"
                             variant="standard"
@@ -320,21 +329,23 @@ function LabRent() {
                             type="text"
                             value={address}
                             onChange={(e) => setAddress(e.target.value)}
-                        />
+                        /> */}
                         <FormControl fullWidth sx={{ margin: '10px 0' }}>
-                            <InputLabel id="demo-simple-select-label">Mã Sản phẩm</InputLabel>
+                            <InputLabel id="demo-simple-select-label">Mã sách</InputLabel>
                             <Select
                                 labelId="demo-simple-select-label"
                                 id="demo-simple-select"
                                 value={codeBook}
-                                label="Mã sản phẩm"
+                                label="Mã sách"
+                                required
+                                helperText="Vui lòng nhập mã sách"
                                 onChange={(e) => {
-                                    console.log(e.target.value);
+                                    // console.log(e.target.value);
                                     setCodeBook(e.target.value);
-                                    setPrice(getPriceByID(e.target.value));
+                                    // setPrice(getPriceByID(e.target.value));
                                 }}
                             >
-                                {listBooks.map((book) => {
+                                {listBooks.map((book) => {                    
                                     return (
                                         <MenuItem key={book._id} value={book._id}>
                                             {book.code}
@@ -343,7 +354,7 @@ function LabRent() {
                                 })}
                             </Select>
                         </FormControl>
-                        <TextField
+                        {/* <TextField
                             sx={{ margin: '10px 0' }}
                             label="Giá sản phẩm"
                             variant="standard"
@@ -351,8 +362,8 @@ function LabRent() {
                             type="number"
                             value={price}
                             onChange={(e) => setPrice(e.target.value)}
-                        />
-
+                        /> */}
+                        
                         <Button
                             sx={{ marginTop: '10px' }}
                             variant="contained"

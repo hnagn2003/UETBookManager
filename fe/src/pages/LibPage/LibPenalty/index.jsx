@@ -23,7 +23,7 @@ function LibPenalty() {
         const getData = async () => {
             try {
                 const res = await axios.get(
-                    `http://localhost:5002/lib/rentPenalty/${localStorage.getItem('idPage')}`,
+                    `http://localhost:5001/lib/rentPenalty/${localStorage.getItem('idPage')}`,
                 );
 
                 if (res) {

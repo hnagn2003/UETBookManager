@@ -16,7 +16,7 @@ function AdminPenalty() {
     useEffect(() => {
         const getData = async () => {
             try {
-                const res = await axios.get('http://localhost:5002/rentPenalty');
+                const res = await axios.get('http://localhost:5001/rentPenalty');
                 setRentPenalty(res.data);
                 // console.log(res.data);
             } catch (err) {

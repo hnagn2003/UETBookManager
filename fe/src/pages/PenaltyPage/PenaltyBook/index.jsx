@@ -44,9 +44,9 @@ function PenaltyBook() {
         const getData = async () => {
             try {
                 const res = await axios.get(
-                    `http://localhost:5002/penalty/rentPenalty/${localStorage.getItem('idPage')}`,
+                    `http://localhost:5001/penalty/rentPenalty/${localStorage.getItem('idPage')}`,
                 );
-                const resLibs = await axios.get('http://localhost:5002/lib');
+                const resLibs = await axios.get('http://localhost:5001/lib');
                 if (resLibs) {
                     setListLibs(resLibs.data);
                     console.log(resLibs.data);
@@ -93,7 +93,7 @@ function PenaltyBook() {
 
         try {
             const resUpdateStatusPenalty = await axios.put(
-                `http://localhost:5002/rentPenalty/updateStatusPenalty/${idRentPenalty}`,
+                `http://localhost:5001/rentPenalty/updateStatusPenalty/${idRentPenalty}`,
                 {
                     idLib: idLibExport,
                     status: 'lib',
@@ -111,7 +111,7 @@ function PenaltyBook() {
     const handleDeliveryLab = async () => {
         // console.log(idRent);
         try {
-            const res = await axios.put(`http://localhost:5002/lab/updateNotRentPenalty/${idRentPenalty}`);
+            const res = await axios.put(`http://localhost:5001/lab/updateNotRentPenalty/${idRentPenalty}`);
             if (res.data.update) {
                 alert(res.data.msg);
                 window.location.reload();

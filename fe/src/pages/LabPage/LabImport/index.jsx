@@ -14,8 +14,8 @@ function LabImport() {
     useEffect(() => {
         const getData = async () => {
             try {
-                const res = await axios.get(`http://localhost:5002/delivery/to/${localStorage.getItem('idPage')}`);
-                const resStorage = await axios.get(`http://localhost:5002/lab/${localStorage.getItem('idPage')}`);
+                const res = await axios.get(`http://localhost:5001/delivery/to/${localStorage.getItem('idPage')}`);
+                const resStorage = await axios.get(`http://localhost:5001/lab/${localStorage.getItem('idPage')}`);
                 const newDeliveries = res.data.filter((delivery) => {
                     return delivery.status !== 'Giao hàng thành công';
                 });
@@ -55,11 +55,11 @@ function LabImport() {
         var amount = Number(amountImport) + bookImport.amount;
 
         try {
-            await axios.post('http://localhost:5002/lab/updateAmount', {
+            await axios.post('http://localhost:5001/lab/updateAmount', {
                 id: localStorage.getItem('idPage'),
                 storage: [{ id: idBook, amount: amount }, ...rest],
             });
-            const res = await axios.put(`http://localhost:5002/delivery/updateStatus/${idDelivery}`, {
+            const res = await axios.put(`http://localhost:5001/delivery/updateStatus/${idDelivery}`, {
                 status: 'Giao hàng thành công',
             });
             if (res.data.update) {

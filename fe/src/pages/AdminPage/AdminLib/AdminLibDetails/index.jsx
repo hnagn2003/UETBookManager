@@ -26,7 +26,7 @@ function LibDetails() {
     useEffect(() => {
         const getData = async () => {
             try {
-                const res = await axios.get(`http://localhost:5002/lib/${id}`);
+                const res = await axios.get(`http://localhost:5001/lib/${id}`);
                 setRows(res.data.books);
                 setStorage(res.data.lib.storage);
             } catch (err) {

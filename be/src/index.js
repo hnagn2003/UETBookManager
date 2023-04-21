@@ -9,7 +9,7 @@ const router = express.Router()
 app.use(cors());
 app.use(express.json());
 
-const PORT = 5002;
+const PORT = 5001;
 
 try {
 

@@ -13,7 +13,7 @@ function Lab() {
     useEffect(() => {
         const getData = async () => {
             try {
-                const res = await axios.get(`http://localhost:5002/lab/${localStorage.getItem('idPage')}`);
+                const res = await axios.get(`http://localhost:5001/lab/${localStorage.getItem('idPage')}`);
                 setLab(res.data.lab);
             } catch (e) {
                 console.error(e);

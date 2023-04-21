@@ -33,6 +33,8 @@ function LabPenalty() {
     const navigate = useNavigate();
     const [listBooks, setListBooks] = useState([]);
     const [listRents, setListRents] = useState([]);
+    const [listStudents, setListStudents] = useState([]);
+
 
     const [listRentPenalties, setListRentPenalties] = useState([]);
 
@@ -46,9 +48,10 @@ function LabPenalty() {
         const getData = async () => {
             try {
                 const res = await axios.get(
-                    `http://localhost:5002/lab/rentPenalty/${localStorage.getItem('idPage')}`,
+                    `http://localhost:5001/lab/rentPenalty/${localStorage.getItem('idPage')}`,
                 );
-                const resPenalties = await axios.get('http://localhost:5002/rentPenalty');
+                console.log(res);
+                const resPenalties = await axios.get('http://localhost:5001/rentPenalty');
                 // if (resPenalties) {
                 //     setListRentPenalties(resPenalties.data);
                 //     console.log(resPenalties.data);
@@ -56,7 +59,12 @@ function LabPenalty() {
                 if (res) {
                     // console.log(res.data);
                     setRows(res.data.rentPenalties); // rentpenalty
-                    setListRents(res.data.bookRentPenalties); // rent 
+                    setListRents(res.data.rents); // rent 
+                    setListBooks(res.data.books);
+                    setListStudents(res.data.students);
+                    // console.log(res.data)
+                    // console.log(res.data.students)
+
                     // setListRentPenalties(resPenalties.data);
                     // console.log(res.data)
 
@@ -75,6 +83,38 @@ function LabPenalty() {
         return book.nameBook;
     };
 
+    const getStudentCode = (id) => {
+        let rent = listRents.filter((rent) => {
+            return rent._id == id;
+        });
+        let student = listStudents.filter((student) => {
+            return student._id == rent[0].idStudent;
+        });
+        return student[0].studentID;
+    };
+
+    const getBookName = (id) => {
+        let rent = listRents.filter((rent) => {
+            return rent._id == id;
+        });
+        let book = listBooks.filter((book) => {
+            return book._id == rent[0].idBook;
+        });
+        return book[0].name;
+    };
+
+    const getBookPrice = (id) => {
+        let rent = listRents.filter((rent) => {
+            return rent._id == id;
+        });
+        let book = listBooks.filter((book) => {
+            return book._id == rent[0].idBook;
+        });
+        return book[0].price;
+    };
+
+    
+    
     const getDate = (data) => {
         let date = new Date(data);
         let year = date.getFullYear();
@@ -100,7 +140,7 @@ function LabPenalty() {
     //     });
 
     //     try {
-    //         const res = await axios.post('http://localhost:5002/delivery/createDeliveryByLab', {
+    //         const res = await axios.post('http://localhost:5001/delivery/createDeliveryByLab', {
     //             from: localStorage.getItem('idPage'),
     //             nameFrom: localStorage.getItem('name'),
     //             to: idPenaltyExport,
@@ -117,18 +157,18 @@ function LabPenalty() {
     //     }
     // };
 
-    // const handleDeliveryStudent = async () => {
-    //     // console.log(idRent);
-    //     try {
-    //         const res = await axios.put(`http://localhost:5002/lab/updateNotRentPenalty/${idRentPenalty}`);
-    //         if (res.data.update) {
-    //             alert(res.data.msg);
-    //             window.location.reload();
-    //         }
-    //     } catch (e) {
-    //         console.log(e);
-    //     }
-    // };
+    const handleDeliveryStudent = async () => {
+        // console.log(idRent);
+        try {
+            const res = await axios.put(`http://localhost:5001/lab/updateNotRentPenalty/${idRentPenalty}`);
+            if (res.data.update) {
+                alert(res.data.msg);
+                window.location.reload();
+            }
+        } catch (e) {
+            console.log(e);
+        }
+    };
 
     return (
         <>
@@ -153,8 +193,9 @@ function LabPenalty() {
                             <TableHead>
                                 <TableRow>
                                     <TableCell>STT</TableCell>
-                                    <TableCell>Mã lỗi</TableCell>
+                                    <TableCell>Mã sinh viên</TableCell>
                                     <TableCell>Tên sách</TableCell>
+                                    <TableCell>Giá</TableCell>
                                     <TableCell>Lỗi</TableCell>
                                     <TableCell>Thời gian</TableCell>
                                 </TableRow>
@@ -168,28 +209,33 @@ function LabPenalty() {
                                         sx={{ '&:last-child td, &:last-child th': { brent: 0 } }}
                                     >
                                         <TableCell>{index + 1}</TableCell>
-                                        {/* <TableCell component="th" scope="row" sx={{ maxWidth: '200px' }}>
-                                            {getRentId(row.idRent)}
-                                        </TableCell> */}
                                         <TableCell component="th" scope="row" sx={{ maxWidth: '200px' }}>
-                                            {row.idRent}
+                                            {getStudentCode(row.idRent)}
                                         </TableCell>
-                                        <TableCell sx={{ maxWidth: '200px' }}>{getNameBook(row.idRent)}</TableCell>
+                                        <TableCell component="th" scope="row" sx={{ maxWidth: '200px' }}>
+                                            {getBookName(row.idRent)}
+                                        </TableCell>
+                                        <TableCell component="th" scope="row" sx={{ maxWidth: '200px' }}>
+                                            {getBookPrice(row.idRent)}
+                                        </TableCell>
+                                        {/* <TableCell sx={{ maxWidth: '200px' }}>{getNameBook(row.idRent)}</TableCell> */}
                                         <TableCell>{row.error}</TableCell>
                                         <TableCell>{getDate(row.createdAt)}</TableCell>
-                                        {/* <TableCell>
+                                        <TableCell>
                                             <Button
                                                 onClick={() => {
-                                                    setIdRentPenalty(row._id);
-                                                    setOpenModalStudent(true);
+                                                    if (row.status === "Chưa đền bù") {
+                                                        setIdRentPenalty(row._id);
+                                                        setOpenModalStudent(true);
+                                                    }
                                                 }}
                                                 variant="outlined"
-                                                color="secondary"
+                                                color={row.status === "Đã đền bù" ? "primary" : "secondary"}
                                             >
-                                                Giao hàng
+                                                {row.status}
                                             </Button>
                                         </TableCell>
-                                        <TableCell>
+                                        {/* <TableCell>
                                             <Button
                                                 onClick={() => {
                                                     setIdRentPenalty(row._id);
@@ -200,7 +246,7 @@ function LabPenalty() {
                                             >
                                                 Trung tâm bảo hành
                                             </Button>
-                                        </TableCell> */}
+                                        </TableCell>  */}
                                     </TableRow>
                                 ))}
                             </TableBody>
@@ -219,7 +265,7 @@ function LabPenalty() {
                     )}
                 </TableContainer>
             </Box>
-            {/* Modal delivery student
+            {/* Modal delivery student */}
             <Modal
                 aria-labelledby="transition-modal-title"
                 aria-describedby="transition-modal-description"
@@ -239,7 +285,7 @@ function LabPenalty() {
                             component="h2"
                             sx={{ textAlign: 'center' }}
                         >
-                            Chuyển hàng cho khách hàng
+                            Xóa phạt
                         </Typography>
 
                         <Box sx={{ display: 'flex', justifyContent: 'center', marginTop: '15px' }}>
@@ -263,7 +309,7 @@ function LabPenalty() {
                         </Box>
                     </Box>
                 </Fade>
-            </Modal> */}
+            </Modal>
             {/* Modal delivery penalty */}
             {/* <Modal
                 aria-labelledby="transition-modal-title"

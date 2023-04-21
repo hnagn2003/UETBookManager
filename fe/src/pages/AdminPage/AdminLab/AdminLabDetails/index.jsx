@@ -26,7 +26,7 @@ function LabDetails() {
     useEffect(() => {
         const getData = async () => {
             try {
-                const res = await axios.get(`http://localhost:5002/lab/${id}`);
+                const res = await axios.get(`http://localhost:5001/lab/${id}`);
                 setRows(res.data.books);
                 setStorage(res.data.lab.storage);
             } catch (err) {

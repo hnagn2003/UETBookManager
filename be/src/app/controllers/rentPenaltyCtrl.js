@@ -64,27 +64,27 @@ const rentPenaltyCtrl = {
     try {
       const idRentPenalty = req.params.id;
       console.log(idRentPenalty);
-      const rentPenalty = await RentPenalties.findOne({
-        _id: idRentPenalty,
-      });
-      const rent = await Rents.findOne({ _id: rentPenalty.idRent });
-      if (!rent) {
-        return res.json({
-          msg: "Failure update new Penalty Rent",
-          update: true,
-        });
-      }
-      if (!rentPenalty) {
-        return res.json({
-          msg: "Failure update new Penalty Rent",
-          update: true,
-        });
-      }
-      await Rents.findByIdAndUpdate(
-        rent._id,
-        { status: "not penalty" },
-        { new: true }
-      );
+      // const rentPenalty = await RentPenalties.findOne({
+      //   _id: idRentPenalty,
+      // });
+      // const rent = await Rents.findOne({ _id: rentPenalty.idRent });
+      // if (!rent) {
+      //   return res.json({
+      //     msg: "Failure update new Penalty Rent",
+      //     update: true,
+      //   });
+      // }
+      // if (!rentPenalty) {
+      //   return res.json({
+      //     msg: "Failure update new Penalty Rent",
+      //     update: true,
+      //   });
+      // }
+      // await Rents.findByIdAndUpdate(
+      //   rent._id,
+      //   { status: "not penalty" },
+      //   { new: true }
+      // );
       await RentPenalties.findByIdAndDelete(idRentPenalty);
       res.json({ msg: "Update", update: true });
     } catch (error) {
@@ -106,21 +106,26 @@ const rentPenaltyCtrl = {
             return await Rents.findOne({ _id: rentPenalty.idRent });
           })
         );
-        let studentIds = rents.map(rent => rent.idStudent);
-        console.log(studentIds);
+
         let students = await Promise.all(
           rents.map(async (rent) => {
             return await Students.findOne({ _id: rent.idStudent});
           })
         );
-        console.log(rents)
-
-        console.log(students);
+        let books = await Promise.all(
+          rents.map(async (rent) => {
+            return await Books.findOne({ _id: rent.idBook});
+          })
+        );
+        // console.log(rentPenalties)
+        // console.log(rents)
+        // console.log(students)
+        // console.log(books)
         res.json({
-          rents: rents, // page dissapear
+          rents: rents,
           rentPenalties: rentPenalties,
           students:students,
-          // books: ,
+          books: books,
         });
       } else {
         res.json({ msg: "Not rentPenalties" });
@@ -188,6 +193,7 @@ const rentPenaltyCtrl = {
       const rentPenalty = await RentPenalties.findOne({
         _id: idRentPenalty,
       });
+      req.body.status = "Đã đền bù";
       if (rentPenalty) {
         console.log(rentPenalty);
         await RentPenalties.findByIdAndUpdate(

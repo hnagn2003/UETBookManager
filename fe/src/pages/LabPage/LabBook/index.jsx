@@ -42,7 +42,7 @@ function LabBook() {
     useEffect(() => {
         const getData = async () => {
             try {
-                const res = await axios.get('http://localhost:5002/book/allBooks');
+                const res = await axios.get('http://localhost:5001/book/allBooks');
                 // console.log(res.data);
                 setBooks(res.data);
             } catch (e) {

@@ -21,7 +21,7 @@ const rentCtrl = {
       } else {
         res.json({ msg: "Not rents" });
       }
-      console.log(lab.name);
+      // console.log(lab.name);
 
     } catch (error) {
       return res.status(500).json({ msg: error.message });
@@ -32,29 +32,32 @@ const rentCtrl = {
       const {
         idLab,
         nameLab,
-        nameStudent,
-        sdt,
-        address,
-        price,
+        studentCode,
         idBook,
       } = req.body;
-      const newStudent = new Students({
-        name: nameStudent,
-        sdt: sdt,
-        address: address,
-      })
+      // const newStudent = new Students({
+      //   name: nameStudent,
+      //   sdt: sdt,
+      //   address: address,
+      // })
 
-      await newStudent.save();
+      // await newStudent.save();
+      console.log(typeof(req.body.studentID));
+
+      const student = await Students.findOne({studentID: parseInt(req.body.studentID)})
 
       const book = await Books.findOne({_id: idBook})
+      console.log(student);
+
+
       const newRent = new Rents({
         idLab: idLab,
         nameLab: nameLab,
-        idStudent: newStudent._id,
+        idStudent: student._id,
         idBook: idBook,
         nameBook: book.name,
-        price: price,
-        status: 'not penalty',
+        // price: price,
+        status: 'Chưa trả',
       })
       newRent.save();
       res.json({create: true, msg: 'Create rent'});

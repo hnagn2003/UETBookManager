@@ -9,7 +9,9 @@ router.post('/updateAmount', labCtrl.updateAmount);
 router.get('/rent/:id', rentCtrl.getRentFromIdLab);
 router.post('/createRent/', rentCtrl.createRent);
 router.post('/createRentPenalty/', rentPenaltyCtrl.createRentPenalty);
-router.put('/updateNotRentPenalty/:id', rentPenaltyCtrl.updateNotRentPenalty);
+// router.put('/updateNotRentPenalty/:id', rentPenaltyCtrl.updateNotRentPenalty);
+router.put('/updateNotRentPenalty/:id', rentPenaltyCtrl.updateStatusPenalty);
+
 router.get('/rentPenalty', rentPenaltyCtrl.getAllRentPenalties);
 router.get('/rentPenalty/:id', rentPenaltyCtrl.getRentPenaltyByIdLab);
 router.get('/', labCtrl.getAllLabs);
