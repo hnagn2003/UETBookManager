@@ -2,6 +2,7 @@ const Rents = require("../models/rentModel");
 const Labs = require("../models/labModel");
 const Books = require("../models/bookModel");
 const Students = require("../models/studentModel");
+const logger = require("../../../log");
 
 const rentCtrl = {
   getRentFromIdLab: async (req, res) => {
@@ -19,11 +20,13 @@ const rentCtrl = {
           students: students,
         });
       } else {
+        logger.error("Không thuê sách");
         res.json({ msg: "Not rents" });
       }
-      // console.log(lab.name);
-
+      console.log(lab.name);
+      logger.info("Tìm sách thuê bằng ID lab");
     } catch (error) {
+      logger.error("Lỗi khi tìm sách thuê bằng ID lab");
       return res.status(500).json({ msg: error.message });
     }
   },
@@ -60,9 +63,10 @@ const rentCtrl = {
         status: 'Chưa trả',
       })
       newRent.save();
+      logger.info("Tạo một mục cho thuê");
       res.json({create: true, msg: 'Create rent'});
-
     } catch (error) {
+      logger.error("Lỗi khi tạo một mục cho thuê");
       return res.status(500).json({ msg: error.message });
     }
   },

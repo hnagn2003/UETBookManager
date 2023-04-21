@@ -15,12 +15,14 @@ import DeleteSweepOutlinedIcon from '@mui/icons-material/DeleteSweepOutlined';
 import Skeleton from '@mui/material/Skeleton';
 import { useEffect, useState } from 'react';
 import axios from 'axios';
-
+import SearchIcon from '@mui/icons-material/Search';
+import ButtonBase from '@mui/material/ButtonBase';
 import Backdrop from '@mui/material/Backdrop';
 import Modal from '@mui/material/Modal';
 import Fade from '@mui/material/Fade';
 import { TextValidator, ValidatorForm } from 'react-material-ui-form-validator';
 import { Stack } from '@mui/system';
+
 
 const styleModal = {
     position: 'absolute',
@@ -39,7 +41,9 @@ function AdminBook() {
     const [openModalCreate, setOpenModalCreate] = useState(false);
     const [openModalEdit, setOpenModalEdit] = useState(false);
     const [openModalDelete, setOpenModalDelete] = useState(false);
-
+    const [openModalSearch, setOpenModalSearch] = useState(false);
+    const [searchResults, setSearchResults] = useState([]);
+    const [searchValue, setSearchValue] = useState('');
     const [code, setCode] = useState('');
     const [name, setName] = useState('');
     const [description, setDescription] = useState('');
@@ -51,20 +55,50 @@ function AdminBook() {
     const [publishYear, setPublishYear] = useState('');
     const [id, setId] = useState('');
 
-    // Get data
-    useEffect(() => { 
-        const getData = async () => {
+    const handleSearch = async () => {
+        const res = await axios.get('http://localhost:5001/book/autoComplete', {
+            params: { searchValue }
+        });
+        setSearchResults(res.data);
+    };
+    const handleResultClick = (result) => {
+        console.log(result.name);
+        setSearchValue(result.name);
+        setSearchResults([]);
+    };
+    const handleInputChange = (event) => {
+        const value = event.target.value;
+        setSearchValue(value);
+        if (value !== '') {
+            handleSearch();
+        }
+    }
+    useEffect(() => {
+        const fetchSearchResults = async () => {
             try {
-                const res = await axios.get('http://localhost:5001/book/allBooks');
-                setRows(res.data);
-            } catch (err) {
-                console.log('fe : ' + err.message);
+                const res = await axios.get('http://localhost:5001/book/allBooksBySearch', {
+                    params: { searchValue }
+                });
+                setRows(res.data)
+            } catch (error) {
+                console.log(error.message);
             }
         };
-        getData();
-    }, []);
+        if (searchValue !== '') {
+            fetchSearchResults();
+        } else {
+            const getAllBooks = async () => {
+                try {
+                    const res = await axios.get('http://localhost:5001/book/allBooks');
+                    setRows(res.data);
+                } catch (err) {
+                    console.log('fe : ' + err.message);
+                }
+            };
+            getAllBooks();
+        }
+    }, [searchValue]);
 
-    // Create book 
     const handleCreate = async () => {
         try {
             const res = await axios.post('http://localhost:5001/book/create', {
@@ -168,7 +202,17 @@ function AdminBook() {
                     <AddCircleOutlineOutlinedIcon sx={{ marginRight: '5px' }} />
                     New
                 </Button>
-
+                <Button
+                    variant="outlined"
+                    color="secondary"
+                    sx={{ margin: '10px' }}
+                    onClick={() => {
+                        setSearchValue('');
+                        setOpenModalSearch(true);
+                    }}
+                >
+                    <SearchIcon sx={{ marginRight: '5px' }} /> Search
+                </Button>
                 <TableContainer sx={{ marginBottom: '40px' }} component={Paper}>
                     {rows.length > 0 ? (
                         <Table sx={{ minWidth: 650 }} size="small" aria-label="a dense table">
@@ -539,6 +583,64 @@ function AdminBook() {
                     </Box>
                 </Fade>
             </Modal>
+            <Modal
+                aria-labelledby="transition-modal-title"
+                aria-describedby="transition-modal-description"
+                open={openModalSearch}
+                onClose={() => setOpenModalSearch(false)}
+                closeAfterTransition
+                BackdropComponent={Backdrop}
+                BackdropProps={{
+                    timeout: 500,
+                }}
+            >
+                <Fade in={openModalSearch}>
+                    <Box
+                        sx={{
+                            position: 'absolute',
+                            top: '20%',
+                            left: '50%',
+                            transform: 'translate(-50%, -50%)',
+                            width: 400,
+                            bgcolor: 'background.paper',
+                            boxShadow: 50,
+                            borderRadius: '10px',
+                            p: 3,
+                        }}
+                    >
+                        <Typography id="transition-modal-title" variant="h6" component="h2">
+                            Tìm kiếm
+                        </Typography>
+                        <ValidatorForm onSubmit={handleSearch}>
+                            <div>
+                                <TextValidator
+                                    sx={{ marginTop: '10px' }}
+                                    variant="standard"
+                                    color="secondary"
+                                    fullWidth
+                                    label="Nhập thông tin"
+                                    value={searchValue}
+                                    onChange={handleInputChange}
+                                    margin="dense"
+                                    validators={['required']}
+                                    errorMessages={['Vui lòng nhập từ khóa tìm kiếm']}
+                                />
+                                {searchResults && searchResults.length > 0 &&
+                                    <div style={{ marginTop: '10px', backgroundColor: 'white', borderRadius: '4px', boxShadow: '0px 0px 4px 0px rgba(0,0,0,0.1)', overflow: 'hidden' }}>
+                                        {searchResults.map((result) => (
+                                            <ButtonBase key={result._id} style={{ width: '100%', textAlign: 'left', padding: '10px', borderBottom: '1px solid #eee' }} onClick={() => handleResultClick(result)}>
+                                                <div style={{ fontSize: '12px', fontWeight: 'bold', color: '#333' }}>
+                                                    {result.name}
+                                                </div>
+                                            </ButtonBase>
+                                        ))}
+                                    </div>
+                                }
+                            </div>
+                        </ValidatorForm>
+                    </Box>
+                </Fade>
+            </Modal >
         </>
     );
 }
