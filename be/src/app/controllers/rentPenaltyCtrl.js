@@ -36,7 +36,7 @@ const rentPenaltyCtrl = {
   createRentPenalty: async (req, res) => {
     try {
       const { idRent, error, idLab, status } = req.body;
-      // console.log(idRent + " " + error + " " + idLab + " " + status);
+      console.log(req.body);
       const rent = await Rents.findOne({ _id: idRent });
       if (!rent) {
         logger.error("Lỗi khi tạo");

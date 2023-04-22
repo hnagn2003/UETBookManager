@@ -98,12 +98,23 @@ function LabRent() {
     };
 
     const getStudentName = (id) => {
+        // console.log("id");
+
+        // console.log(id);
+
         let student = listStudents.find((student) =>  {
             return student._id == id;
         });
-        console.log(student);
 
         return student.name
+    }
+    const getBookName = (id) => {
+
+        let book = listBooks.find((book) =>  {
+            return book._id == id;
+        });
+
+        return book.name
     }
     const compareDate = (data) => {
         let date = new Date(data);
@@ -152,13 +163,17 @@ function LabRent() {
     };
     const handleRentPenalty = async () => {
         try {
+            console.log("hi")
+            console.log()
+
             const res = await axios.post('http://localhost:5001/lab/createRentPenalty', {
                 idRent: idRent,
                 error: error,
                 idLab: localStorage.getItem('idPage'),
-                status: 'lab',
+                status: 'Chưa đền bù',
             });
             if (res.data.create) {
+                console.log("error create successfull");
                 alert(res.data.msg);
                 window.location.reload();
             }
@@ -198,11 +213,12 @@ function LabRent() {
                             <TableHead>
                                 <TableRow>
                                     <TableCell>STT</TableCell>
-                                    <TableCell>Tên sản phẩm</TableCell>
-                                    <TableCell>Tên sinh viên</TableCell>
-                                    <TableCell>Status</TableCell>
+                                    <TableCell>Tên sách</TableCell>
+                                    <TableCell>Đối tượng</TableCell>
+                                    <TableCell>Trạng thái</TableCell>
                                     <TableCell>Thời gian</TableCell>
-                                    {/* <TableCell>Bảo hành</TableCell> */}
+                                    <TableCell>Quá hạn</TableCell>
+                                    <TableCell>Tạo lỗi</TableCell>
                                 </TableRow>
                             </TableHead>
                             <TableBody>
@@ -215,51 +231,75 @@ function LabRent() {
                                     >
                                         <TableCell>{index + 1}</TableCell>
                                         <TableCell component="th" scope="row" sortDirection="desc">
-                                            {row.idBook}
+                                            {getBookName(row.idBook)}
                                         </TableCell>
+                                        {/* {console.log(row)} */}
+
                                         <TableCell>{getStudentName(row.idStudent)}</TableCell>
-                                        {/* {console.log(row.idStudent)} */}
-                                        <TableCell>{row.status}</TableCell>
+                                        <TableCell component="th" scope="row" sortDirection="desc">
+                                            {row.status}
+                                        </TableCell>
                                         <TableCell>{getDate(row.createdAt)}</TableCell>
-                                        {/* <TableCell>
-                                            {compareDate(row.createdAt) > 365 ? (
+                                        <TableCell>
+                                            {row.status == 'Đã trả' ? (
+
+                                                // compareDate(row.createdAt) > 365
                                                 <Button
-                                                    onClick={() => {}}
-                                                    variant="outlined"
-                                                    disabled
-                                                    color="secondary"
-                                                >
-                                                    Hết bảo hành
-                                                </Button>
-                                            ) : (
-                                                <>
-                                                    {row.status === 'not penalty' ? (
-                                                        <Button
-                                                            onClick={() => {
-                                                                setIdRent(row._id);
-                                                                setOpenModalPenalty(true);
-                                                            }}
+                                                            // onClick={() => {
+                                                            //     setIdRent(row._id);
+                                                            //     setOpenModalPenalty(true);
+                                                            // }}
                                                             variant="outlined"
                                                             color="primary"
+                                                            disabled
                                                         >
-                                                            Bảo hành
+                                                            Đã trả
                                                         </Button>
+                                            ) : (
+                                                <>
+                                                    {compareDate(row.createdAt) > 365 ? (
+                                                        <Button
+                                                        onClick={() => {}}
+                                                        variant="outlined"
+                                                        disabled
+                                                        
+                                                        style={{ color: 'red', borderColor: 'red' }}
+
+                                                    >
+                                                        Quá hạn
+                                                    </Button>
                                                     ) : (
                                                         <Button
-                                                            onClick={() => {}}
-                                                            sx={{
-                                                                color: 'red !important',
-                                                                brent: '1px solid red !important',
+                                                            onClick={() => {
+                                                                // setIdRent(row._id);
+                                                                setOpenModalPenalty(true);
                                                             }}
-                                                            disabled
+                                                            // disabled
                                                             variant="outlined"
+                                                            style={{ color: 'blue', borderColor: 'blue' }}
+
                                                         >
-                                                            Đang bảo hành
+                                                            Đang mượn
                                                         </Button>
                                                     )}
                                                 </>
                                             )}
-                                        </TableCell> */}
+                                        </TableCell>
+                                        <TableCell>
+                                        <Button
+                                            onClick={() => {
+                                                console.log(row._id)
+                                                setIdRent(row._id);
+                                                setOpenModalPenalty(true);
+                                            }}
+                                            // disabled
+                                            variant="outlined"
+                                            style={{ color: 'red', borderColor: 'red' }}
+
+                                        >
+                                            Tạo lỗi
+                                        </Button>
+                                        </TableCell>
                                     </TableRow>
                                 ))}
                             </TableBody>
@@ -396,12 +436,12 @@ function LabRent() {
                             component="h2"
                             sx={{ textAlign: 'center' }}
                         >
-                            Chuyển vào danh sách bảo hành
+                            Tạo lỗi 
                         </Typography>
 
                         <TextField
                             sx={{ marginTop: '15px' }}
-                            label="Lỗi sản phẩm"
+                            label="Báo cáo lỗi"
                             variant="standard"
                             fullWidth
                             type="text"

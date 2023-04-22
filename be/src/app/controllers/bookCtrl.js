@@ -59,7 +59,7 @@ const bookCtrl = {
         language, 
         publishYear, 
         lab: [],
-        lib: [],
+        lib: ["63832d6b3006d5bf09fc6fe8","63832ea46d987083f9ccb576"],
 
       });
       logger.info("Tạo mới một quyển sách");

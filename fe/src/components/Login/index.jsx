@@ -60,7 +60,7 @@ export default function Login() {
                     sm={4}
                     md={7}
                     sx={{
-                        backgroundImage: 'url(https://aztruyen.com/cover/dn-genshin-impact-x-kazuha-cung-nhau-di-den-noi-cuoi-chan-troi-337699641.jpg)',
+                        backgroundImage: 'url(https://images-wixmp-ed30a86b8c4ca887773594c2.wixmp.com/f/9f3f9bd9-0673-4276-bb34-71ece2a5820e/dfn5a7p-44e25f03-8419-41c2-973c-58c3c1628353.png/v1/fill/w_1920,h_1920,q_80,strp/portal_to_another_dimension__ai_art__by_3d1viner_dfn5a7p-fullview.jpg?token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1cm46YXBwOjdlMGQxODg5ODIyNjQzNzNhNWYwZDQxNWVhMGQyNmUwIiwiaXNzIjoidXJuOmFwcDo3ZTBkMTg4OTgyMjY0MzczYTVmMGQ0MTVlYTBkMjZlMCIsIm9iaiI6W1t7ImhlaWdodCI6Ijw9MTkyMCIsInBhdGgiOiJcL2ZcLzlmM2Y5YmQ5LTA2NzMtNDI3Ni1iYjM0LTcxZWNlMmE1ODIwZVwvZGZuNWE3cC00NGUyNWYwMy04NDE5LTQxYzItOTczYy01OGMzYzE2MjgzNTMucG5nIiwid2lkdGgiOiI8PTE5MjAifV1dLCJhdWQiOlsidXJuOnNlcnZpY2U6aW1hZ2Uub3BlcmF0aW9ucyJdfQ.jtvmH-dSaTnulHoZBrIDAuxm2LUWKtNraPpCLgbqmVI)',
                         backgroundRepeat: 'no-repeat',
                         backgroundColor: (t) => (t.palette.mode === 'light' ? t.palette.grey[50] : t.palette.grey[900]),
                         backgroundSize: 'cover',
