@@ -222,7 +222,9 @@ function AdminBook() {
                                     <TableCell>Code</TableCell>
                                     <TableCell>Name</TableCell>
                                     <TableCell>Price</TableCell>
-                                    {/* <TableCell>Password</TableCell> */}
+                                    <TableCell>Danh mục</TableCell>
+                                    <TableCell>Tác giả</TableCell>
+                                    <TableCell>Năm xuất bản</TableCell>
                                     <TableCell align="center">Chỉnh sửa</TableCell>
                                     <TableCell align="center">Xóa</TableCell>
                                 </TableRow>
@@ -241,6 +243,9 @@ function AdminBook() {
                                         </TableCell>
                                         <TableCell>{row.name}</TableCell>
                                         <TableCell>{PriceVND(row.price)}</TableCell>
+                                        <TableCell>{row.category}</TableCell>
+                                        <TableCell>{row.author}</TableCell>
+                                        <TableCell>{row.publishYear}</TableCell>
                                         <TableCell
                                             align="center"
                                             onClick={() => {

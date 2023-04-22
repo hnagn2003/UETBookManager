@@ -47,6 +47,8 @@ function LabRent() {
     const [price, setPrice] = useState(0);
 
     const [openModalPenalty, setOpenModalPenalty] = useState(false);
+    const [rentStatus, changeStatus] = useState(false);
+
     const [idRent, setIdRent] = useState('');
     const [error, setError] = useState('');
  
@@ -123,7 +125,17 @@ function LabRent() {
         let ms2 = today.getTime();
         return Math.ceil((ms2 - ms1) / (24 * 60 * 60 * 1000));
     };
-
+    const changeRentStatus = async () => {
+        try {
+            const res = await axios.put(`http://localhost:5001/lab/updateNotRent/${idRent}`);
+            if (res.data.update) {
+                alert(res.data.msg);
+                window.location.reload();
+            }
+        } catch (e) {
+            console.log(e);
+        }
+    }
     const handleCreateRent = async () => {
         // console.log(codeBook);
         const rest = storage.filter((item) => {
@@ -259,7 +271,10 @@ function LabRent() {
                                                 <>
                                                     {compareDate(row.createdAt) > 365 ? (
                                                         <Button
-                                                        onClick={() => {}}
+                                                        onClick={() => {
+                                                            setIdRent(row._id);
+                                                            changeStatus(true);
+                                                        }}
                                                         variant="outlined"
                                                         disabled
                                                         
@@ -271,10 +286,11 @@ function LabRent() {
                                                     ) : (
                                                         <Button
                                                             onClick={() => {
-                                                                // setIdRent(row._id);
-                                                                setOpenModalPenalty(true);
+                                                                setIdRent(row._id);
+                                                                changeStatus(true);
                                                             }}
                                                             // disabled
+                                                            
                                                             variant="outlined"
                                                             style={{ color: 'blue', borderColor: 'blue' }}
 
@@ -288,7 +304,7 @@ function LabRent() {
                                         <TableCell>
                                         <Button
                                             onClick={() => {
-                                                console.log(row._id)
+                                                // console.log(row._id)
                                                 setIdRent(row._id);
                                                 setOpenModalPenalty(true);
                                             }}
@@ -463,6 +479,61 @@ function LabRent() {
                                 variant="contained"
                                 type="submit"
                                 onClick={handleRentPenalty}
+                            >
+                                Xác nhận
+                            </Button>
+                        </Box>
+                    </Box>
+                </Fade>
+            </Modal>
+
+            {/* Modal rent status */}
+            <Modal
+                aria-labelledby="transition-modal-title"
+                aria-describedby="transition-modal-description"
+                open={rentStatus}
+                onClose={() => changeStatus(false)}
+                closeAfterTransition
+                BackdropComponent={Backdrop}
+                BackdropProps={{
+                    timeout: 500,
+                }}
+            >
+                <Fade in={rentStatus}>
+                    <Box sx={styleModal}>
+                        <Typography
+                            id="transition-modal-title"
+                            variant="h6"
+                            component="h2"
+                            sx={{ textAlign: 'center' }}
+                        >
+                            Đánh dấu là đã trả
+                        </Typography>
+
+                        {/* <TextField
+                            sx={{ marginTop: '15px' }}
+                            label="Đã trả"
+                            variant="standard"
+                            fullWidth
+                            type="text"
+                            value={error}
+                            onChange={(e) => setError(e.target.value)}
+                        /> */}
+                        <Box sx={{ display: 'flex', justifyContent: 'center', marginTop: '15px' }}>
+                            <Button
+                                sx={{ marginTop: '10px' }}
+                                color="secondary"
+                                variant="contained"
+                                type="submit"
+                                onClick={() => changeStatus(false)}
+                            >
+                                Hủy bỏ
+                            </Button>
+                            <Button
+                                sx={{ marginTop: '10px', marginLeft: '10px' }}
+                                variant="contained"
+                                type="submit"
+                                onClick={changeRentStatus}
                             >
                                 Xác nhận
                             </Button>

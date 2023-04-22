@@ -70,6 +70,29 @@ const rentCtrl = {
       return res.status(500).json({ msg: error.message });
     }
   },
+  updateStatusRent: async (req, res) => {
+    try {
+      console.log(req.body)
+      const idRent = req.params.id;
+      const rent = await Rents.findOne({
+        _id: idRent,
+      });
+      req.body.status = "Đã trả";
+      if (rent) {
+        console.log(rent);
+        await Rents.findByIdAndUpdate(
+          idRent,
+          req.body,
+          { new: true }
+        );
+        logger.info("Updated Status Rent ")
+        return res.json({update: true});
+      }
+    } catch (error) {
+      logger.error("Error: Update Status Rent");
+      return res.status(500).json({ msg: error.message });
+    }
+  },
 };
 
 module.exports = rentCtrl;
