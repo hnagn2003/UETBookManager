@@ -227,7 +227,7 @@ function PenaltyBook() {
                             component="h2"
                             sx={{ textAlign: 'center' }}
                         >
-                            Chuyển hàng về đại lý
+                            Chuyển sách về Phòng Thí NGhiệm
                         </Typography>
 
                         <Box sx={{ display: 'flex', justifyContent: 'center', marginTop: '15px' }}>

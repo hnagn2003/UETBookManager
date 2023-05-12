@@ -195,12 +195,12 @@ function LibExport() {
                             Nhập thông tin vận chuyển
                         </Typography>
                         <FormControl fullWidth sx={{ margin: '15px 0' }}>
-                            <InputLabel id="demo-simple-select-label">Đại lý</InputLabel>
+                            <InputLabel id="demo-simple-select-label">Phòng Thí NGhiệm</InputLabel>
                             <Select
                                 labelId="demo-simple-select-label"
                                 id="demo-simple-select"
                                 value={idLabExport}
-                                label="Đại lý"
+                                label="Phòng Thí NGhiệm"
                                 onChange={(e) => {
                                     console.log(e.target.value);
                                     setIdLabExport(e.target.value);
